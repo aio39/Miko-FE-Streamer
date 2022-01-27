@@ -1,13 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Home from './routes/Home';
+import Homes from './routes/Homes';
+import Login from './routes/Login';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="home" element={<Homes />}>
+            <Route
+              index
+              element={
+                <main style={{ padding: '1rem' }}>
+                  <p>Index로 기본 설정</p>
+                </main>
+              }
+            />
+            <Route path=":homeId" element={<Home />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: '1rem' }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
