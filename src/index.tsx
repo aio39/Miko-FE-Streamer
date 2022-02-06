@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -13,6 +14,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
   <React.StrictMode>
+      <RecoilRoot>
     <ChakraProvider resetCSS>
       <BrowserRouter>
         <Routes>
@@ -42,6 +44,7 @@ ReactDOM.render(
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
 );
