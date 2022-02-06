@@ -1,4 +1,18 @@
-import { AspectRatio, Box, Grid, GridItem, Text } from '@chakra-ui/react';
+import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
+import {
+  AspectRatio,
+  Box,
+  ButtonGroup,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Flex,
+  Grid,
+  GridItem,
+  IconButton,
+  useEditableControls,
+} from '@chakra-ui/react';
+import { FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { draftMessageState } from '../../../recoil/draftMessageState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
@@ -15,20 +29,96 @@ const positionSwith = {
   9: { right: 0, bottom: 0 },
 };
 
+const EditableText: FC<{ type: 'mt' | 'st' }> = ({ type }) => {
+  const [draftMessage, setDraftMessage] = useRecoilState(draftMessageState);
+
+  function EditableControls() {
+    const {
+      isEditing,
+      getSubmitButtonProps,
+      getCancelButtonProps,
+      getEditButtonProps,
+    } = useEditableControls();
+
+    return (
+      <Box position="absolute" right="-10px" transform="translate(100%,0)">
+        {isEditing ? (
+          <ButtonGroup justifyContent="center" size="sm">
+            <IconButton
+              icon={<CheckIcon />}
+              {...getSubmitButtonProps()}
+              aria-label="a"
+            />
+            <IconButton
+              icon={<CloseIcon />}
+              {...getCancelButtonProps()}
+              aria-label="a"
+            />
+          </ButtonGroup>
+        ) : (
+          <Flex justifyContent="center">
+            <IconButton
+              size="sm"
+              icon={<EditIcon />}
+              {...getEditButtonProps()}
+              aria-label="a"
+            />
+          </Flex>
+        )}
+      </Box>
+    );
+  }
+
+  const handleOnSubmit = (text: string) => {
+    switch (type) {
+      case 'mt':
+        setDraftMessage((pre) => ({ ...pre, mt: text }));
+        break;
+      case 'st':
+        setDraftMessage((pre) => ({ ...pre, st: text }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  return (
+    <Editable
+      //   textAlign="start"
+      defaultValue={type === 'mt' ? draftMessage.mt : draftMessage.st}
+      fontSize="2xl"
+      isPreviewFocusable={false}
+      width="fit-content"
+      display="flex"
+      position="relative"
+      onSubmit={handleOnSubmit}
+      placeholder={type === 'mt' ? '메인 텍스트' : '서브 텍스트'}
+      color={type === 'mt' ? draftMessage.mtc : draftMessage.stc}
+    >
+      <EditablePreview width="fit-content" />
+      <EditableInput width="fit-content" />
+      <EditableControls />
+    </Editable>
+  );
+};
+
 const VideoMessage = () => {
   const messageState = useRecoilValue(draftMessageState);
+
   return (
     <Box
       position="absolute"
       {...positionSwith[messageState.p]}
       bg={messageState.bc}
     >
-      <Text color={messageState.mtc}>
+      {/* <Text color={messageState.mtc}>
         Lorem ipsum is placeholder text commonly used in the graphic, print, and
       </Text>
       <Text color={messageState.stc}>
         Lorem ipsum is placeholder text commonly used in the graphic, print, and
-      </Text>
+      </Text> */}
+      <EditableText type="mt" />
+      <EditableText type="st" />
     </Box>
   );
 };
