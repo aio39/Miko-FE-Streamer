@@ -3,14 +3,10 @@ import SplitPane from 'react-split-pane';
 import { useRecoilState } from 'recoil';
 import { Message, Quiz } from '../../const';
 import { selectedWindowState } from '../../recoil/selectedWindowState';
+import CreateMessage from './createMessage/CreateMessage';
 import SideBar from './sideBar/SideBar';
 
 
-const MessageCreate = () => {
-  return <div>
-    message careate
-  </div>
-}
 
 const QuizCreate = () => {
   return <div>
@@ -24,7 +20,7 @@ const Concert = () => {
 
    const mainWindow = useCallback(() => {
        switch(selectedWindow) {
-        case Message:   return <MessageCreate />;
+        case Message:   return <CreateMessage />;
         case Quiz:   return <QuizCreate />;
         default:      return <h1>No project match</h1>
       }
