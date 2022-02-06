@@ -18,6 +18,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { draftMessageState } from '../../../recoil/draftMessageState';
 import { metadataState } from '../../../recoil/metadataState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
+import TextColorPicker from './TextColorPicker';
 
 const positionSwith = {
   1: { left: 0, top: 0 },
@@ -166,7 +167,7 @@ const CreateMessage = () => {
   };
 
   return (
-    <div>
+    <Box overflowY="scroll" h="full">
       <Box>
         <AspectRatio
           position="relative"
@@ -180,10 +181,11 @@ const CreateMessage = () => {
         </AspectRatio>
       </Box>
       <PositionSelector />
+      <TextColorPicker></TextColorPicker>
       <Button colorScheme="blue" onClick={handleSaveMessage}>
         Save
       </Button>
-    </div>
+    </Box>
   );
 };
 
