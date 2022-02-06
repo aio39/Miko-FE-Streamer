@@ -2,6 +2,7 @@
 export type PositionNumberRange = 1 | 2 | 3;
 
 export type MessageMetadata = {
+  d: 'm';
   /**
    * Main Text:  큰 타이틀
    */
@@ -39,3 +40,5 @@ export type MessageMetadata = {
    */
   s: number;
 };
+
+export type MetadataFormats = MessageMetadata;

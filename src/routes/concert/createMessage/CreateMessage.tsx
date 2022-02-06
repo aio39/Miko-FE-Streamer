@@ -2,6 +2,7 @@ import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import {
   AspectRatio,
   Box,
+  Button,
   ButtonGroup,
   Editable,
   EditableInput,
@@ -15,6 +16,7 @@ import {
 import { FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { draftMessageState } from '../../../recoil/draftMessageState';
+import { metadataState } from '../../../recoil/metadataState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
 
 const positionSwith = {
@@ -156,6 +158,13 @@ const PositionSelector = () => {
 };
 
 const CreateMessage = () => {
+  const [draftMessage, setDraftMessage] = useRecoilState(draftMessageState);
+  const [metadata, setMetadata] = useRecoilState(metadataState);
+
+  const handleSaveMessage = () => {
+    setMetadata((pre) => [...pre, draftMessage]);
+  };
+
   return (
     <div>
       <Box>
@@ -171,6 +180,9 @@ const CreateMessage = () => {
         </AspectRatio>
       </Box>
       <PositionSelector />
+      <Button colorScheme="blue" onClick={handleSaveMessage}>
+        Save
+      </Button>
     </div>
   );
 };
