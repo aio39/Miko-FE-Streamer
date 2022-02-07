@@ -23,9 +23,6 @@ const TimeLine = () => {
     return dayjs(end_at);
   }, [concertData]);
 
-  console.log(aDayjs.get('h'));
-  console.log(aDayjs.get('m'));
-  console.log(aDayjs.get('s'));
   console.log(aDayjs.toString());
   console.log(bDayjs.toString());
 

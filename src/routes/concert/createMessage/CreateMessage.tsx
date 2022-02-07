@@ -18,6 +18,7 @@ import Screen169 from '../../../components/hoc/Screen169';
 import { draftMessageState } from '../../../recoil/draftMessageState';
 import { metadataState } from '../../../recoil/metadataState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
+import DragTest from './DragTest';
 import LinkInput from './LinkInput';
 import MsgResetBtn from './MsgResetBtn';
 import TextColorPicker from './TextColorPicker';
@@ -182,6 +183,7 @@ const CreateMessage = () => {
         Save
       </Button>
       <MsgResetBtn></MsgResetBtn>
+      <DragTest />
     </Box>
   );
 };
