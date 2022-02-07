@@ -88,7 +88,10 @@ const CreateQuiz = () => {
   }, [draftQuiz]);
 
   const handleSaveQuiz = () => {
-    setMetadata((pre) => [...pre, draftQuiz]);
+    setMetadata((prev) => [
+      ...prev,
+      { createdAt: Date.now(), data: draftQuiz, type: 'q' },
+    ]);
   };
 
   return (

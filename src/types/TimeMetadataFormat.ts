@@ -1,6 +1,8 @@
 // type PositionNumberRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export type PositionNumberRange = 1 | 2 | 3;
 
+export type MetadataType = 'm' | 'q';
+
 export type MessageMetadata = {
   /**
    * data type:  메세지
@@ -69,9 +71,10 @@ export type QuizMetadata = {
 
 export type MetadataFormats = MessageMetadata | QuizMetadata;
 
-export type Medatata = {
+export type MetaData = {
   data: MetadataFormats;
+  type: MetadataType;
   createdAt: number;
-  tag: string[];
-  title: string;
+  tag?: string[];
+  title?: string;
 };

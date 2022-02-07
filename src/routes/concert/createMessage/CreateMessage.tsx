@@ -166,7 +166,10 @@ const CreateMessage = () => {
   const [metadata, setMetadata] = useRecoilState(metadataState);
 
   const handleSaveMessage = () => {
-    setMetadata((pre) => [...pre, draftMessage]);
+    setMetadata((prev) => [
+      ...prev,
+      { createdAt: Date.now(), data: draftMessage, type: 'm' },
+    ]);
   };
 
   return (

@@ -4,7 +4,8 @@ import { useRecoilValue } from 'recoil';
 import { metadataState } from '../../../recoil/metadataState';
 import {
   MessageMetadata,
-  MetadataFormats,
+  MetaData,
+  QuizMetadata,
 } from '../../../types/TimeMetadataFormat';
 
 const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
@@ -16,13 +17,23 @@ const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
   );
 };
 
+const MetadataQuizPreview: FC<{ data: QuizMetadata }> = ({ data }) => {
+  return (
+    <Box width="full" h="100" border="1px">
+      <Text>{data.mt}</Text>
+    </Box>
+  );
+};
+
 const MetadataListContainer = () => {
   const metadata = useRecoilValue(metadataState);
 
-  const metadataDrawSwitch = (data: MetadataFormats, idx: number) => {
-    switch (data.d) {
+  const metadataDrawSwitch = (data: MetaData, idx: number) => {
+    switch (data.data.d) {
       case 'm':
-        return <MetadataMsgPreview key={idx} data={data} />;
+        return <MetadataMsgPreview key={idx} data={data.data} />;
+      case 'q':
+        return <MetadataQuizPreview key={idx} data={data.data} />;
       default:
         break;
     }
