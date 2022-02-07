@@ -18,6 +18,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { draftMessageState } from '../../../recoil/draftMessageState';
 import { metadataState } from '../../../recoil/metadataState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
+import LinkInput from './LinkInput';
 import TextColorPicker from './TextColorPicker';
 
 const positionSwith = {
@@ -91,15 +92,15 @@ const EditableText: FC<{ type: 'mt' | 'st' }> = ({ type }) => {
       defaultValue={type === 'mt' ? draftMessage.mt : draftMessage.st}
       fontSize="2xl"
       isPreviewFocusable={false}
-      width="fit-content"
+      width="auto"
       display="flex"
       position="relative"
       onSubmit={handleOnSubmit}
       placeholder={type === 'mt' ? '메인 텍스트' : '서브 텍스트'}
       color={type === 'mt' ? draftMessage.mtc : draftMessage.stc}
     >
-      <EditablePreview width="fit-content" />
-      <EditableInput width="fit-content" />
+      <EditablePreview />
+      <EditableInput width="auto" />
       <EditableControls />
     </Editable>
   );
@@ -182,6 +183,7 @@ const CreateMessage = () => {
       </Box>
       <PositionSelector />
       <TextColorPicker></TextColorPicker>
+      <LinkInput />
       <Button colorScheme="blue" onClick={handleSaveMessage}>
         Save
       </Button>
