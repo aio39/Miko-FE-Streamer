@@ -12,6 +12,7 @@ const initMessageMetadata: MessageMetadata = {
   stc: '#000000',
   p: 1,
   s: 5,
+  t: 5,
 };
 
 const draftMessageState = atom<MessageMetadata>({

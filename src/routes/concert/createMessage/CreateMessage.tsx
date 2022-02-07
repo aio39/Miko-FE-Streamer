@@ -1,6 +1,5 @@
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import {
-  AspectRatio,
   Box,
   Button,
   ButtonGroup,
@@ -15,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import Screen169 from '../../../components/hoc/Screen169';
 import { draftMessageState } from '../../../recoil/draftMessageState';
 import { metadataState } from '../../../recoil/metadataState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
@@ -171,16 +171,9 @@ const CreateMessage = () => {
   return (
     <Box overflowY="scroll" h="full">
       <Box>
-        <AspectRatio
-          position="relative"
-          ratio={16 / 9}
-          bgColor="blackAlpha.300"
-          m="4"
-        >
-          <Box position="absolute" with="full" height="full">
-            <VideoMessage />
-          </Box>
-        </AspectRatio>
+        <Screen169>
+          <VideoMessage />
+        </Screen169>
       </Box>
       <PositionSelector />
       <TextColorPicker></TextColorPicker>

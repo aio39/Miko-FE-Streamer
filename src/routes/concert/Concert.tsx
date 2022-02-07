@@ -4,12 +4,9 @@ import { useRecoilState } from 'recoil';
 import { Message, Quiz } from '../../const';
 import { selectedWindowState } from '../../recoil/selectedWindowState';
 import CreateMessage from './createMessage/CreateMessage';
+import CreateQuiz from './createQuiz/CreateQuiz';
 import MetadataListView from './metadataList/MetadataListView';
 import SideBar from './sideBar/SideBar';
-
-const QuizCreate = () => {
-  return <div>quiz</div>;
-};
 
 const Concert = () => {
   const [selectedWindow, setSelectedWindow] =
@@ -20,7 +17,7 @@ const Concert = () => {
       case Message:
         return <CreateMessage />;
       case Quiz:
-        return <QuizCreate />;
+        return <CreateQuiz />;
       default:
         return <h1>No project match</h1>;
     }
