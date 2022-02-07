@@ -7,6 +7,7 @@ import CreateMessage from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';
 import MetadataListView from './metadataList/MetadataListView';
 import SideBar from './sideBar/SideBar';
+import TimeLine from './timeline/TimeLine';
 
 const Concert = () => {
   const [selectedWindow, setSelectedWindow] =
@@ -26,7 +27,7 @@ const Concert = () => {
   return (
     <SplitPane defaultSize="80%" split="horizontal" style={{ height: '100vh' }}>
       <SplitPane defaultSize="10%" split="vertical">
-        <div className="full_wh" style={{ backgroundColor: 'green' }}>
+        <div className="full_wh" style={{ backgroundColor: '#ff000022' }}>
           <SideBar></SideBar>
           {/* <VStack width="full" height="full" bgColor="gray.100">
             aaaaaaaaaafsdfdssdf
@@ -39,7 +40,9 @@ const Concert = () => {
           </div>
         </SplitPane>
       </SplitPane>
-      <div>mediaLine</div>
+      <div className="full_wh" style={{ backgroundColor: '#39c5bb33' }}>
+        <TimeLine />
+      </div>
     </SplitPane>
   );
 };
