@@ -7,8 +7,6 @@ import {
   EditableInput,
   EditablePreview,
   Flex,
-  Grid,
-  GridItem,
   IconButton,
   useEditableControls,
 } from '@chakra-ui/react';
@@ -17,10 +15,10 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import Screen169 from '../../../components/hoc/Screen169';
 import { draftMessageState } from '../../../recoil/draftMessageState';
 import { metadataState } from '../../../recoil/metadataState';
-import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
 import DragTest from './DragTest';
 import LinkInput from './LinkInput';
 import MsgResetBtn from './MsgResetBtn';
+import { PositionSelector } from './PositionSelector';
 import TextColorPicker from './TextColorPicker';
 
 const positionSwith = {
@@ -126,38 +124,6 @@ const VideoMessage = () => {
       <EditableText type="mt" />
       <EditableText type="st" />
     </Box>
-  );
-};
-
-const PositionSelector = () => {
-  const [draftMessage, setDraftMessage] = useRecoilState(draftMessageState);
-  const { p: position } = draftMessage;
-
-  const handleChangePosition: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    if (e.target instanceof HTMLDivElement) {
-      const idx = parseInt(
-        e.target.dataset['idx'] as string
-      ) as PositionNumberRange;
-      setDraftMessage((pre) => ({ ...pre, p: idx }));
-    }
-  };
-
-  return (
-    <Grid
-      templateColumns="repeat(3, 1fr)"
-      gap={6}
-      onClick={handleChangePosition}
-    >
-      {new Array(9).fill(0).map((_, idx) => (
-        <GridItem
-          key={idx + 1}
-          data-idx={idx + 1}
-          w="100%"
-          h="10"
-          bg={idx + 1 === position ? 'blue' : 'white'}
-        />
-      ))}
-    </Grid>
   );
 };
 
