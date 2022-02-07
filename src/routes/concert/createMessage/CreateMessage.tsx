@@ -19,6 +19,7 @@ import { draftMessageState } from '../../../recoil/draftMessageState';
 import { metadataState } from '../../../recoil/metadataState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
 import LinkInput from './LinkInput';
+import MsgResetBtn from './MsgResetBtn';
 import TextColorPicker from './TextColorPicker';
 
 const positionSwith = {
@@ -187,6 +188,7 @@ const CreateMessage = () => {
       <Button colorScheme="blue" onClick={handleSaveMessage}>
         Save
       </Button>
+      <MsgResetBtn></MsgResetBtn>
     </Box>
   );
 };
