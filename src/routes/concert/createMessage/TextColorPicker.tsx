@@ -24,7 +24,7 @@ const ColorPickerPopoverContent: FC<{
         <ChromePicker
           color={color}
           onChangeComplete={(color) => onChnage(color.hex)}
-          disableAlpha
+          // disableAlpha
         />
       </PopoverBody>
     </PopoverContent>

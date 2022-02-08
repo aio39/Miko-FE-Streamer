@@ -21,12 +21,13 @@ const CreateMsg = () => {
           <DraftMessagePreview />
         </Screen169>
       </Box>
-      <HStack>
+      <HStack flexWrap="wrap">
         <PositionSelector />
         <MsgBoxEditor />
         <MsgTextDataEditor atom={draftMsgMainTextState} type="main" />
         <MsgTextDataEditor atom={draftMsgSubTextState} type="sub" />
       </HStack>
+
       <LinkInput />
       <CreateBtn />
       <MsgResetBtn></MsgResetBtn>

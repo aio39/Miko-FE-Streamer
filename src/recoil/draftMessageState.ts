@@ -9,7 +9,7 @@ const draftMsgBoxDataState = atom<MessageMetadata['boxData']>({
     round: 10,
     padding: 10,
     spacing: 10,
-    hexColor: '#FFFFFF',
+    hexColor: '#FFFFFFFF',
   },
 });
 
@@ -18,7 +18,7 @@ const initMsgMainTextData = {
   size: 20,
   bold: 600,
   font: 'serif',
-  hexColor: '#111111',
+  hexColor: '#111111FF',
 };
 
 const draftMsgMainTextState = atom<MessageMetadata['mainTextData']>({
