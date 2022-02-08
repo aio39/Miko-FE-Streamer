@@ -34,7 +34,7 @@ const MsgTextDataEditor: FC<{
     setMsgTextData((prev) => ({ ...prev, bold: value }));
   };
 
-  const handleChangeFont: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChangeFont: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
     setMsgTextData((prev) => ({ ...prev, font: e.target.value }));
   };
 
@@ -85,10 +85,11 @@ const MsgTextDataEditor: FC<{
           f
         </HStack>
         <HStack>
-          <Select placeholder="Font" title="font selection" name="font">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+          <Select placeholder="Font" value={font} onChange={handleChangeFont}>
+            <option value="sans-serif">sans-serif</option>
+            <option value="system-ui">system-ui</option>
+            <option value="Georigia">Georigia</option>
+            <option value="monospace">monospace</option>
           </Select>
         </HStack>
       </HStack>

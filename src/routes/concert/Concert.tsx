@@ -26,7 +26,7 @@ const Concert = () => {
 
   return (
     <SplitPane defaultSize="80%" split="horizontal" style={{ height: '100vh' }}>
-      <SplitPane defaultSize="10%" split="vertical">
+      <SplitPane defaultSize="3%" split="vertical">
         <div className="full_wh" style={{ backgroundColor: '#ff000022' }}>
           <SideBar></SideBar>
           {/* <VStack width="full" height="full" bgColor="gray.100">
