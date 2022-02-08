@@ -1,18 +1,19 @@
 import { Box, Center, Grid, GridItem } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
-import { draftMessageState } from '../../../recoil/draftMessageState';
+import { draftMsgPositionState } from '../../../recoil/draftMessageState';
 import { PositionNumberRange } from '../../../types/TimeMetadataFormat';
 
 export const PositionSelector = () => {
-  const [draftMessage, setDraftMessage] = useRecoilState(draftMessageState);
-  const { p: position } = draftMessage;
+  const [draftMsgPosition, setDraftMsgPosition] = useRecoilState(
+    draftMsgPositionState
+  );
 
   const handleChangePosition: React.MouseEventHandler<HTMLDivElement> = (e) => {
     if (e.target instanceof HTMLDivElement) {
       const idx = parseInt(
         e.target.dataset['idx'] as string
       ) as PositionNumberRange;
-      if (idx) setDraftMessage((pre) => ({ ...pre, p: idx }));
+      if (idx) setDraftMsgPosition(idx);
     }
   };
 
@@ -29,7 +30,7 @@ export const PositionSelector = () => {
       borderColor="gray.200"
     >
       {new Array(9).fill(0).map((_, idx) => {
-        const isSelected = idx + 1 === position;
+        const isSelected = idx + 1 === draftMsgPosition;
         return (
           <GridItem
             key={idx + 1}

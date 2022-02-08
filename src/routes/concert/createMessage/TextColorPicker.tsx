@@ -11,16 +11,18 @@ import {
 import { FC } from 'react';
 import { ChromePicker } from 'react-color';
 import { useRecoilState } from 'recoil';
-import { draftMessageState } from '../../../recoil/draftMessageState';
+import { draftMsgMainTextState } from '../../../recoil/draftMessageState';
 
 const ColorPickerPopoverContent: FC<{ type: string; color: string }> = ({
   type,
   color,
 }) => {
-  const [draftMessage, setDraftMessage] = useRecoilState(draftMessageState);
+  const [draftMsgMainText, setDraftMsgMainText] = useRecoilState(
+    draftMsgMainTextState
+  );
 
   const handleChangeComplete = (color: string, property: string) => {
-    setDraftMessage((pre) => ({ ...pre, [property]: color }));
+    setDraftMsgMainText((pre) => ({ ...pre, hexColor: color }));
   };
 
   return (
@@ -28,7 +30,7 @@ const ColorPickerPopoverContent: FC<{ type: string; color: string }> = ({
       <PopoverArrow />
       <PopoverBody p="0">
         <ChromePicker
-          color={draftMessage.mtc}
+          color={draftMsgMainText.hexColor}
           onChangeComplete={(color) => handleChangeComplete(color.hex, type)}
           disableAlpha
         />
@@ -38,11 +40,9 @@ const ColorPickerPopoverContent: FC<{ type: string; color: string }> = ({
 };
 
 const TextColorPicker = () => {
-  const [draftMessage, setDraftMessage] = useRecoilState(draftMessageState);
-
-  const handleChangeComplete = (color: string, property: string) => {
-    setDraftMessage((pre) => ({ ...pre, [property]: color }));
-  };
+  const [draftMsgMainText, setDraftMsgMainText] = useRecoilState(
+    draftMsgMainTextState
+  );
 
   return (
     <VStack>
@@ -51,11 +51,14 @@ const TextColorPicker = () => {
           <PopoverTrigger>
             <HStack>
               <Box>메인 텍스트</Box>
-              <Box w="6" h="6" bgColor={draftMessage.mtc}></Box>
-              <Box>{draftMessage.mtc}</Box>
+              <Box w="6" h="6" bgColor={draftMsgMainText.hexColor}></Box>
+              <Box>{draftMsgMainText.text}</Box>
             </HStack>
           </PopoverTrigger>
-          <ColorPickerPopoverContent color={draftMessage.mtc} type="mtc" />
+          <ColorPickerPopoverContent
+            color={draftMsgMainText.hexColor}
+            type="mtc"
+          />
         </Popover>
       </HStack>
     </VStack>

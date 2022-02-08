@@ -11,8 +11,8 @@ import {
 const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
   return (
     <Box width="full" h="100" border="1px">
-      <Text>{data.mt}</Text>
-      <Text>{data.st}</Text>
+      <Text>{data.mainTextData.text}</Text>
+      <Text>{data.subTextData.text}</Text>
     </Box>
   );
 };
@@ -20,7 +20,7 @@ const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
 const MetadataQuizPreview: FC<{ data: QuizMetadata }> = ({ data }) => {
   return (
     <Box width="full" h="100" border="1px">
-      <Text>{data.mt}</Text>
+      <Text>{data.mainText}</Text>
     </Box>
   );
 };
@@ -29,7 +29,7 @@ const MetadataListContainer = () => {
   const metadata = useRecoilValue(metadataState);
 
   const metadataDrawSwitch = (data: MetaData, idx: number) => {
-    switch (data.data.d) {
+    switch (data.data.dataType) {
       case 'm':
         return <MetadataMsgPreview key={idx} data={data.data} />;
       case 'q':

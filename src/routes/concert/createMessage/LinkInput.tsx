@@ -1,19 +1,17 @@
 import { Box, Input } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
-import { draftMessageState } from '../../../recoil/draftMessageState';
+import { draftMsgUrlState } from '../../../recoil/draftMessageState';
 
 const LinkInput = () => {
-  const [draftMessage, setDraftMessage] = useRecoilState(draftMessageState);
+  const [draftMsgUrl, setDraftMsgUrl] = useRecoilState(draftMsgUrlState);
 
   return (
     <Box>
       <Input
         placeholder="Url"
         width="auto"
-        value={draftMessage.u}
-        onChange={(e) =>
-          setDraftMessage((pre) => ({ ...pre, u: e.target.value }))
-        }
+        value={draftMsgUrl}
+        onChange={(e) => setDraftMsgUrl(e.target.value)}
       />
     </Box>
   );

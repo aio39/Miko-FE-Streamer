@@ -16,7 +16,7 @@ const Choice: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   const handleDeleteChoice = () => {
     setDraftQuiz((prev) =>
       produce(prev, (draft) => {
-        draft.s.splice(idx, 1);
+        draft.choices.splice(idx, 1);
         return draft;
       })
     );
@@ -43,7 +43,7 @@ const ChoiceAdd: FC = () => {
   const handleInitailizeNewChoice = () => {
     setDraftQuiz((prev) =>
       produce(prev, (draft) => {
-        draft.s.push('');
+        draft.choices.push('');
         return draft;
       })
     );
@@ -66,10 +66,10 @@ const CreateQuiz = () => {
   const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizState);
   const [metadata, setMetadata] = useRecoilState(metadataState);
 
-  const isFull = useMemo(() => draftQuiz.s.length >= 4, [draftQuiz]);
+  const isFull = useMemo(() => draftQuiz.choices.length >= 4, [draftQuiz]);
   // const isShouldBe3Column = useMemo(() => draftQuiz.s.length >= 5, [draftQuiz]);
   const [width, height] = useMemo(() => {
-    const l = draftQuiz.s.length;
+    const l = draftQuiz.choices.length;
     const [w, h] = [25, 35];
 
     switch (l) {
@@ -105,7 +105,7 @@ const CreateQuiz = () => {
           gap="4"
           bgColor="gray.400"
         >
-          {draftQuiz.s.map((text, idx) => (
+          {draftQuiz.choices.map((text, idx) => (
             <Choice key={idx} text={text} idx={idx} />
           ))}
           {!isFull && <ChoiceAdd />}
