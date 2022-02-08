@@ -3,7 +3,9 @@ import { useRecoilValue } from 'recoil';
 import Screen169 from '../../../components/hoc/Screen169';
 import {
   draftMsgBoxDataState,
+  draftMsgMainTextState,
   draftMsgPositionState,
+  draftMsgSubTextState,
 } from '../../../recoil/draftMessageState';
 import CreateBtn from './CreateBtn';
 import DragTest from './DragTest';
@@ -13,7 +15,6 @@ import MsgEtcDataEditor from './MsgEtcDataEditor';
 import MsgResetBtn from './MsgResetBtn';
 import MsgTextEditor from './MsgTextEditor copy';
 import { PositionSelector } from './PositionSelector';
-import TextColorPicker from './TextColorPicker';
 
 // const EditableText: FC<{ type: 'mt' | 'st' }> = ({ type }) => {
 //   const draftMessage = useRecoilValue(draftMsgState);
@@ -127,9 +128,9 @@ const CreateMsg = () => {
         <PositionSelector />
         <MsgBoxEditor />
         <MsgTextEditor />
-        <MsgEtcDataEditor />
+        <MsgEtcDataEditor atom={draftMsgMainTextState} type="main" />
+        <MsgEtcDataEditor atom={draftMsgSubTextState} type="sub" />
       </HStack>
-      <TextColorPicker></TextColorPicker>
       <LinkInput />
       <CreateBtn />
       <MsgResetBtn></MsgResetBtn>

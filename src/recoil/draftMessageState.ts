@@ -13,26 +13,22 @@ const draftMsgBoxDataState = atom<MessageMetadata['boxData']>({
   },
 });
 
+const initMsgMainTextData = {
+  text: '',
+  size: 20,
+  bold: 600,
+  font: 'serif',
+  hexColor: '#111111',
+};
+
 const draftMsgMainTextState = atom<MessageMetadata['mainTextData']>({
   key: 'draftMsgMainText',
-  default: {
-    text: '',
-    size: 20,
-    bold: 600,
-    font: 'serif',
-    hexColor: '#111111',
-  },
+  default: initMsgMainTextData,
 });
 
 const draftMsgSubTextState = atom<MessageMetadata['subTextData']>({
   key: 'draftMsgSubText',
-  default: {
-    text: '',
-    size: 20,
-    bold: 600,
-    font: 'serif',
-    hexColor: '#111111',
-  },
+  default: initMsgMainTextData,
 });
 
 const draftMsgPositionState = atom<MessageMetadata['positionIndex']>({
@@ -64,6 +60,13 @@ const draftMsgTimeDurationState = atom<MessageMetadata['durationTime']>({
 //   default: initMessageMetadata,
 // });
 
+const draftMsgIsHasSubTextState = selector<boolean>({
+  key: 'draftMsgIsHasSubText',
+  get: ({ get }) => {
+    return !!get(draftMsgSubTextState);
+  },
+});
+
 const draftMsgState = selector<MessageMetadata>({
   key: 'draftMessage',
   get: ({ get }) => {
@@ -92,4 +95,5 @@ export {
   draftMsgUrlState,
   draftMsgAnimationTypeState,
   draftMsgTimeDurationState,
+  draftMsgIsHasSubTextState,
 };

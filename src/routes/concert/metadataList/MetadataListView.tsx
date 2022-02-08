@@ -12,7 +12,7 @@ const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
   return (
     <Box width="full" h="100" border="1px">
       <Text>{data.mainTextData.text}</Text>
-      <Text>{data.subTextData.text}</Text>
+      {data.subTextData && <Text>{data.subTextData.text}</Text>}
     </Box>
   );
 };
