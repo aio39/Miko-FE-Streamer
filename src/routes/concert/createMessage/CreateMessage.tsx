@@ -11,9 +11,8 @@ import CreateBtn from './CreateBtn';
 import DragTest from './DragTest';
 import LinkInput from './LinkInput';
 import MsgBoxEditor from './MsgBoxEditor';
-import MsgEtcDataEditor from './MsgEtcDataEditor';
 import MsgResetBtn from './MsgResetBtn';
-import MsgTextEditor from './MsgTextEditor copy';
+import MsgTextDataEditor from './MsgTextDataEditor';
 import { PositionSelector } from './PositionSelector';
 
 // const EditableText: FC<{ type: 'mt' | 'st' }> = ({ type }) => {
@@ -127,9 +126,8 @@ const CreateMsg = () => {
       <HStack>
         <PositionSelector />
         <MsgBoxEditor />
-        <MsgTextEditor />
-        <MsgEtcDataEditor atom={draftMsgMainTextState} type="main" />
-        <MsgEtcDataEditor atom={draftMsgSubTextState} type="sub" />
+        <MsgTextDataEditor atom={draftMsgMainTextState} type="main" />
+        <MsgTextDataEditor atom={draftMsgSubTextState} type="sub" />
       </HStack>
       <LinkInput />
       <CreateBtn />

@@ -3,7 +3,7 @@ import SplitPane from 'react-split-pane';
 import { useRecoilState } from 'recoil';
 import { Message, Quiz } from '../../const';
 import { selectedWindowState } from '../../recoil/selectedWindowState';
-import CreateMessage from './createMessage/CreateMessage';
+import CreateMsg from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';
 import MetadataListView from './metadataList/MetadataListView';
 import SideBar from './sideBar/SideBar';
@@ -16,7 +16,7 @@ const Concert = () => {
   const mainWindow = useCallback(() => {
     switch (selectedWindow) {
       case Message:
-        return <CreateMessage />;
+        return <CreateMsg />;
       case Quiz:
         return <CreateQuiz />;
       default:

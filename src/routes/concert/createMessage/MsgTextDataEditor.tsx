@@ -15,7 +15,7 @@ import { RecoilState, useRecoilState } from 'recoil';
 import { MsgTextData } from '../../../types/TimeMetadataFormat';
 import TextColorPicker from './TextColorPicker';
 
-const MsgEtcDataEditor: FC<{
+const MsgTextDataEditor: FC<{
   atom: RecoilState<MsgTextData>;
   type: 'main' | 'sub';
 }> = ({ atom, type }) => {
@@ -44,7 +44,7 @@ const MsgEtcDataEditor: FC<{
 
   return (
     <VStack>
-      <Text>메인 텍스트</Text>
+      <Text>{type === 'main' ? '메인 텍스트' : '서브 텍스트'}</Text>
       <Input value={text} onChange={handleChangeText}></Input>
       <HStack>
         <HStack>
@@ -97,4 +97,4 @@ const MsgEtcDataEditor: FC<{
   );
 };
 
-export default MsgEtcDataEditor;
+export default MsgTextDataEditor;

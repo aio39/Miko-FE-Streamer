@@ -46,7 +46,7 @@ const TextColorPicker: FC<{
       <Popover>
         <PopoverTrigger>
           <HStack>
-            <Box w="6" h="6" bgColor={color}></Box>
+            <Box w="6" h="6" bgColor={color} shadow="base"></Box>
             <Text>{color} </Text>
           </HStack>
         </PopoverTrigger>

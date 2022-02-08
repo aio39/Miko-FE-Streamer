@@ -38,7 +38,7 @@ export type MessageMetadata = {
   /**
    * Box: 박스 데이터
    */
-  boxData?: MsgBoxData;
+  boxData: MsgBoxData;
   /**
    * position:
    */
