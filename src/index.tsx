@@ -1,49 +1,18 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Concert from './routes/concert/Concert';
-import Home from './routes/Home';
-import Homes from './routes/Homes';
-import Login from './routes/Login';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
   <React.StrictMode>
-      <RecoilRoot>
-    <ChakraProvider resetCSS>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/concert" element={<Concert />}></Route>
-            <Route path="home" element={<Homes />}>
-              <Route
-                index
-                element={
-                  <main style={{ padding: '1rem' }}>
-                    <p>Index로 기본 설정</p>
-                  </main>
-                }
-              />
-              <Route path=":homeId" element={<Home />} />
-            </Route>
-            <Route path="login" element={<Login />} />
-            <Route
-              path="*"
-              element={
-                <main style={{ padding: '1rem' }}>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ChakraProvider>
+    <RecoilRoot>
+      <ChakraProvider resetCSS>
+        <App />
+      </ChakraProvider>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
