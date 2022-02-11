@@ -84,10 +84,9 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="login" element={<LoginPage />} />
           <Route path="/" element={<RequireAuth />}>
+            <Route path="/home" element={<Homes />}></Route>
             <Route path="/concert" element={<Concert />}></Route>
-          </Route>
 
-          <Route path="home" element={<Homes />}>
             <Route
               index
               element={

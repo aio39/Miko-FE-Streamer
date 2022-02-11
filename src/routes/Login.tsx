@@ -1,3 +1,4 @@
+import { Button, Link } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -69,7 +70,9 @@ const LoginPage: FC = () => {
   const location = useLocation();
   const isLogin = useRecoilValue(isLoginState);
 
-  // const from = location.state;
+  const fromPathname =
+    ((location.state as any)?.from?.pathname as string) || undefined || '/';
+  console.log(fromPathname);
   // const from = location?.state?.from?.pathname || '/';
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -79,24 +82,23 @@ const LoginPage: FC = () => {
     const username = formData.get('username') as string;
 
     // isLogin.signin(username, () => {
-    //   // Send them back to the page they tried to visit when they were
-    //   // redirected to the login page. Use { replace: true } so we don't create
-    //   // another entry in the history stack for the login page.  This means that
-    //   // when they get to the protected page and click the back button, they
-    //   // won't end up back on the login page, which is also really nice for the
-    //   // user experience.
     //   navigate(from, { replace: true });
     // });
   }
 
   return (
     <div>
-      <p>You must log in to view the page at</p>
+      <p>You must log in to view the page at {fromPathname}</p>
       <form onSubmit={handleSubmit}>
         <label>
           Username: <input name="username" type="text" />
         </label>{' '}
-        <button type="submit">Login</button>
+        {/* <button type="submit">Login</button> */}
+        <Button>
+          <Link href="http://localhost:3939/api/login/google">
+            Google Login
+          </Link>
+        </Button>
       </form>
     </div>
   );

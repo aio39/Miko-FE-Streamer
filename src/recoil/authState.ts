@@ -1,19 +1,20 @@
-import { selector } from 'recoil';
+import { atom, selector } from 'recoil';
 
-// const authState = atom<false>({
-//   key: 'auth',
-//   default: false,
-// });
+const getCookieValue = (name: string) =>
+  document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+
+const loginAtom = atom<boolean>({
+  key: 'isLogin',
+  default: getCookieValue('isLogin') ? true : false,
+});
 
 const isLoginState = selector<boolean>({
-  key: 'isLogin',
-  get: ({ get }) => {
-    const isExistToken = document.cookie.match(
-      /^(.*;)?\s*logged\s*=\s*[^;]+(.*)?$/
-    );
-    console.log('isExistToken', isExistToken);
-
-    return isExistToken ? true : false;
+  key: 'auth',
+  get: async ({ get }) => {
+    return get(loginAtom);
+  },
+  set: ({ set }, newValue) => {
+    set(loginAtom, newValue);
   },
 });
 
