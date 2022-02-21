@@ -16,7 +16,7 @@ import {
 import produce from 'immer';
 import { FC } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { metadataState } from '../../../recoil/metadataState';
+import { metadataState } from 'recoil/metadataState';
 import {
   MessageMetadata,
   MetaData,

@@ -1,7 +1,7 @@
+import { Message, Quiz } from 'const';
 import { useCallback } from 'react';
 import SplitPane from 'react-split-pane';
 import { useRecoilState } from 'recoil';
-import { Message, Quiz } from '../../const';
 import { selectedWindowState } from '../../recoil/selectedWindowState';
 import CreateMsg from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';

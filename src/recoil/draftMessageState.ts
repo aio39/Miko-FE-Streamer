@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { MessageMetadata } from '../types/TimeMetadataFormat';
+import { MessageMetadata } from 'types/TimeMetadataFormat';
 
 const draftMsgBoxDataState = atom<MessageMetadata['boxData']>({
   key: 'draftMsgBoxData',

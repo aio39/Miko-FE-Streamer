@@ -1,4 +1,5 @@
 import { Box, Button, HStack } from '@chakra-ui/react';
+import SidebarWithHeader from 'layout/SidebarLayout';
 import React from 'react';
 import {
   BrowserRouter,
@@ -63,6 +64,12 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<MainPage />} />
+          <Route path="test" element={<SidebarWithHeader />}>
+            <Route path="" element={<Box>aaa</Box>} />
+          </Route>
+          <Route path="test/:id">
+            <Route path="" element={<Box>bbb</Box>} />
+          </Route>
           <Route path="login" element={<LoginPage />} />
           <Route path="login/suscess" element={<SuccessLogin />} />
           <Route path="my" element={<RequireAuth />}>

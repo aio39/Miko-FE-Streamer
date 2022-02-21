@@ -1,9 +1,9 @@
 import { Box, HStack } from '@chakra-ui/react';
-import Screen169 from '../../../components/hoc/Screen169';
+import Screen169 from 'components/hoc/Screen169';
 import {
   draftMsgMainTextState,
   draftMsgSubTextState,
-} from '../../../recoil/draftMessageState';
+} from 'recoil/draftMessageState';
 import CreateBtn from './CreateBtn';
 import DraftMessagePreview from './DraftMessagePreview';
 import DragTest from './DragTest';

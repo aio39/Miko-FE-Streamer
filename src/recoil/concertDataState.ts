@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { ConcertData } from '../types/ConcertData';
+import { ConcertData } from 'types/ConcertData';
 
 const concertDataState = atom<ConcertData>({
   key: 'concertData',

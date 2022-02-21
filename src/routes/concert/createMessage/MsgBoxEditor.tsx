@@ -9,7 +9,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
-import { draftMsgBoxDataState } from '../../../recoil/draftMessageState';
+import { draftMsgBoxDataState } from 'recoil/draftMessageState';
 import TextColorPicker from './TextColorPicker';
 
 const MsgBoxEditor = () => {

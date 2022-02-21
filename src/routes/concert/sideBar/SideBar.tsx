@@ -1,18 +1,12 @@
 import { Center, VStack } from '@chakra-ui/react';
+import { Information, Message, Quiz, Ranking, WindowType } from 'const';
 import { FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  Information,
-  Message,
-  Quiz,
-  Ranking,
-  WindowType,
-} from '../../../const';
-import { selectedWindowState } from '../../../recoil/selectedWindowState';
-import { ReactComponent as InformationLogo } from './../../../svg/information.svg';
-import { ReactComponent as MessageLogo } from './../../../svg/message.svg';
-import { ReactComponent as QuizLogo } from './../../../svg/quiz.svg';
-import { ReactComponent as RankingLogo } from './../../../svg/ranking.svg';
+import { selectedWindowState } from 'recoil/selectedWindowState';
+import { ReactComponent as InformationLogo } from 'svg/information.svg';
+import { ReactComponent as MessageLogo } from 'svg/message.svg';
+import { ReactComponent as QuizLogo } from 'svg/quiz.svg';
+import { ReactComponent as RankingLogo } from 'svg/ranking.svg';
 
 const IconWrapper: FC<{ type: WindowType }> = ({ type, children }) => {
   const [selectedWindow, setSelectedWindow] =

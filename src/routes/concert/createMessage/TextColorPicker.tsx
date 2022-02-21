@@ -11,7 +11,7 @@ import {
 import { FC, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { useRecoilState } from 'recoil';
-import { draftMsgMainTextState } from '../../../recoil/draftMessageState';
+import { draftMsgMainTextState } from 'recoil/draftMessageState';
 
 const ColorPickerPopoverContent: FC<{
   color: string;
