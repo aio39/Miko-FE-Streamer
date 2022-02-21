@@ -1,5 +1,11 @@
 import { Box, Button, HStack } from '@chakra-ui/react';
 import SidebarWithHeader from 'layout/SidebarLayout';
+import Concert from 'pages/concert/Concert';
+import Home from 'pages/Home';
+import Homes from 'pages/Homes';
+import LoginPage, { RequireAuth } from 'pages/Login';
+import MainPage from 'pages/Main';
+import SuccessLogin from 'pages/SuccessLogin';
 import React from 'react';
 import {
   BrowserRouter,
@@ -12,12 +18,6 @@ import {
 import { useRecoilValue } from 'recoil';
 import './App.css';
 import { isLoginState } from './recoil/authState';
-import Concert from './routes/concert/Concert';
-import Home from './routes/Home';
-import Homes from './routes/Homes';
-import LoginPage, { RequireAuth } from './routes/Login';
-import MainPage from './routes/Main';
-import SuccessLogin from './routes/SuccessLogin';
 
 function AuthStatus() {
   const isLogin = useRecoilValue(isLoginState);
