@@ -2,7 +2,7 @@ import { Box, Button, Container, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-export default function MainPage() {
+export default function HomePage() {
   let params = useParams();
   return (
     <Box width="full" height="full" position="relative">

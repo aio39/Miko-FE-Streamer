@@ -13,28 +13,11 @@ import {
 } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import { isLoginState } from 'recoil/authState';
 import useColorStore from 'state/hooks/useColorStore';
 import { useLogin } from 'state/swr/useUser';
-
-export { RequireAuth };
-
-function RequireAuth({}: {}) {
-  const isLogin = useRecoilValue(isLoginState);
-  const location = useLocation();
-  console.log('is login ?', isLogin);
-  if (!isLogin) {
-    return (
-      <div>
-        <Navigate to="/login" state={{ from: location }} replace />
-      </div>
-    );
-  }
-
-  return <Outlet />;
-}
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();

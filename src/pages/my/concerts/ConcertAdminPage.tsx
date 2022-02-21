@@ -1,18 +1,19 @@
 import { Message, Quiz } from 'const';
 import { useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import { useRecoilState } from 'recoil';
-import { selectedWindowState } from '../../recoil/selectedWindowState';
+import { selectedWindowState } from 'recoil/selectedWindowState';
 import CreateMsg from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';
 import MetadataListView from './metadataList/MetadataListView';
 import SideBar from './sideBar/SideBar';
 import TimeLine from './timeline/TimeLine';
 
-const Concert = () => {
+const ConcertAdminPage = () => {
   const [selectedWindow, setSelectedWindow] =
     useRecoilState(selectedWindowState);
-
+  const params = useParams();
   const mainWindow = useCallback(() => {
     switch (selectedWindow) {
       case Message:
@@ -23,6 +24,8 @@ const Concert = () => {
         return <h1>No project match</h1>;
     }
   }, [selectedWindow]);
+
+  console.log(params);
 
   return (
     <SplitPane defaultSize="80%" split="horizontal" style={{ height: '100vh' }}>
@@ -47,4 +50,4 @@ const Concert = () => {
   );
 };
 
-export default Concert;
+export default ConcertAdminPage;

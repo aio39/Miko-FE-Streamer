@@ -21,7 +21,7 @@ import {
   MessageMetadata,
   MetaData,
   QuizMetadata,
-} from '../../../types/TimeMetadataFormat';
+} from 'types/TimeMetadataFormat';
 const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
   return (
     <Box width="full" h="100" border="1px">
