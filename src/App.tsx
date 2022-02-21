@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Text } from '@chakra-ui/react';
+import { Box, Button, HStack } from '@chakra-ui/react';
 import React from 'react';
 import {
   BrowserRouter,
@@ -15,19 +15,8 @@ import Concert from './routes/concert/Concert';
 import Home from './routes/Home';
 import Homes from './routes/Homes';
 import LoginPage, { RequireAuth } from './routes/Login';
-
-// <div className="App">
-//   <header className="App-header"></header>
-//   {/* <nav
-//     style={{
-//       borderBottom: 'solid 1px',
-//       paddingBottom: '1rem',
-//     }}
-//   >
-//     <Link to="/home">home</Link> | <Link to="/login">login</Link>
-//   </nav> */}
-//   <Outlet />
-// </div>;
+import MainPage from './routes/Main';
+import SuccessLogin from './routes/SuccessLogin';
 
 function AuthStatus() {
   const isLogin = useRecoilValue(isLoginState);
@@ -53,7 +42,7 @@ function AuthStatus() {
 
 function Layout() {
   return (
-    <div>
+    <Box width="full" height="100vh">
       <AuthStatus />
       <HStack>
         <Button>
@@ -64,29 +53,21 @@ function Layout() {
         </Button>
       </HStack>
       <Outlet />
-    </div>
-  );
-}
-
-const MainPage = () => {
-  return (
-    <Box>
-      <Text>Main Page!</Text>
     </Box>
   );
-};
+}
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<MainPage />}></Route>
+          <Route path="/" element={<MainPage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route path="/" element={<RequireAuth />}>
-            <Route path="/home" element={<Homes />}></Route>
-            <Route path="/concert" element={<Concert />}></Route>
-
+          <Route path="login/suscess" element={<SuccessLogin />} />
+          <Route path="my" element={<RequireAuth />}>
+            <Route path="home" element={<Homes />}></Route>
+            <Route path="concert" element={<Concert />}></Route>
             <Route
               index
               element={

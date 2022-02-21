@@ -8,3 +8,5 @@ export type WindowType =
   | typeof Quiz
   | typeof Information
   | typeof Ranking;
+
+export const LARAVEL_URL = 'http://localhost:8080/api/';

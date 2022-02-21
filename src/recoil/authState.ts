@@ -10,7 +10,7 @@ const loginAtom = atom<boolean>({
 
 const isLoginState = selector<boolean>({
   key: 'auth',
-  get: async ({ get }) => {
+  get: ({ get }) => {
     return get(loginAtom);
   },
   set: ({ set }, newValue) => {

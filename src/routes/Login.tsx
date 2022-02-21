@@ -1,60 +1,31 @@
-import { Button, Link } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  Link,
+  Stack,
+} from '@chakra-ui/react';
+import React, { FC } from 'react';
+import { useForm } from 'react-hook-form';
 import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { isLoginState } from '../recoil/authState';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isLoginState } from 'recoil/authState';
+import useColorStore from 'state/hooks/useColorStore';
+import { useLogin } from 'state/swr/useUser';
 
-/**
- * This represents some generic auth provider API, like Firebase.
- */
-const fakeAuthProvider = {
-  isAuthenticated: false,
-  signin(callback: VoidFunction) {
-    fakeAuthProvider.isAuthenticated = true;
-    setTimeout(callback, 100); // fake async
-  },
-  signout(callback: VoidFunction) {
-    fakeAuthProvider.isAuthenticated = false;
-    setTimeout(callback, 100);
-  },
-};
-
-export { fakeAuthProvider, RequireAuth };
-
-function AuthProvider({ children }: { children: React.ReactNode }) {
-  let [user, setUser] = useState<any>(null);
-
-  let signin = (newUser: string, callback: VoidFunction) => {
-    return fakeAuthProvider.signin(() => {
-      setUser(newUser);
-      callback();
-    });
-  };
-
-  let signout = (callback: VoidFunction) => {
-    return fakeAuthProvider.signout(() => {
-      setUser(null);
-      callback();
-    });
-  };
-
-  let value = { user, signin, signout };
-
-  return <>{children}</>;
-}
+export { RequireAuth };
 
 function RequireAuth({}: {}) {
   const isLogin = useRecoilValue(isLoginState);
-  let navigate = useNavigate();
   const location = useLocation();
   console.log('is login ?', isLogin);
   if (!isLogin) {
-    // navigate('/login');
-    // Redirect them to the /login page, but save the current location they were
-    // trying to go to when they were redirected. This allows us to send them
-    // along to that page after they login, which is a nicer user experience
-    // than dropping them off on the home page.
-    // return <div></div>;
     return (
       <div>
         <Navigate to="/login" state={{ from: location }} replace />
@@ -68,39 +39,107 @@ function RequireAuth({}: {}) {
 const LoginPage: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isLogin = useRecoilValue(isLoginState);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm<{ email: string; password: string }>({ mode: 'all' });
+  const setLoginState = useSetRecoilState(isLoginState);
+
+  const onSubmit = async (data: any) => {
+    const result = await useLogin(data);
+    console.log(result);
+    if (result) {
+      setLoginState(true);
+      navigate('/');
+    }
+  };
 
   const fromPathname =
     ((location.state as any)?.from?.pathname as string) || undefined || '/';
-  console.log(fromPathname);
-  // const from = location?.state?.from?.pathname || '/';
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const username = formData.get('username') as string;
-
-    // isLogin.signin(username, () => {
-    //   navigate(from, { replace: true });
-    // });
-  }
 
   return (
-    <div>
-      <p>You must log in to view the page at {fromPathname}</p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username: <input name="username" type="text" />
-        </label>{' '}
-        {/* <button type="submit">Login</button> */}
-        <Button>
-          <Link href="http://localhost:3939/api/login/google">
-            Google Login
-          </Link>
-        </Button>
-      </form>
-    </div>
+    <Box>
+      <Flex
+        minH={'100vh'}
+        align={'center'}
+        justify={'center'}
+        bg={useColorStore('background')}
+      >
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={8} px={2}>
+          <Stack align={'center'}>
+            <Heading fontSize={'6xl'}>Marusuku</Heading>
+          </Stack>
+          <Box
+            rounded="lg"
+            bg={useColorStore('surface')}
+            boxShadow={'lg'}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl id="email" isInvalid={!!errors.email}>
+                  <FormLabel>Email address</FormLabel>
+                  <Input
+                    type="email"
+                    id="email"
+                    {...register('email', {
+                      required: 'This is required',
+                      minLength: {
+                        value: 4,
+                        message: 'Minimum length should be 4',
+                      },
+                    })}
+                  />
+                  <FormErrorMessage>
+                    {errors.email && errors.email.message}
+                  </FormErrorMessage>
+                </FormControl>
+                <FormControl id="password" isInvalid={!!errors.password}>
+                  <FormLabel>Password</FormLabel>
+                  <Input
+                    type="password"
+                    id="password"
+                    {...register('password', {
+                      required: 'This is required',
+                      minLength: {
+                        value: 4,
+                        message: 'Minimum length should be 4',
+                      },
+                    })}
+                  />
+                  <FormErrorMessage>
+                    {errors.password && errors.password.message}
+                  </FormErrorMessage>
+                </FormControl>
+                <Stack spacing={10}>
+                  <Stack
+                    direction={{ base: 'column', sm: 'row' }}
+                    align={'start'}
+                    justify={'space-between'}
+                  >
+                    <Checkbox>Remember me</Checkbox>
+                    <Link color={'blue.400'}>비밀번호 찾기</Link>
+                    <Link color={'blue.400'}>회원가입</Link>
+                  </Stack>
+                  <Button
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }}
+                    type="submit"
+                    isLoading={isSubmitting}
+                  >
+                    로그인
+                  </Button>
+                </Stack>
+              </form>
+            </Stack>
+          </Box>
+        </Stack>
+      </Flex>
+    </Box>
   );
 };
 
