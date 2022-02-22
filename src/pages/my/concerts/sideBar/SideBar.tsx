@@ -2,7 +2,7 @@ import { Center, VStack } from '@chakra-ui/react';
 import { Information, Message, Quiz, Ranking, WindowType } from 'const';
 import { FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { selectedWindowState } from 'recoil/selectedWindowState';
+import { selectedWindowState } from 'state/recoil/selectedWindowState';
 import { ReactComponent as InformationLogo } from 'svg/information.svg';
 import { ReactComponent as MessageLogo } from 'svg/message.svg';
 import { ReactComponent as QuizLogo } from 'svg/quiz.svg';

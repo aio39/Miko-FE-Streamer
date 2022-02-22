@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
-import { draftMsgState } from 'recoil/draftMessageState';
+import { draftMsgState } from 'state/recoil/draftMessageState';
 import { MsgTextData } from 'types/TimeMetadataFormat';
 
 // const EditableText: FC<{ type: 'mt' | 'st' }> = ({ type }) => {

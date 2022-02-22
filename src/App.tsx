@@ -6,7 +6,7 @@ import RequiredLoginGuard from 'pages/guard/RequiredLoginGuard';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
 import ConcertCreatePage from 'pages/my/ConcertCreatePage';
-import ConcertListPage from 'pages/my/ConcertListPage copy';
+import ConcertListPage from 'pages/my/ConcertListPage';
 import ConcertAdminPage from 'pages/my/concerts/ConcertAdminPage';
 import EditMyPage from 'pages/my/EditMyPage';
 import MyPage from 'pages/my/MyPage';

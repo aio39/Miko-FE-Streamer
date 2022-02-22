@@ -3,8 +3,8 @@ import Screen169 from 'components/hoc/Screen169';
 import produce from 'immer';
 import { FC, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
-import { draftQuizState } from 'recoil/draftQuizState';
-import { metadataState } from 'recoil/metadataState';
+import { draftQuizState } from 'state/recoil/draftQuizState';
+import { metadataState } from 'state/recoil/metadataState';
 
 const Choice: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizState);

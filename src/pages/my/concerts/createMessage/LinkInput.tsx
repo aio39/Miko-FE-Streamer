@@ -1,6 +1,6 @@
 import { Box, Input } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
-import { draftMsgUrlState } from 'recoil/draftMessageState';
+import { draftMsgUrlState } from 'state/recoil/draftMessageState';
 
 const LinkInput = () => {
   const [draftMsgUrl, setDraftMsgUrl] = useRecoilState(draftMsgUrlState);

@@ -3,7 +3,7 @@ import Screen169 from 'components/hoc/Screen169';
 import {
   draftMsgMainTextState,
   draftMsgSubTextState,
-} from 'recoil/draftMessageState';
+} from 'state/recoil/draftMessageState';
 import CreateBtn from './CreateBtn';
 import DraftMessagePreview from './DraftMessagePreview';
 import DragTest from './DragTest';

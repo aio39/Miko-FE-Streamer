@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { useEffect, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
-import { concertDataState } from 'recoil/concertDataState';
+import { concertDataState } from 'state/recoil/concertDataState';
 
 const TIMELINE = 'timeline';
 

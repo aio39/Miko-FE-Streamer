@@ -1,6 +1,6 @@
 import { Box, Center, Grid, GridItem } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
-import { draftMsgPositionState } from 'recoil/draftMessageState';
+import { draftMsgPositionState } from 'state/recoil/draftMessageState';
 import { PositionNumberRange } from 'types/TimeMetadataFormat';
 
 export const PositionSelector = () => {

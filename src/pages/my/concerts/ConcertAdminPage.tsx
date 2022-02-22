@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import { useRecoilState } from 'recoil';
-import { selectedWindowState } from 'recoil/selectedWindowState';
+import { selectedWindowState } from 'state/recoil/selectedWindowState';
 import CreateMsg from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';
 import MetadataListView from './metadataList/MetadataListView';
