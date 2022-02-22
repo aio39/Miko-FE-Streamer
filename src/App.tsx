@@ -1,6 +1,6 @@
 import LoginStatus from 'components/display/LoginStatus';
 import FullWidthHeightLayout from 'layout/FullWidthHeightLayout';
-import SidebarWithHeader from 'layout/SidebarLayout';
+import SidebarWithHeader from 'layout/sidebarLayout/SidebarLayout';
 import NotLoginGuard from 'pages/guard/NotLoginGuard';
 import RequiredLoginGuard from 'pages/guard/RequiredLoginGuard';
 import HomePage from 'pages/HomePage';

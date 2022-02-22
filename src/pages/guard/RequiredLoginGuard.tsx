@@ -6,7 +6,7 @@ const RequiredLoginGuard = () => {
   const isLogin = useRecoilValue(isLoginState);
   const location = useLocation();
   console.log('is login ?', isLogin);
-  if (!isLogin) {
+  if (isLogin === false) {
     return (
       <div>
         <Navigate to="/login" state={{ from: location }} replace />
