@@ -1,12 +1,9 @@
 import { atom } from 'recoil';
-import { ConcertData } from 'types/ConcertData';
+import { Concert } from 'types/share/Concert';
 
-const concertDataState = atom<ConcertData>({
+const concertDataState = atom<Concert | undefined>({
   key: 'concertData',
-  default: {
-    start_at: 1644230400000,
-    end_at: 1644241200000,
-  },
+  default: undefined,
 });
 
 export { concertDataState };

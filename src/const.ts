@@ -11,3 +11,5 @@ export type WindowType =
 
 export const LARAVEL_URL = 'http://localhost:8080/api/';
 export const S3_URL = 'https://marusuku.s3.ap-northeast-2.amazonaws.com/';
+
+export const categoryArray = ['콘서트', '음악'];

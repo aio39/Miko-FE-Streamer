@@ -6,7 +6,7 @@ const FORMAT = {
   YMDHMS: 'YYYY/MM/DD A hh:mm:ss',
 };
 
-const convertDate = (data: string, format: keyof typeof FORMAT = 'YMD') => {
+const convertDate = (data: number, format: keyof typeof FORMAT = 'YMD') => {
   return dayjs(data).format(FORMAT[format]);
 };
 

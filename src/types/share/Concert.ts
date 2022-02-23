@@ -9,11 +9,18 @@ export interface Concert extends CommonProps {
   detail: string;
   content: string;
   is_public: number;
-  all_concert_start_date: string;
-  all_concert_end_date: string;
+  all_concert_start_date: number;
+  all_concert_end_date: number;
 }
 
-export type CreteUserData = Pick<
+export type CreateConcertData = Pick<
   Concert,
-  'cover_image' | 'title' | 'artist' | 'detail' | 'content'
+  | 'cover_image'
+  | 'title'
+  | 'artist'
+  | 'detail'
+  | 'content'
+  | 'category_id'
+  | 'all_concert_end_date'
+  | 'all_concert_start_date'
 >;

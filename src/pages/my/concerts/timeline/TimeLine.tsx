@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { useEffect, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { concertDataState } from 'state/recoil/concertDataState';
+import { Concert } from 'types/share/Concert';
 
 const TIMELINE = 'timeline';
 
@@ -14,19 +15,21 @@ const TL_WIDTH = 15;
 
 const TimeLine = () => {
   const concertData = useRecoilValue(concertDataState);
-  const { start_at, end_at } = concertData;
+  const { all_concert_end_date, all_concert_start_date } =
+    concertData as Concert;
   const aDayjs = useMemo(() => {
-    return dayjs(start_at);
+    return dayjs(all_concert_start_date);
   }, [concertData]);
 
   const bDayjs = useMemo(() => {
-    return dayjs(end_at);
+    return dayjs(all_concert_end_date);
   }, [concertData]);
 
   console.log(aDayjs.toString());
   console.log(bDayjs.toString());
 
-  const lineCount = Math.floor((end_at - start_at) / MINUTE) + 2;
+  const lineCount =
+    Math.floor((all_concert_end_date - all_concert_start_date) / MINUTE) + 2;
 
   useEffect(() => {
     const canvas = document.getElementById(TIMELINE) as HTMLCanvasElement;
@@ -34,7 +37,11 @@ const TimeLine = () => {
     if (ctx) {
       let count = 0;
 
-      for (let i = start_at; i < end_at; i += MINUTE) {
+      for (
+        let i = all_concert_start_date;
+        i < all_concert_end_date;
+        i += MINUTE
+      ) {
         if (count % 5 === 0) {
           const iDayJs = dayjs(i);
 
