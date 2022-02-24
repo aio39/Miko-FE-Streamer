@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
+import theme from 'theme';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -10,7 +11,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ChakraProvider resetCSS>
+      <ChakraProvider resetCSS theme={theme}>
         <App />
       </ChakraProvider>
     </RecoilRoot>

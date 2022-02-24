@@ -1,14 +1,17 @@
 import { Button } from '@chakra-ui/button';
 import { Box, useDisclosure, VStack } from '@chakra-ui/react';
+import DateInputWrapper from 'components/common/inputs/DateInput';
 import {
   InputWrapper,
   SelectWrapper,
 } from 'components/common/inputs/HookInput';
 import ImageUpload from 'components/common/inputs/ImageUpload';
+import ModalWrapper from 'components/common/inputs/ModalWrapper';
 import { categoryArray } from 'const';
 import React, { useRef, useState } from 'react';
 import { FilePond } from 'react-filepond';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import useColorStore from 'state/hooks/useColorStore';
 import { axiosI } from 'state/swr/fetcher';
 import { useUser } from 'state/swr/useUser';
@@ -30,7 +33,7 @@ const ConcertCreatePage = () => {
     mode: 'onChange',
   });
   const { data: userData, isNotLogged } = useUser();
-  const [createdMenu, setCreatedMenu] = useState<Concert>();
+  const [createdConcert, setCreatedConcert] = useState<Concert>();
   const imageUploadRef = useRef<FilePond>(null);
   const useDisclosureReturn = useDisclosure();
 
@@ -39,25 +42,28 @@ const ConcertCreatePage = () => {
   const onSubmit: SubmitHandler<CreateConcertData> = async (inputData) => {
     const formData = new FormData();
     Object.entries(inputData).forEach(([key, value]) => {
-      // if (typeof value === 'number') value = value.toString();
-      formData.set(key, value);
+      if (key === 'category_id')
+        value = categoryArray.indexOf(value as string) + 1;
+      formData.set(key, value as string);
     });
 
     const image = imageUploadRef.current?.getFile();
     if (image) {
-      formData.set('image', image.file);
+      formData.set('cover_image', image.file);
     }
 
-    const { data } = await axiosI.post<Concert>(`/api/menus`, formData, {
+    const { data } = await axiosI.post<Concert>(`/concerts`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
     if (data) {
-      setCreatedMenu(data);
+      console.log(data);
+      setCreatedConcert(data);
       useDisclosureReturn.onOpen();
     }
   };
+
   return (
     <Box>
       <Box
@@ -82,79 +88,39 @@ const ConcertCreatePage = () => {
             <InputWrapper
               registerReturn={register('artist', { required: true })}
               error={errors.artist}
-              data={['구독 모델 이름', '모델명']}
+              data={['참가 아티스트 리스트', 'ex) 가수A']}
             />
             <InputWrapper
               registerReturn={register('detail', { required: true })}
               error={errors.detail}
-              data={['설명', '구독에 대한 설명']}
+              data={['설명', '설명']}
             />
             <SelectWrapper
               registerReturn={register('category_id', {
                 required: '필수 선택입니다.',
               })}
               error={errors.category_id}
-              data={['업종', undefined]}
+              data={['카테고리', undefined]}
               selectList={categoryArray}
             />
             <InputWrapper
               registerReturn={register('title', { required: true })}
               error={errors.title}
-              data={['설명', '구독에 대한 설명']}
+              data={['콘서트 명', '콘서트 이름']}
             />
             <InputWrapper
               registerReturn={register('content', { required: true })}
               error={errors.content}
-              data={['설명', '구독에 대한 설명']}
+              data={['Content', 'Content']}
             />
-            {/* <NumberInputWrapper
-              registerReturn={register('cycle_month', {
-                max: 12,
-                min: 1,
-                required: true,
-              })}
-              error={errors.cycle_month}
-              data={['결제 주기 월', '메뉴에 대한 설명']}
-              min={1}
-              max={12}
+            <DateInputWrapper
+              setValue={setValue}
+              registerReturn={register('all_concert_start_date')}
             />
-            <NumberInputWrapper
-              registerReturn={register('price', { min: 0, required: true })}
-              error={errors.price}
-              data={['가격 설정', '결제 주기 마다 결제되는 가격']}
-              min={0}
+            <DateInputWrapper
+              setValue={setValue}
+              registerReturn={register('all_concert_end_date')}
             />
-            <Divider />
-            <Text fontSize="xl">사용 한도 설정</Text>
-
-            <NumberInputWrapper
-              registerReturn={register('limit_day')}
-              error={errors.limit_day}
-              data={['1일 사용 횟수', '공란 미설정']}
-              isNotRequired
-              min={0}
-            />
-            <NumberInputWrapper
-              registerReturn={register('limit_week')}
-              error={errors.limit_week}
-              data={['일주일 사용 회숫', '공란 미설정']}
-              isNotRequired
-              min={0}
-            />
-            <NumberInputWrapper
-              registerReturn={register('limit_month')}
-              error={errors.limit_month}
-              data={['월 사용 횟수', '공란 미설정']}
-              isNotRequired
-              min={0}
-            />
-            <NumberInputWrapper
-              registerReturn={register('limit_year')}
-              error={errors.limit_year}
-              data={['연 사용 횟수', '공란 미설정']}
-              isNotRequired
-              min={0}
-            /> */}
           </VStack>
 
           <Button
@@ -165,21 +131,21 @@ const ConcertCreatePage = () => {
             disabled={!isValid}
             isLoading={isSubmitting}
           >
-            메뉴 생성
+            콘서트 생성
           </Button>
         </form>
       </Box>
-      {/* <ModalWrapper
+      <ModalWrapper
         useDisclosureReturn={useDisclosureReturn}
         text={{
-          title: '메뉴 생성 성공',
+          title: '콘서트 생성 성공',
           close: '추가 생성',
-          confirm: '메뉴 확인',
+          confirm: '콘서트 확인',
         }}
         href="/seller/shop"
       >
-        {createdMenu && <>성공</>}
-      </ModalWrapper> */}
+        {createdConcert && <>성공</>}
+      </ModalWrapper>
     </Box>
   );
 };

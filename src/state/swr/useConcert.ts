@@ -16,7 +16,7 @@ const useConcerts = (query?: CommonFSW) => {
     fetcher,
     {
       use: [laggy],
-      suspense: true,
+      // suspense: true,
     }
   );
 
