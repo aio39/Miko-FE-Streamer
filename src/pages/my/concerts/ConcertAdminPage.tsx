@@ -1,19 +1,32 @@
+import { Center } from '@chakra-ui/react';
 import { Message, Quiz } from 'const';
-import { useCallback } from 'react';
+import { Suspense, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import { useRecoilState } from 'recoil';
 import { selectedWindowState } from 'state/recoil/selectedWindowState';
+import { useConcert } from 'state/swr/useConcert';
 import CreateMsg from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';
 import MetadataListView from './metadataList/MetadataListView';
 import SideBar from './sideBar/SideBar';
-import TimeLine from './timeline/TimeLine';
 
-const ConcertAdminPage = () => {
+const SuspenseHOC = (WrappedComponent: () => JSX.Element) => {
+  return function () {
+    return (
+      <Suspense fallback={<Center> 로딩</Center>}>
+        <WrappedComponent />
+      </Suspense>
+    );
+  };
+};
+
+const ConcertAdminPageNoData = () => {
   const [selectedWindow, setSelectedWindow] =
     useRecoilState(selectedWindowState);
   const params = useParams();
+  const { data } = useConcert(parseInt(params.concertId as string));
+  console.log('data', data.data);
   const mainWindow = useCallback(() => {
     switch (selectedWindow) {
       case Message:
@@ -44,10 +57,12 @@ const ConcertAdminPage = () => {
         </SplitPane>
       </SplitPane>
       <div className="full_wh" style={{ backgroundColor: '#39c5bb33' }}>
-        <TimeLine />
+        {/* <TimeLine /> */}
       </div>
     </SplitPane>
   );
 };
+
+const ConcertAdminPage = SuspenseHOC(ConcertAdminPageNoData);
 
 export default ConcertAdminPage;

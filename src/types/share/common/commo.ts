@@ -22,6 +22,10 @@ export interface Pagination<T> {
   meta: Meta;
 }
 
+export interface CommonDataResponse<T> {
+  data: T;
+}
+
 export interface Links {
   first: string;
   last: string;

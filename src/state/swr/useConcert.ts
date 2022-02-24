@@ -1,5 +1,9 @@
 import useSWR from 'swr';
-import { CommonFSW, Pagination } from 'types/share/common/commo';
+import {
+  CommonDataResponse,
+  CommonFSW,
+  Pagination,
+} from 'types/share/common/commo';
 import { Concert } from 'types/share/Concert';
 import { createFSWQueryString } from './createQueryStringKey';
 import { fetcher } from './fetcher';
@@ -16,7 +20,6 @@ const useConcerts = (query?: CommonFSW) => {
     fetcher,
     {
       use: [laggy],
-      // suspense: true,
     }
   );
 
@@ -26,8 +29,9 @@ const useConcerts = (query?: CommonFSW) => {
 const useConcert = (Concert_id: number) => {
   const url = `${URL_CONCERTS}/${Concert_id}`;
 
-  const swrResponses = useSWR<Concert>(url, fetcher, {
+  const swrResponses = useSWR<CommonDataResponse<Concert>>(url, fetcher, {
     use: [laggy],
+    suspense: true,
   });
 
   return swrResponses;
