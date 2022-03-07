@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react';
-import { Message, Quiz } from 'const';
+import { GetChannel, Information, Message, Quiz } from 'const';
 import { Suspense, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
@@ -8,6 +8,8 @@ import { selectedWindowState } from 'state/recoil/selectedWindowState';
 import { useConcert } from 'state/swr/useConcert';
 import CreateMsg from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';
+import ConcertInformation from './information/ConcertInformation';
+import ManageKeys from './manageKeys/ManageKeys';
 import MetadataListView from './metadataList/MetadataListView';
 import SideBar from './sideBar/SideBar';
 
@@ -26,13 +28,17 @@ const ConcertAdminPageNoData = () => {
     useRecoilState(selectedWindowState);
   const params = useParams();
   const { data } = useConcert(parseInt(params.concertId as string));
-  console.log('data', data.data);
+  console.log('data', data?.data);
   const mainWindow = useCallback(() => {
     switch (selectedWindow) {
       case Message:
         return <CreateMsg />;
       case Quiz:
         return <CreateQuiz />;
+      case Information:
+        return <ConcertInformation />;
+      case GetChannel:
+        return <ManageKeys />;
       default:
         return <h1>No project match</h1>;
     }

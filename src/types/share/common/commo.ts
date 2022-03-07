@@ -1,6 +1,6 @@
 export interface TimeStamps {
-  updated_at: Date;
-  created_at: Date;
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 export interface CommonProps extends TimeStamps {

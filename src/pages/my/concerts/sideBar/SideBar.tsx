@@ -40,6 +40,9 @@ const SideBar = () => {
       <IconWrapper type={Ranking}>
         <RankingLogo />
       </IconWrapper>
+      <IconWrapper type={Ranking}>
+        <RankingLogo />
+      </IconWrapper>
     </VStack>
   );
 };

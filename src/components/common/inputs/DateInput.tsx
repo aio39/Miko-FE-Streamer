@@ -16,7 +16,7 @@ import {
 import convertDate from 'helper/convertDate';
 import { FC, useEffect, useState } from 'react';
 import { UseFormRegisterReturn, UseFormSetValue } from 'react-hook-form';
-import { Calendar, DayValue } from 'react-modern-calendar-datepicker';
+import { Calendar, DayValue, Locale } from 'react-modern-calendar-datepicker';
 
 const DateInputWrapper: FC<{
   registerReturn: UseFormRegisterReturn;
@@ -115,7 +115,7 @@ const DateInputWrapper: FC<{
 
 export default DateInputWrapper;
 
-const myCustomLocale = {
+const myCustomLocale: Locale = {
   // months list by order
   months: [
     '1월',
