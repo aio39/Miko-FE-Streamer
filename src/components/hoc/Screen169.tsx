@@ -1,8 +1,8 @@
 import { AspectRatio, Box } from '@chakra-ui/react';
-import FileInputBtn from 'components/button/FileInputBtn';
+import FileInputBtn from '@src/components/button/FileInputBtn';
+import { screenImageState } from '@src/state/recoil/screenImage';
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
-import { screenImageState } from 'state/recoil/screenImage';
 
 const Screen169: FC = ({ children }) => {
   const imageUrl = useRecoilValue(screenImageState);

@@ -1,4 +1,4 @@
-import { Message } from 'const';
+import { Message } from '@src/const';
 import { atom } from 'recoil';
 
 const selectedWindowState = atom({

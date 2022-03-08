@@ -13,7 +13,6 @@ import {
   PopoverTrigger,
   Text,
 } from '@chakra-ui/react';
-import convertDate from 'helper/convertDate';
 import { FC, useEffect, useState } from 'react';
 import { UseFormRegisterReturn, UseFormSetValue } from 'react-hook-form';
 import { Calendar, DayValue, Locale } from 'react-modern-calendar-datepicker';
@@ -211,3 +210,9 @@ const myCustomLocale: Locale = {
   // is your language rtl or ltr?
   isRtl: false,
 };
+function convertDate(
+  arg0: Date | number,
+  arg1: string
+): string | (() => string) {
+  throw new Error('Function not implemented.');
+}

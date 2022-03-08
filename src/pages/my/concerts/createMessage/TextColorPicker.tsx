@@ -8,10 +8,10 @@ import {
   PopoverTrigger,
   Text,
 } from '@chakra-ui/react';
+import { draftMsgMainTextState } from '@src/state/recoil/draftMessageState';
 import { FC, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { useRecoilState } from 'recoil';
-import { draftMsgMainTextState } from 'state/recoil/draftMessageState';
 
 const ColorPickerPopoverContent: FC<{
   color: string;

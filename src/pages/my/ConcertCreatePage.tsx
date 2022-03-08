@@ -1,21 +1,21 @@
 import { Button } from '@chakra-ui/button';
 import { Box, useDisclosure, VStack } from '@chakra-ui/react';
-import DateInputWrapper from 'components/common/inputs/DateInput';
+import DateInputWrapper from '@src/components/common/inputs/DateInput';
 import {
   InputWrapper,
   SelectWrapper,
-} from 'components/common/inputs/HookInput';
-import ImageUpload from 'components/common/inputs/ImageUpload';
-import ModalWrapper from 'components/common/inputs/ModalWrapper';
-import { categoryArray } from 'const';
+} from '@src/components/common/inputs/HookInput';
+import ImageUpload from '@src/components/common/inputs/ImageUpload';
+import ModalWrapper from '@src/components/common/inputs/ModalWrapper';
+import { categoryArray } from '@src/const';
+import useColorStore from '@src/state/hooks/useColorStore';
+import { axiosI } from '@src/state/swr/fetcher';
+import { useUser } from '@src/state/swr/useUser';
+import { Concert, CreateConcertData } from '@src/types/share/Concert';
 import React, { useRef, useState } from 'react';
 import { FilePond } from 'react-filepond';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import useColorStore from 'state/hooks/useColorStore';
-import { axiosI } from 'state/swr/fetcher';
-import { useUser } from 'state/swr/useUser';
-import { Concert, CreateConcertData } from 'types/share/Concert';
 
 interface FormInputs {
   name: string;
@@ -96,10 +96,10 @@ const ConcertCreatePage = () => {
               data={['설명', '설명']}
             />
             <SelectWrapper
-              registerReturn={register('category_id', {
+              registerReturn={register('categoryId', {
                 required: '필수 선택입니다.',
               })}
-              error={errors.category_id}
+              error={errors.categoryId}
               data={['카테고리', undefined]}
               selectList={categoryArray}
             />
@@ -115,11 +115,11 @@ const ConcertCreatePage = () => {
             />
             <DateInputWrapper
               setValue={setValue}
-              registerReturn={register('all_concert_start_date')}
+              registerReturn={register('allConcertStartDate')}
             />
             <DateInputWrapper
               setValue={setValue}
-              registerReturn={register('all_concert_end_date')}
+              registerReturn={register('allConcertEndDate')}
             />
           </VStack>
 

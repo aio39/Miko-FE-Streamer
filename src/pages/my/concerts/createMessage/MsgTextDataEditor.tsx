@@ -10,9 +10,9 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { MsgTextData } from '@src/types/TimeMetadataFormat';
 import { FC } from 'react';
 import { RecoilState, useRecoilState } from 'recoil';
-import { MsgTextData } from 'types/TimeMetadataFormat';
 import TextColorPicker from './TextColorPicker';
 
 const MsgTextDataEditor: FC<{

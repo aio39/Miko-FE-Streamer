@@ -1,6 +1,6 @@
+import { LoginData, User } from '@src/types/share/User';
 import { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
-import { LoginData, User } from 'types/share/User';
 import { axiosI, fetcher } from './fetcher';
 import laggy from './middleware/laggy';
 

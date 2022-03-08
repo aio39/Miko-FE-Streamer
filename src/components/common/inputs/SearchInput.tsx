@@ -1,7 +1,7 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import { Input, InputRightElement } from '@chakra-ui/input';
 import { Button, InputGroup } from '@chakra-ui/react';
-import { createSearchParams } from 'helper/createSearchParams';
+import { createSearchParams } from '@src/helper/createSearchParams';
 import React, { FC, useState } from 'react';
 
 interface ISearchInput {

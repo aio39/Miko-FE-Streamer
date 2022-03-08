@@ -1,5 +1,5 @@
+import { QuizMetadata } from '@src/types/TimeMetadataFormat';
 import { atom } from 'recoil';
-import { QuizMetadata } from 'types/TimeMetadataFormat';
 
 // const initQuizMetadata: QuizMetadata = {
 // dataType: 'q',

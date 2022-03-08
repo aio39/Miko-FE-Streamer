@@ -1,7 +1,7 @@
 import { Box, Button } from '@chakra-ui/react';
+import { screenImageState } from '@src/state/recoil/screenImage';
 import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { screenImageState } from 'state/recoil/screenImage';
 
 const FileInputBtn = () => {
   // Create a reference to the hidden file input element

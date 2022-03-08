@@ -8,8 +8,8 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { draftMsgBoxDataState } from '@src/state/recoil/draftMessageState';
 import { useRecoilState } from 'recoil';
-import { draftMsgBoxDataState } from 'state/recoil/draftMessageState';
 import TextColorPicker from './TextColorPicker';
 
 const MsgBoxEditor = () => {

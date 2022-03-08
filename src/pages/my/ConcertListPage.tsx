@@ -8,18 +8,18 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
-import AsLink from 'components/common/wrapChakra/AsLink';
-import { S3_URL } from 'const';
-import convertDate from 'helper/convertDate';
+import AsLink from '@src/components/common/wrapChakra/AsLink';
+import { S3_URL } from '@src/const';
+import convertDate from '@src/helper/convertDate';
+import { useConcerts } from '@src/state/swr/useConcert';
+import { Concert } from '@src/types/share/Concert';
 import React, { FC } from 'react';
 import { MdMusicNote, MdSchedule } from 'react-icons/md';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { useConcerts } from 'state/swr/useConcert';
-import { Concert } from 'types/share/Concert';
 
 const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
-  const startDate = convertDate(data.all_concert_start_date, 'YMDHM');
-  const endDate = convertDate(data.all_concert_end_date, 'YMDHM');
+  const startDate = convertDate(data.allConcertStartDate, 'YMDHM');
+  const endDate = convertDate(data.allConcertEndDate, 'YMDHM');
 
   return (
     <AsLink to={`/my/concerts/${data.id}`}>
@@ -36,7 +36,7 @@ const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
           h={56}
           fit="cover"
           objectPosition="center"
-          src={S3_URL + data.cover_image}
+          src={S3_URL + data.coverImage}
           alt="avatar"
         />
 

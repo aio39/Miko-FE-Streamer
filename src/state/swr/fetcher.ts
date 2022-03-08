@@ -1,6 +1,6 @@
 import { createStandaloneToast } from '@chakra-ui/react';
+import { LARAVEL_URL, NODE_URL } from '@src/const';
 import axios, { AxiosError } from 'axios';
-import { LARAVEL_URL, NODE_URL } from 'const';
 
 const config = {
   baseURL: LARAVEL_URL,

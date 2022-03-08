@@ -1,10 +1,10 @@
 import { Box, Button } from '@chakra-ui/react';
-import { NODE_URL } from 'const';
+import { NODE_URL } from '@src/const';
+import { axiosI } from '@src/state/swr/fetcher';
+import { useConcert } from '@src/state/swr/useConcert';
+import { Concert } from '@src/types/share/Concert';
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { axiosI } from 'state/swr/fetcher';
-import { useConcert } from 'state/swr/useConcert';
-import { Concert } from 'types/share/Concert';
 
 const ConcertInformation: FC = () => {
   const params = useParams();

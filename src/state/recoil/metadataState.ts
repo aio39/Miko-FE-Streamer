@@ -1,5 +1,5 @@
+import { MetaData } from '@src/types/TimeMetadataFormat';
 import { atom } from 'recoil';
-import { MetaData } from 'types/TimeMetadataFormat';
 
 const metadataState = atom<Array<MetaData>>({
   key: 'metadata',

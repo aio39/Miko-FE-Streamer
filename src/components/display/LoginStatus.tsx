@@ -1,7 +1,7 @@
 import { Box, Button, HStack } from '@chakra-ui/react';
+import { isLoginState } from '@src/state/recoil/authState';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { isLoginState } from 'state/recoil/authState';
 
 const LoginStatus = () => {
   const isLogin = useRecoilValue(isLoginState);

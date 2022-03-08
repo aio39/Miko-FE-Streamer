@@ -5,6 +5,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^1.1.5",
     "@chakra-ui/react": "^1.8.1",
+    "@craco/craco": "^6.4.3",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@testing-library/jest-dom": "^5.16.1",
@@ -49,7 +50,7 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -73,6 +74,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-color": "^3.0.6"
+    "@types/react-color": "^3.0.6",
+    "craco-alias": "^3.0.1"
   }
 }

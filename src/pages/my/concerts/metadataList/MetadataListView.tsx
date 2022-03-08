@@ -13,15 +13,15 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import produce from 'immer';
-import { FC } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { metadataState } from 'state/recoil/metadataState';
+import { metadataState } from '@src/state/recoil/metadataState';
 import {
   MessageMetadata,
   MetaData,
   QuizMetadata,
-} from 'types/TimeMetadataFormat';
+} from '@src/types/TimeMetadataFormat';
+import produce from 'immer';
+import { FC } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
   return (
     <Box width="full" h="100" border="1px">

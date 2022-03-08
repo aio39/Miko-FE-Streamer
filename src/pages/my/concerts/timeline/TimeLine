@@ -1,9 +1,9 @@
 import { Box } from '@chakra-ui/react';
+import { concertDataState } from '@src/state/recoil/concertDataState';
+import { Concert } from '@src/types/share/Concert';
 import dayjs from 'dayjs';
 import { useEffect, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
-import { concertDataState } from 'state/recoil/concertDataState';
-import { Concert } from 'types/share/Concert';
 
 const TIMELINE = 'timeline';
 
@@ -15,21 +15,20 @@ const TL_WIDTH = 15;
 
 const TimeLine = () => {
   const concertData = useRecoilValue(concertDataState);
-  const { all_concert_end_date, all_concert_start_date } =
-    concertData as Concert;
+  const { allConcertEndDate, allConcertStartDate } = concertData as Concert;
   const aDayjs = useMemo(() => {
-    return dayjs(all_concert_start_date);
+    return dayjs(allConcertStartDate);
   }, [concertData]);
 
   const bDayjs = useMemo(() => {
-    return dayjs(all_concert_end_date);
+    return dayjs(allConcertEndDate);
   }, [concertData]);
 
   console.log(aDayjs.toString());
   console.log(bDayjs.toString());
 
   const lineCount =
-    Math.floor((all_concert_end_date - all_concert_start_date) / MINUTE) + 2;
+    Math.floor((allConcertEndDate - allConcertStartDate) / MINUTE) + 2;
 
   useEffect(() => {
     const canvas = document.getElementById(TIMELINE) as HTMLCanvasElement;
@@ -37,11 +36,7 @@ const TimeLine = () => {
     if (ctx) {
       let count = 0;
 
-      for (
-        let i = all_concert_start_date;
-        i < all_concert_end_date;
-        i += MINUTE
-      ) {
+      for (let i = allConcertStartDate; i < allConcertEndDate; i += MINUTE) {
         if (count % 5 === 0) {
           const iDayJs = dayjs(i);
 

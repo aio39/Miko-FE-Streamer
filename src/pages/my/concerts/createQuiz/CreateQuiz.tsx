@@ -1,10 +1,10 @@
 import { Box, Button, Center, Grid, GridItem, Text } from '@chakra-ui/react';
-import Screen169 from 'components/hoc/Screen169';
+import Screen169 from '@src/components/hoc/Screen169';
+import { draftQuizState } from '@src/state/recoil/draftQuizState';
+import { metadataState } from '@src/state/recoil/metadataState';
 import produce from 'immer';
 import { FC, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
-import { draftQuizState } from 'state/recoil/draftQuizState';
-import { metadataState } from 'state/recoil/metadataState';
 
 const Choice: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizState);

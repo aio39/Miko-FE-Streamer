@@ -14,11 +14,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "baseUrl": "src"
+    "jsx": "preserve"
   },
-  "include": ["src"],
+  "include": ["src", "src/pages/my/concerts/timeline/.TimeLine.tsx"],
   "exclude": ["node_modules"],
+  "extends": "./tsconfig.paths.json",
   // "extends": "./tsconfig.paths.json",
   "rules": {
     // "no-unused-declaration": true

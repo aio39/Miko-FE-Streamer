@@ -2,11 +2,11 @@ import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
-import theme from 'theme';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import theme from './theme';
 
 ReactDOM.render(
   <React.StrictMode>

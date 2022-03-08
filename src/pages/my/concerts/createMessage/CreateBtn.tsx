@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react';
+import { draftMsgState } from '@src/state/recoil/draftMessageState';
+import { metadataState } from '@src/state/recoil/metadataState';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { draftMsgState } from 'state/recoil/draftMessageState';
-import { metadataState } from 'state/recoil/metadataState';
 
 const CreateBtn = () => {
   const draftMessage = useRecoilValue(draftMsgState);

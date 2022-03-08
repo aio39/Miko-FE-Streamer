@@ -11,13 +11,13 @@ import {
   Link,
   Stack,
 } from '@chakra-ui/react';
+import useColorStore from '@src/state/hooks/useColorStore';
+import { isLoginState } from '@src/state/recoil/authState';
+import { useLogin } from '@src/state/swr/useUser';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import useColorStore from 'state/hooks/useColorStore';
-import { isLoginState } from 'state/recoil/authState';
-import { useLogin } from 'state/swr/useUser';
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 import { Center } from '@chakra-ui/react';
-import { GetChannel, Information, Message, Quiz } from 'const';
+import { GetChannel, Information, Message, Quiz } from '@src/const';
+import { selectedWindowState } from '@src/state/recoil/selectedWindowState';
+import { useConcert } from '@src/state/swr/useConcert';
 import { Suspense, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import { useRecoilState } from 'recoil';
-import { selectedWindowState } from 'state/recoil/selectedWindowState';
-import { useConcert } from 'state/swr/useConcert';
 import CreateMsg from './createMessage/CreateMessage';
 import CreateQuiz from './createQuiz/CreateQuiz';
 import ConcertInformation from './information/ConcertInformation';
