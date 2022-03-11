@@ -5,7 +5,7 @@ export type User = {
   photo?: string;
 };
 
-export type CreteUserData = Pick<User, 'name' | 'email'> & {
+export type CreteUserData = Pick<User, "name" | "email"> & {
   password: string;
   confirm: string;
 };

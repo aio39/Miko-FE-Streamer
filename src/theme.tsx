@@ -1,18 +1,18 @@
-import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 
-const fonts = { body: 'Spoqa Han Sans, Spoqa Han Sans JP, Sans-serif' };
+const fonts = { body: "Spoqa Han Sans, Spoqa Han Sans JP, Sans-serif" };
 
 const breakpoints = createBreakpoints({
-  sm: '30em',
-  md: '48em',
-  lg: '62em',
-  xl: '80em',
-  '2xl': '96em',
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
 });
 
 const config: ThemeConfig = {
-  initialColorMode: 'light',
+  initialColorMode: "light",
   useSystemColorMode: false,
 };
 
@@ -21,7 +21,7 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   colors: {
-    black: '#16161D',
+    black: "#16161D",
   },
   fonts,
   breakpoints,
@@ -30,8 +30,8 @@ const theme = extendTheme({
       variants: {
         responsive: {
           popper: {
-            maxWidth: 'unset',
-            width: 'unset',
+            maxWidth: "unset",
+            width: "unset",
           },
         },
       },

@@ -1,17 +1,8 @@
-import {
-  Box,
-  HStack,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  Text,
-} from '@chakra-ui/react';
-import { draftMsgMainTextState } from '@src/state/recoil/draftMessageState';
-import { FC, useState } from 'react';
-import { ChromePicker } from 'react-color';
-import { useRecoilState } from 'recoil';
+import { Box, HStack, Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverTrigger, Text } from "@chakra-ui/react";
+import { draftMsgMainTextState } from "@src/state/recoil/draftMessageState";
+import { FC, useState } from "react";
+import { ChromePicker } from "react-color";
+import { useRecoilState } from "recoil";
 
 const ColorPickerPopoverContent: FC<{
   color: string;
@@ -23,7 +14,7 @@ const ColorPickerPopoverContent: FC<{
       <PopoverBody p="0">
         <ChromePicker
           color={color}
-          onChangeComplete={(color) => onChnage(color.hex)}
+          onChangeComplete={color => onChnage(color.hex)}
           // disableAlpha
         />
       </PopoverBody>
@@ -35,11 +26,9 @@ const TextColorPicker: FC<{
   color: string;
   onChnage: (newValue: string) => void;
 }> = ({ color, onChnage }) => {
-  const [draftMsgMainText, setDraftMsgMainText] = useRecoilState(
-    draftMsgMainTextState
-  );
+  const [draftMsgMainText, setDraftMsgMainText] = useRecoilState(draftMsgMainTextState);
 
-  const [first, setFirst] = useState('a');
+  const [first, setFirst] = useState("a");
 
   return (
     <HStack>

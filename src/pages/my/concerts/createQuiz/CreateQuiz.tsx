@@ -1,10 +1,10 @@
-import { Box, Button, Center, Grid, GridItem, Text } from '@chakra-ui/react';
-import Screen169 from '@src/components/hoc/Screen169';
-import { draftQuizState } from '@src/state/recoil/draftQuizState';
-import { metadataState } from '@src/state/recoil/metadataState';
-import produce from 'immer';
-import { FC, useMemo } from 'react';
-import { useRecoilState } from 'recoil';
+import { Box, Button, Center, Grid, GridItem, Text } from "@chakra-ui/react";
+import Screen169 from "@src/components/hoc/Screen169";
+import { draftQuizState } from "@src/state/recoil/draftQuizState";
+import { metadataState } from "@src/state/recoil/metadataState";
+import produce from "immer";
+import { FC, useMemo } from "react";
+import { useRecoilState } from "recoil";
 
 const Choice: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizState);
@@ -14,11 +14,11 @@ const Choice: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   };
 
   const handleDeleteChoice = () => {
-    setDraftQuiz((prev) =>
-      produce(prev, (draft) => {
+    setDraftQuiz(prev =>
+      produce(prev, draft => {
         draft.choices.splice(idx, 1);
         return draft;
-      })
+      }),
     );
   };
 
@@ -26,12 +26,7 @@ const Choice: FC<{ text: string; idx: number }> = ({ text, idx }) => {
     <GridItem bgColor="white" borderRadius="2xl" p="3" position="relative">
       <Text>{idx + 1}</Text>
       <ChoiceEdit text={text} />
-      <Button
-        onClick={handleDeleteChoice}
-        position="absolute"
-        top="-10"
-        right="-10"
-      >
+      <Button onClick={handleDeleteChoice} position="absolute" top="-10" right="-10">
         X
       </Button>
     </GridItem>
@@ -41,11 +36,11 @@ const Choice: FC<{ text: string; idx: number }> = ({ text, idx }) => {
 const ChoiceAdd: FC = () => {
   const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizState);
   const handleInitailizeNewChoice = () => {
-    setDraftQuiz((prev) =>
-      produce(prev, (draft) => {
-        draft.choices.push('');
+    setDraftQuiz(prev =>
+      produce(prev, draft => {
+        draft.choices.push("");
         return draft;
-      })
+      }),
     );
   };
 
@@ -88,23 +83,14 @@ const CreateQuiz = () => {
   }, [draftQuiz]);
 
   const handleSaveQuiz = () => {
-    setMetadata((prev) => [
-      ...prev,
-      { createdAt: Date.now(), data: draftQuiz, type: 'q' },
-    ]);
+    setMetadata(prev => [...prev, { createdAt: Date.now(), data: draftQuiz, type: "q" }]);
   };
 
   return (
     <Box overflowY="scroll" h="full">
       <Text>설문 / 퀴즈 제작 </Text>
       <Screen169>
-        <Grid
-          templateColumns={`repeat(${width / 25}, 1fr)`}
-          width={width + '%'}
-          height={height + '%'}
-          gap="4"
-          bgColor="gray.400"
-        >
+        <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + "%"} height={height + "%"} gap="4" bgColor="gray.400">
           {draftQuiz.choices.map((text, idx) => (
             <Choice key={idx} text={text} idx={idx} />
           ))}

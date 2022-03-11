@@ -1,7 +1,7 @@
-import { Flex, FlexProps, Icon, Link } from '@chakra-ui/react';
-import { ReactText } from 'react';
-import { IconType } from 'react-icons';
-import { Link as ReachLink } from 'react-router-dom';
+import { Flex, FlexProps, Icon, Link } from "@chakra-ui/react";
+import { ReactText } from "react";
+import { IconType } from "react-icons";
+import { Link as ReachLink } from "react-router-dom";
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
@@ -14,8 +14,8 @@ const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
       //   href="#"
       as={ReachLink}
       to={url}
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}
+      style={{ textDecoration: "none" }}
+      _focus={{ boxShadow: "none" }}
     >
       <Flex
         align="center"
@@ -25,8 +25,8 @@ const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'cyan.400',
-          color: 'white',
+          bg: "cyan.400",
+          color: "white",
         }}
         {...rest}
       >
@@ -35,7 +35,7 @@ const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
             mr="4"
             fontSize="16"
             _groupHover={{
-              color: 'white',
+              color: "white",
             }}
             as={icon}
           />

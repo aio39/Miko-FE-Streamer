@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from "@chakra-ui/react";
 
 const MetadataPopup = () => {
   return <Box></Box>;

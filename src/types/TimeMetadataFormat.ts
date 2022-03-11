@@ -1,7 +1,7 @@
 export type PositionNumberRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 // export type PositionNumberRange = 1 | 2 | 3;
 
-export type MetadataType = 'm' | 'q';
+export type MetadataType = "m" | "q";
 
 // 내용, 크기, 볼드, 폰트, 컬러
 // type MsgTextData = [string, number, number, string, Color];
@@ -34,7 +34,7 @@ export type MessageMetadata = {
   /**
    * data type:  메세지
    */
-  dataType: 'm';
+  dataType: "m";
   /**
    * Box: 박스 데이터
    */
@@ -69,7 +69,7 @@ export type QuizMetadata = {
   /**
    * data type:  퀴즈
    */
-  dataType: 'q';
+  dataType: "q";
   /**
    * Main Text:  큰 타이틀
    */

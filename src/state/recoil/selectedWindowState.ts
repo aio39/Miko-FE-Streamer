@@ -1,8 +1,8 @@
-import { Message } from '@src/const';
-import { atom } from 'recoil';
+import { Message } from "@src/const";
+import { atom } from "recoil";
 
 const selectedWindowState = atom({
-  key: 'selectedWindow',
+  key: "selectedWindow",
   default: Message,
 });
 

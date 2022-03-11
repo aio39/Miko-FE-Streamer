@@ -1,27 +1,9 @@
-import {
-  Box,
-  Button,
-  Center,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  useDisclosure,
-  VStack,
-} from '@chakra-ui/react';
-import { metadataState } from '@src/state/recoil/metadataState';
-import {
-  MessageMetadata,
-  MetaData,
-  QuizMetadata,
-} from '@src/types/TimeMetadataFormat';
-import produce from 'immer';
-import { FC } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Box, Button, Center, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import { metadataState } from "@src/state/recoil/metadataState";
+import { MessageMetadata, MetaData, QuizMetadata } from "@src/types/TimeMetadataFormat";
+import produce from "immer";
+import { FC } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 const MetadataMsgPreview: FC<{ data: MessageMetadata }> = ({ data }) => {
   return (
     <Box width="full" h="100" border="1px">
@@ -39,44 +21,25 @@ const MetadataQuizPreview: FC<{ data: QuizMetadata }> = ({ data }) => {
   );
 };
 
-const MetadataPreviewContainer: FC<{ data: MetaData }> = ({
-  children,
-  data,
-}) => {
+const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const setMetadata = useSetRecoilState(metadataState);
 
   const handleRemoveMetadata = () => {
-    setMetadata((prev) =>
-      produce(prev, (draft) => {
-        const idx = draft.findIndex((d) => d.createdAt === data.createdAt);
+    setMetadata(prev =>
+      produce(prev, draft => {
+        const idx = draft.findIndex(d => d.createdAt === data.createdAt);
         draft.splice(idx, 1);
         return draft;
-      })
+      }),
     );
   };
 
   return (
     <Box width="full" h="100" border="1px" position="relative">
       <Text>{children}</Text>
-      <Box
-        position="absolute"
-        right="0"
-        bottom="0"
-        w="10"
-        h="10"
-        bg="red"
-        onClick={handleRemoveMetadata}
-      ></Box>
-      <Center
-        position="absolute"
-        right="16"
-        bottom="0"
-        w="10"
-        h="10"
-        bg="blue"
-        onClick={onOpen}
-      ></Center>
+      <Box position="absolute" right="0" bottom="0" w="10" h="10" bg="red" onClick={handleRemoveMetadata}></Box>
+      <Center position="absolute" right="16" bottom="0" w="10" h="10" bg="blue" onClick={onOpen}></Center>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -103,9 +66,9 @@ const MetadataListContainer = () => {
 
   const metadataDrawSwitch = (data: MetaData, idx: number) => {
     switch (data.data.dataType) {
-      case 'm':
+      case "m":
         return <MetadataMsgPreview key={idx} data={data.data} />;
-      case 'q':
+      case "q":
         return <MetadataQuizPreview key={idx} data={data.data} />;
       default:
         break;
@@ -119,11 +82,7 @@ const MetadataListContainer = () => {
       <Text>리스트</Text>
       <VStack>
         {metadata.map((data, idx) => {
-          return (
-            <MetadataPreviewContainer data={data}>
-              {metadataDrawSwitch(data, idx)}
-            </MetadataPreviewContainer>
-          );
+          return <MetadataPreviewContainer data={data}>{metadataDrawSwitch(data, idx)}</MetadataPreviewContainer>;
         })}
       </VStack>
     </Box>

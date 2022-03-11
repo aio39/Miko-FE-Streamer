@@ -1,40 +1,31 @@
-import {
-  HStack,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import { draftMsgBoxDataState } from '@src/state/recoil/draftMessageState';
-import { useRecoilState } from 'recoil';
-import TextColorPicker from './TextColorPicker';
+import { HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text, VStack } from "@chakra-ui/react";
+import { draftMsgBoxDataState } from "@src/state/recoil/draftMessageState";
+import { useRecoilState } from "recoil";
+import TextColorPicker from "./TextColorPicker";
 
 const MsgBoxEditor = () => {
   const [msgBoxData, setMsgBoxData] = useRecoilState(draftMsgBoxDataState);
   const { width, height, padding, round, spacing, hexColor } = msgBoxData;
 
   const handleChangeWidth = (value: number) => {
-    setMsgBoxData((prev) => ({ ...prev, width: value }));
+    setMsgBoxData(prev => ({ ...prev, width: value }));
   };
 
   const handleChangeHeight = (value: number) => {
-    setMsgBoxData((prev) => ({ ...prev, height: value }));
+    setMsgBoxData(prev => ({ ...prev, height: value }));
   };
   const handleChangePadding = (value: number) => {
-    setMsgBoxData((prev) => ({ ...prev, padding: value }));
+    setMsgBoxData(prev => ({ ...prev, padding: value }));
   };
   const handleChangeRound = (value: number) => {
-    setMsgBoxData((prev) => ({ ...prev, round: value }));
+    setMsgBoxData(prev => ({ ...prev, round: value }));
   };
   const handleChangeSpacing = (value: number) => {
-    setMsgBoxData((prev) => ({ ...prev, spacing: value }));
+    setMsgBoxData(prev => ({ ...prev, spacing: value }));
   };
 
   const handleChangeColor = (color: string) => {
-    setMsgBoxData((prev) => ({ ...prev, hexColor: color }));
+    setMsgBoxData(prev => ({ ...prev, hexColor: color }));
   };
 
   return (
@@ -44,15 +35,7 @@ const MsgBoxEditor = () => {
       <HStack>
         <HStack>
           <Text>W</Text>
-          <NumberInput
-            w="5rem"
-            step={10}
-            defaultValue={200}
-            min={100}
-            max={500}
-            value={width}
-            onChange={(_, value) => handleChangeWidth(value)}
-          >
+          <NumberInput w="5rem" step={10} defaultValue={200} min={100} max={500} value={width} onChange={(_, value) => handleChangeWidth(value)}>
             <NumberInputField textAlign="center" />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -62,15 +45,7 @@ const MsgBoxEditor = () => {
         </HStack>
         <HStack>
           <Text>P</Text>
-          <NumberInput
-            w="5rem"
-            step={1}
-            defaultValue={15}
-            min={10}
-            max={100}
-            value={padding}
-            onChange={(_, value) => handleChangePadding(value)}
-          >
+          <NumberInput w="5rem" step={1} defaultValue={15} min={10} max={100} value={padding} onChange={(_, value) => handleChangePadding(value)}>
             <NumberInputField textAlign="center" />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -80,15 +55,7 @@ const MsgBoxEditor = () => {
         </HStack>
         <HStack>
           <Text>S</Text>
-          <NumberInput
-            w="5rem"
-            step={1}
-            defaultValue={15}
-            min={10}
-            max={100}
-            value={spacing}
-            onChange={(_, value) => handleChangeSpacing(value)}
-          >
+          <NumberInput w="5rem" step={1} defaultValue={15} min={10} max={100} value={spacing} onChange={(_, value) => handleChangeSpacing(value)}>
             <NumberInputField textAlign="center" />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -101,15 +68,7 @@ const MsgBoxEditor = () => {
       <HStack>
         <HStack>
           <Text>H</Text>
-          <NumberInput
-            w="5rem"
-            step={10}
-            defaultValue={200}
-            min={100}
-            max={500}
-            value={height}
-            onChange={(_, value) => handleChangeHeight(value)}
-          >
+          <NumberInput w="5rem" step={10} defaultValue={200} min={100} max={500} value={height} onChange={(_, value) => handleChangeHeight(value)}>
             <NumberInputField textAlign="center" />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -119,15 +78,7 @@ const MsgBoxEditor = () => {
         </HStack>
         <HStack>
           <Text>R</Text>
-          <NumberInput
-            w="5rem"
-            step={1}
-            defaultValue={15}
-            min={10}
-            max={100}
-            value={round}
-            onChange={(_, value) => handleChangeRound(value)}
-          >
+          <NumberInput w="5rem" step={1} defaultValue={15} min={10} max={100} value={round} onChange={(_, value) => handleChangeRound(value)}>
             <NumberInputField textAlign="center" />
             <NumberInputStepper>
               <NumberIncrementStepper />

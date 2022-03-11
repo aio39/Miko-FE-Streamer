@@ -1,17 +1,14 @@
-import { Box, HStack } from '@chakra-ui/react';
-import Screen169 from '@src/components/hoc/Screen169';
-import {
-  draftMsgMainTextState,
-  draftMsgSubTextState,
-} from '@src/state/recoil/draftMessageState';
-import CreateBtn from './CreateBtn';
-import DraftMessagePreview from './DraftMessagePreview';
-import DragTest from './DragTest';
-import LinkInput from './LinkInput';
-import MsgBoxEditor from './MsgBoxEditor';
-import MsgResetBtn from './MsgResetBtn';
-import MsgTextDataEditor from './MsgTextDataEditor';
-import { PositionSelector } from './PositionSelector';
+import { Box, HStack } from "@chakra-ui/react";
+import Screen169 from "@src/components/hoc/Screen169";
+import { draftMsgMainTextState, draftMsgSubTextState } from "@src/state/recoil/draftMessageState";
+import CreateBtn from "./CreateBtn";
+import DraftMessagePreview from "./DraftMessagePreview";
+import DragTest from "./DragTest";
+import LinkInput from "./LinkInput";
+import MsgBoxEditor from "./MsgBoxEditor";
+import MsgResetBtn from "./MsgResetBtn";
+import MsgTextDataEditor from "./MsgTextDataEditor";
+import { PositionSelector } from "./PositionSelector";
 
 const CreateMsg = () => {
   return (

@@ -1,32 +1,26 @@
-import { LoginData, User } from '@src/types/share/User';
-import { mutate } from 'swr';
-import useSWRImmutable from 'swr/immutable';
-import { axiosI, fetcher } from './fetcher';
-import laggy from './middleware/laggy';
+import { LoginData, User } from "@src/types/share/User";
+import { mutate } from "swr";
+import useSWRImmutable from "swr/immutable";
+import { axiosI, fetcher } from "./fetcher";
+import laggy from "./middleware/laggy";
 
-const URL_USER = '/users';
-const URL_LOGIN = '/login';
-const URL_LOGOUT = '/logout';
+const URL_USER = "/users";
+const URL_LOGIN = "/login";
+const URL_LOGOUT = "/logout";
 
 const useUser = () => {
   const aFetcher = (url: string) => {
-    const isExistToken = document.cookie.match(
-      /^(.*;)?\s*isLogin\s*=\s*[^;]+(.*)?$/
-    );
-    console.log('isExistToken', isExistToken);
+    const isExistToken = document.cookie.match(/^(.*;)?\s*isLogin\s*=\s*[^;]+(.*)?$/);
+    console.log("isExistToken", isExistToken);
     if (!isExistToken) return Promise.resolve(undefined);
-    console.log('useUser 실행');
+    console.log("useUser 실행");
     return fetcher(url);
   };
 
-  const { data, error, mutate, isValidating } = useSWRImmutable<User>(
-    URL_USER,
-    aFetcher,
-    {
-      errorRetryCount: 5,
-      use: [laggy],
-    }
-  );
+  const { data, error, mutate, isValidating } = useSWRImmutable<User>(URL_USER, aFetcher, {
+    errorRetryCount: 5,
+    use: [laggy],
+  });
 
   const isNotLogged = !isValidating && !data; // 확인중이 아니며, 데이터가 undefined
 

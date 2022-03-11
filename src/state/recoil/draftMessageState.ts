@@ -1,53 +1,53 @@
-import { MessageMetadata } from '@src/types/TimeMetadataFormat';
-import { atom, selector } from 'recoil';
+import { MessageMetadata } from "@src/types/TimeMetadataFormat";
+import { atom, selector } from "recoil";
 
-const draftMsgBoxDataState = atom<MessageMetadata['boxData']>({
-  key: 'draftMsgBoxData',
+const draftMsgBoxDataState = atom<MessageMetadata["boxData"]>({
+  key: "draftMsgBoxData",
   default: {
     width: 200,
     height: 100,
     round: 10,
     padding: 10,
     spacing: 10,
-    hexColor: '#FFFFFFFF',
+    hexColor: "#FFFFFFFF",
   },
 });
 
 const initMsgMainTextData = {
-  text: '',
+  text: "",
   size: 20,
   bold: 600,
-  font: 'serif',
-  hexColor: '#111111FF',
+  font: "serif",
+  hexColor: "#111111FF",
 };
 
-const draftMsgMainTextState = atom<MessageMetadata['mainTextData']>({
-  key: 'draftMsgMainText',
+const draftMsgMainTextState = atom<MessageMetadata["mainTextData"]>({
+  key: "draftMsgMainText",
   default: initMsgMainTextData,
 });
 
-const draftMsgSubTextState = atom<MessageMetadata['subTextData']>({
-  key: 'draftMsgSubText',
+const draftMsgSubTextState = atom<MessageMetadata["subTextData"]>({
+  key: "draftMsgSubText",
   default: initMsgMainTextData,
 });
 
-const draftMsgPositionState = atom<MessageMetadata['positionIndex']>({
-  key: 'draftPosition',
+const draftMsgPositionState = atom<MessageMetadata["positionIndex"]>({
+  key: "draftPosition",
   default: 1,
 });
 
-const draftMsgUrlState = atom<MessageMetadata['urlString']>({
-  key: 'draftUrl',
+const draftMsgUrlState = atom<MessageMetadata["urlString"]>({
+  key: "draftUrl",
   default: undefined,
 });
 
-const draftMsgAnimationTypeState = atom<MessageMetadata['animationType']>({
-  key: 'draftAnimationype',
+const draftMsgAnimationTypeState = atom<MessageMetadata["animationType"]>({
+  key: "draftAnimationype",
   default: undefined,
 });
 
-const draftMsgTimeDurationState = atom<MessageMetadata['durationTime']>({
-  key: 'draftTimeDuration',
+const draftMsgTimeDurationState = atom<MessageMetadata["durationTime"]>({
+  key: "draftTimeDuration",
   default: 5,
 });
 
@@ -61,17 +61,17 @@ const draftMsgTimeDurationState = atom<MessageMetadata['durationTime']>({
 // });
 
 const draftMsgIsHasSubTextState = selector<boolean>({
-  key: 'draftMsgIsHasSubText',
+  key: "draftMsgIsHasSubText",
   get: ({ get }) => {
     return !!get(draftMsgSubTextState);
   },
 });
 
 const draftMsgState = selector<MessageMetadata>({
-  key: 'draftMessage',
+  key: "draftMessage",
   get: ({ get }) => {
     return {
-      dataType: 'm',
+      dataType: "m",
       boxData: get(draftMsgBoxDataState),
       positionIndex: get(draftMsgPositionState),
       mainTextData: get(draftMsgMainTextState),

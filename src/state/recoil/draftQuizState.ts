@@ -1,5 +1,5 @@
-import { QuizMetadata } from '@src/types/TimeMetadataFormat';
-import { atom } from 'recoil';
+import { QuizMetadata } from "@src/types/TimeMetadataFormat";
+import { atom } from "recoil";
 
 // const initQuizMetadata: QuizMetadata = {
 // dataType: 'q',
@@ -9,9 +9,9 @@ import { atom } from 'recoil';
 // };
 
 const draftQuizState = atom<QuizMetadata>({
-  key: 'draftQuiz',
+  key: "draftQuiz",
   default: {
-    dataType: 'q',
+    dataType: "q",
     mainText: undefined,
     durationTime: 30,
     choices: new Array(0).fill(undefined),

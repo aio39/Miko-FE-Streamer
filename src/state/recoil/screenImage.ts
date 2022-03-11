@@ -1,7 +1,7 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 const screenImageState = atom<string | undefined>({
-  key: 'screenImage',
+  key: "screenImage",
   default: undefined,
 });
 

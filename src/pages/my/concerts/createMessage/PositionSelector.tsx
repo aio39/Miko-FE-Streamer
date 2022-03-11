@@ -1,18 +1,14 @@
-import { Box, Center, Grid, GridItem } from '@chakra-ui/react';
-import { draftMsgPositionState } from '@src/state/recoil/draftMessageState';
-import { PositionNumberRange } from '@src/types/TimeMetadataFormat';
-import { useRecoilState } from 'recoil';
+import { Box, Center, Grid, GridItem } from "@chakra-ui/react";
+import { draftMsgPositionState } from "@src/state/recoil/draftMessageState";
+import { PositionNumberRange } from "@src/types/TimeMetadataFormat";
+import { useRecoilState } from "recoil";
 
 export const PositionSelector = () => {
-  const [draftMsgPosition, setDraftMsgPosition] = useRecoilState(
-    draftMsgPositionState
-  );
+  const [draftMsgPosition, setDraftMsgPosition] = useRecoilState(draftMsgPositionState);
 
-  const handleChangePosition: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleChangePosition: React.MouseEventHandler<HTMLDivElement> = e => {
     if (e.target instanceof HTMLDivElement) {
-      const idx = parseInt(
-        e.target.dataset['idx'] as string
-      ) as PositionNumberRange;
+      const idx = parseInt(e.target.dataset["idx"] as string) as PositionNumberRange;
       if (idx) setDraftMsgPosition(idx);
     }
   };
@@ -32,19 +28,10 @@ export const PositionSelector = () => {
       {new Array(9).fill(0).map((_, idx) => {
         const isSelected = idx + 1 === draftMsgPosition;
         return (
-          <GridItem
-            key={idx + 1}
-            data-idx={idx + 1}
-            bgColor={isSelected ? 'blue.50' : 'white'}
-          >
+          <GridItem key={idx + 1} data-idx={idx + 1} bgColor={isSelected ? "blue.50" : "white"}>
             {isSelected && (
               <Center w="full" h="full">
-                <Box
-                  w="1rem"
-                  h="1rem"
-                  borderRadius="full"
-                  bgColor="skyblue"
-                ></Box>
+                <Box w="1rem" h="1rem" borderRadius="full" bgColor="skyblue"></Box>
               </Center>
             )}
           </GridItem>
