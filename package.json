@@ -16,6 +16,7 @@
     "@types/react": "^16.14.21",
     "@types/react-dom": "^16.9.14",
     "axios": "^0.26.0",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.10.7",
     "filepond": "^4.30.3",
     "filepond-plugin-image-exif-orientation": "^1.0.11",
@@ -51,8 +52,8 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "cross-env DISABLE_ESLINT_PLUGIN=true craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
