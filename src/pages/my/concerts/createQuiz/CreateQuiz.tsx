@@ -3,10 +3,10 @@ import Screen169 from "@src/components/hoc/Screen169";
 import { draftQuizChoicesState, draftQuizState } from "@src/state/recoil/draftQuizState";
 import { useMemo } from "react";
 import { useRecoilState } from "recoil";
+import SaveMetaDataBtn from "../../../../components/button/SaveQuizBtn";
 import ChoiceAddBox from "./ChoiceAddBox";
 import ChoiceBox from "./ChoiceBox";
 import QuizTitle from "./QuizTitle";
-import SaveQuizBtn from "./SaveQuizBtn";
 
 // const ChoiceCreate = () => {
 //   return <GridItem bgColor="white" borderRadius="2xl" p="3"></GridItem>;
@@ -51,7 +51,7 @@ const CreateQuiz = () => {
           </Grid>
         </Center>
       </Screen169>
-      <SaveQuizBtn />
+      <SaveMetaDataBtn savedMetaData={draftQuiz} />
     </Box>
   );
 };

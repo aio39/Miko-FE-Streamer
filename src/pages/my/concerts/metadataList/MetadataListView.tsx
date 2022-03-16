@@ -15,10 +15,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Message, Quiz } from "@src/const";
+import { draftMsgState } from "@src/state/recoil/draftMessageState";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
-import { MessageMainMetadata, MetaData, QuizMainMetadata, QuizMetaData } from "@src/types/TimeMetadataFormat";
+import { MessageMainMetadata, MessageMetadata, MetaData, QuizMainMetadata, QuizMetaData } from "@src/types/TimeMetadataFormat";
 import produce from "immer";
 import { FC } from "react";
 import { FiDelete, FiEdit, FiSend } from "react-icons/fi";
@@ -52,6 +53,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
   const { isOpen, onOpen, onClose } = useDisclosure();
   const setSelectedWindow = useSetRecoilState(selectedWindowState);
   const setDraftQuiz = useSetRecoilState(draftQuizState);
+  const setDraftMsg = useSetRecoilState(draftMsgState);
 
   const setMetadata = useSetRecoilState(metadataState);
 
@@ -73,6 +75,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
       setSelectedWindow(Quiz);
     }
     if (data.data.dataType === "m") {
+      setDraftMsg(data as MessageMetadata);
       setSelectedWindow(Message);
     }
   };

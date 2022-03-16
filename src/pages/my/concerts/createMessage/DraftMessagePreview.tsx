@@ -102,7 +102,7 @@ const DraftMessagePreview = () => {
   //   const positionIndex = useRecoilValue(draftMsgPositionState);
   //   const boxData = useRecoilValue(draftMsgBoxDataState);
   const draftMsgData = useRecoilValue(draftMsgState);
-  const { boxData, mainTextData, subTextData, positionIndex } = draftMsgData;
+  const { boxData, mainTextData, subTextData, positionIndex } = draftMsgData.data;
   return (
     <Box position="absolute" {...positionSwith[positionIndex]} bgColor={boxData?.hexColor} width={boxData.width} height={boxData.height} borderRadius={boxData.round}>
       {/* <EditableText type="mt" />
