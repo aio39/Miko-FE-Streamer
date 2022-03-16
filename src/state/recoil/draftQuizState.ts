@@ -13,8 +13,8 @@ const draftQuizDurationTimeState = atom<number>({
   default: 30,
 });
 
-const draftQuizMainTextState = atom<string>({
-  key: "draftQuizMainText",
+const draftQuizMainTitleState = atom<string>({
+  key: "draftQuizMainTitleState",
   default: "",
 });
 
@@ -44,7 +44,7 @@ const draftQuizState = selector<QuizMetaData>({
     return {
       data: {
         dataType: "q",
-        mainText: get(draftQuizMainTextState),
+        mainText: get(draftQuizMainTitleState),
         durationTime: get(draftQuizDurationTimeState),
         choices: get(draftQuizChoicesState),
       },
@@ -58,14 +58,14 @@ const draftQuizState = selector<QuizMetaData>({
     console.log("set quize", data);
     if (data instanceof DefaultValue) {
       console.log("draftQuizState selector reset", data);
-      reset(draftQuizMainTextState);
+      reset(draftQuizMainTitleState);
       reset(draftQuizDurationTimeState);
       reset(draftQuizChoicesState);
       reset(draftQuizTagsState);
       reset(draftQuizTitleState);
       reset(draftQuizCreatedAtState);
     } else {
-      set(draftQuizMainTextState, data.data.mainText);
+      set(draftQuizMainTitleState, data.data.mainText);
       set(draftQuizDurationTimeState, data.data.durationTime);
       set(draftQuizChoicesState, data.data.choices);
       set(draftQuizTagsState, data.tags);
@@ -75,4 +75,4 @@ const draftQuizState = selector<QuizMetaData>({
   },
 });
 
-export { draftQuizState, draftQuizDurationTimeState, draftQuizMainTextState, draftQuizChoicesState };
+export { draftQuizState, draftQuizDurationTimeState, draftQuizMainTitleState, draftQuizChoicesState };
