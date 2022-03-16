@@ -1,5 +1,5 @@
 import { QuizMetadata } from "@src/types/TimeMetadataFormat";
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 // const initQuizMetadata: QuizMetadata = {
 // dataType: 'q',
@@ -8,14 +8,31 @@ import { atom } from "recoil";
 // s: new Array(0).fill(undefined),
 // };
 
-const draftQuizState = atom<QuizMetadata>({
+const draftQuizDurationTimeState = atom<number>({
+  key: "draftQuizDurationTime",
+  default: 30,
+});
+
+const draftQuizMainTextState = atom<string>({
+  key: "draftQuizMainText",
+  default: "",
+});
+
+const draftQuizChoicesState = atom<string[]>({
+  key: "draftQuizChoices",
+  default: [],
+});
+
+const draftQuizState = selector<QuizMetadata>({
   key: "draftQuiz",
-  default: {
-    dataType: "q",
-    mainText: undefined,
-    durationTime: 30,
-    choices: new Array(0).fill(undefined),
+  get: ({ get }) => {
+    return {
+      dataType: "q",
+      mainText: get(draftQuizMainTextState),
+      durationTime: get(draftQuizDurationTimeState),
+      choices: get(draftQuizChoicesState),
+    };
   },
 });
 
-export { draftQuizState };
+export { draftQuizState, draftQuizDurationTimeState, draftQuizMainTextState, draftQuizChoicesState };
