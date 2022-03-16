@@ -4,7 +4,7 @@ import { draftQuizChoicesState, draftQuizState } from "@src/state/recoil/draftQu
 import { metadataState } from "@src/state/recoil/metadataState";
 import produce from "immer";
 import { FC, useMemo } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 const ChoiceEdit: FC<{ text: string; idx: number }> = ({ text, idx }) => {
   const setDraftQuizChoices = useSetRecoilState(draftQuizChoicesState);
@@ -73,26 +73,35 @@ const ChoiceAdd: FC = () => {
 const SaveQuizBtn = () => {
   const draftQuiz = useRecoilValue(draftQuizState);
   const [metadata, setMetadata] = useRecoilState(metadataState);
+  const resetDraftQuiz = useResetRecoilState(draftQuizState);
 
   const handleSaveQuiz = () => {
     // setMetadata(prev => [...prev, { createdAt: Date.now(), data: draftQuiz, type: "q" }]);
     setMetadata(prev =>
       produce(prev, draft => {
-        draft.push({ data: draftQuiz, createdAt: Date.now(), type: "q" });
+        if (draftQuiz.createdAt !== -1) {
+          // Edit으로 불러온 데이터
+          const idx = draft.findIndex(v => v.createdAt === draftQuiz.createdAt);
+          draft[idx] = draftQuiz;
+        } else {
+          draft.push({ ...draftQuiz, createdAt: Date.now() });
+        }
       }),
     );
+    resetDraftQuiz();
   };
 
   return <Button onClick={handleSaveQuiz}>Save</Button>;
 };
 
 const CreateQuiz = () => {
-  const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizChoicesState);
+  const [draftQuizChoices, setDraftQuizChoices] = useRecoilState(draftQuizChoicesState);
+  const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizState);
 
-  const isFull = useMemo(() => draftQuiz.length >= 4, [draftQuiz]);
+  const isFull = useMemo(() => draftQuizChoices.length >= 4, [draftQuizChoices]);
   // const isShouldBe3Column = useMemo(() => draftQuiz.s.length >= 5, [draftQuiz]);
   const [width, height] = useMemo(() => {
-    const l = draftQuiz.length;
+    const l = draftQuizChoices.length;
     const [w, h] = [25, 35];
 
     switch (l) {
@@ -108,14 +117,14 @@ const CreateQuiz = () => {
       default:
         return [w * 2, h * 2];
     }
-  }, [draftQuiz]);
+  }, [draftQuizChoices]);
 
   return (
     <Box overflowY="scroll" h="full">
       <Text>설문 / 퀴즈 제작 </Text>
       <Screen169>
         <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + "%"} height={height + "%"} gap="4" bgColor="gray.400">
-          {draftQuiz.map((text, idx) => (
+          {draftQuizChoices?.map((text, idx) => (
             <Choice key={idx} text={text} idx={idx} />
           ))}
           {!isFull && <ChoiceAdd />}

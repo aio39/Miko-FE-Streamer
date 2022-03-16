@@ -30,7 +30,7 @@ export type MsgBoxData = {
   hexColor: string;
 };
 
-export type MessageMetadata = {
+export type MessageMainMetadata = {
   /**
    * data type:  메세지
    */
@@ -65,7 +65,7 @@ export type MessageMetadata = {
   durationTime: number;
 };
 
-export type QuizMetadata = {
+export type QuizMainMetadata = {
   /**
    * data type:  퀴즈
    */
@@ -73,7 +73,7 @@ export type QuizMetadata = {
   /**
    * Main Text:  큰 타이틀
    */
-  mainText: string | undefined;
+  mainText: string;
   /**
    * Time: 지속 시간 second 단위
    */
@@ -84,12 +84,24 @@ export type QuizMetadata = {
   choices: string[];
 };
 
-export type MetadataFormats = MessageMetadata | QuizMetadata;
+export type MainMetadataFormats = MessageMainMetadata | QuizMainMetadata;
 
-export type MetaData = {
-  data: MetadataFormats;
+type CommonMetaData = {
+  data: MainMetadataFormats;
   type: MetadataType;
   createdAt: number;
-  tag?: string[];
-  title?: string;
+  tags: string[];
+  title: string;
 };
+
+export type QuizMetaData = {
+  data: QuizMainMetadata;
+  type: "q";
+} & CommonMetaData;
+
+export type MessageMetadata = {
+  data: MessageMainMetadata;
+  type: "m";
+} & CommonMetaData;
+
+export type MetaData = QuizMetaData | MessageMetadata;

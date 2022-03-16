@@ -12,6 +12,11 @@ const COLOR = {
   textHigh: ["#000000", "#FFFFFF"],
   textMedium: ["#000000DD", "#FFFFFFDD"],
   textDisabled: ["#00000055", "#FFFFFF55"],
+  deepGrey: ["#1c1c1c"],
+  grey: ["#232323"],
+  lightGrey: ["#313131"],
+  lightBlue: ["#2b8ceb"],
+  deepBlue: ["#065586"],
 };
 
 const useColorStore = (colorKey: keyof typeof COLOR) => {

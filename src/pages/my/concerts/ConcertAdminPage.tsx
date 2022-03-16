@@ -27,7 +27,7 @@ const ConcertAdminPageNoData = () => {
   const [selectedWindow, setSelectedWindow] = useRecoilState(selectedWindowState);
   const params = useParams();
   const { data } = useConcert(parseInt(params.concertId as string));
-  console.log("data", data?.data);
+
   const mainWindow = useCallback(() => {
     switch (selectedWindow) {
       case Message:
@@ -43,12 +43,10 @@ const ConcertAdminPageNoData = () => {
     }
   }, [selectedWindow]);
 
-  console.log(params);
-
   return (
     <SplitPane defaultSize="80%" split="horizontal" style={{ height: "100vh" }}>
       <SplitPane defaultSize="3%" split="vertical">
-        <div className="full_wh" style={{ backgroundColor: "#ff000022" }}>
+        <div className="full_wh" style={{ border: "2px", borderBlockColor: "white" }}>
           <SideBar></SideBar>
           {/* <VStack width="full" height="full" bgColor="gray.100">
             aaaaaaaaaafsdfdssdf

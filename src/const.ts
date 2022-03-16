@@ -4,7 +4,7 @@ export const Ranking = "ranking";
 export const Information = "information";
 export const GetChannel = "GetChannel";
 
-export type WindowType = typeof Message | typeof Quiz | typeof Information | typeof Ranking;
+export type WindowType = typeof Message | typeof Quiz | typeof Information | typeof Ranking | typeof GetChannel;
 
 export const LARAVEL_URL = "http://localhost:8080/api/";
 export const NODE_URL = "http://localhost:3001/api/";

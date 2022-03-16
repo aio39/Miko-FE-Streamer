@@ -1,7 +1,7 @@
-import { MessageMetadata } from "@src/types/TimeMetadataFormat";
+import { MessageMainMetadata } from "@src/types/TimeMetadataFormat";
 import { atom, selector } from "recoil";
 
-const draftMsgBoxDataState = atom<MessageMetadata["boxData"]>({
+const draftMsgBoxDataState = atom<MessageMainMetadata["boxData"]>({
   key: "draftMsgBoxData",
   default: {
     width: 200,
@@ -21,32 +21,32 @@ const initMsgMainTextData = {
   hexColor: "#111111FF",
 };
 
-const draftMsgMainTextState = atom<MessageMetadata["mainTextData"]>({
+const draftMsgMainTextState = atom<MessageMainMetadata["mainTextData"]>({
   key: "draftMsgMainText",
   default: initMsgMainTextData,
 });
 
-const draftMsgSubTextState = atom<MessageMetadata["subTextData"]>({
+const draftMsgSubTextState = atom<MessageMainMetadata["subTextData"]>({
   key: "draftMsgSubText",
   default: initMsgMainTextData,
 });
 
-const draftMsgPositionState = atom<MessageMetadata["positionIndex"]>({
+const draftMsgPositionState = atom<MessageMainMetadata["positionIndex"]>({
   key: "draftPosition",
   default: 1,
 });
 
-const draftMsgUrlState = atom<MessageMetadata["urlString"]>({
+const draftMsgUrlState = atom<MessageMainMetadata["urlString"]>({
   key: "draftUrl",
   default: undefined,
 });
 
-const draftMsgAnimationTypeState = atom<MessageMetadata["animationType"]>({
+const draftMsgAnimationTypeState = atom<MessageMainMetadata["animationType"]>({
   key: "draftAnimationype",
   default: undefined,
 });
 
-const draftMsgTimeDurationState = atom<MessageMetadata["durationTime"]>({
+const draftMsgTimeDurationState = atom<MessageMainMetadata["durationTime"]>({
   key: "draftTimeDuration",
   default: 5,
 });
@@ -67,7 +67,7 @@ const draftMsgIsHasSubTextState = selector<boolean>({
   },
 });
 
-const draftMsgState = selector<MessageMetadata>({
+const draftMsgState = selector<MessageMainMetadata>({
   key: "draftMessage",
   get: ({ get }) => {
     return {

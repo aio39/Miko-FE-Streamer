@@ -1,5 +1,5 @@
-import { QuizMetadata } from "@src/types/TimeMetadataFormat";
-import { atom, selector } from "recoil";
+import { atom, DefaultValue, selector } from "recoil";
+import { QuizMetaData } from "./../../types/TimeMetadataFormat";
 
 // const initQuizMetadata: QuizMetadata = {
 // dataType: 'q',
@@ -23,15 +23,55 @@ const draftQuizChoicesState = atom<string[]>({
   default: [],
 });
 
-const draftQuizState = selector<QuizMetadata>({
+const draftQuizCreatedAtState = atom<number>({
+  key: "draftQuizCreatedAtState",
+  default: -1,
+});
+
+const draftQuizTagsState = atom<string[]>({
+  key: "draftQuizTagsState",
+  default: [],
+});
+
+const draftQuizTitleState = atom<string>({
+  key: "draftQuizTitleState",
+  default: "",
+});
+
+const draftQuizState = selector<QuizMetaData>({
   key: "draftQuiz",
   get: ({ get }) => {
     return {
-      dataType: "q",
-      mainText: get(draftQuizMainTextState),
-      durationTime: get(draftQuizDurationTimeState),
-      choices: get(draftQuizChoicesState),
+      data: {
+        dataType: "q",
+        mainText: get(draftQuizMainTextState),
+        durationTime: get(draftQuizDurationTimeState),
+        choices: get(draftQuizChoicesState),
+      },
+      type: "q",
+      tags: get(draftQuizTagsState),
+      title: get(draftQuizTitleState),
+      createdAt: get(draftQuizCreatedAtState),
     };
+  },
+  set: ({ set, reset }, data) => {
+    console.log("set quize", data);
+    if (data instanceof DefaultValue) {
+      console.log("draftQuizState selector reset", data);
+      reset(draftQuizMainTextState);
+      reset(draftQuizDurationTimeState);
+      reset(draftQuizChoicesState);
+      reset(draftQuizTagsState);
+      reset(draftQuizTitleState);
+      reset(draftQuizCreatedAtState);
+    } else {
+      set(draftQuizMainTextState, data.data.mainText);
+      set(draftQuizDurationTimeState, data.data.durationTime);
+      set(draftQuizChoicesState, data.data.choices);
+      set(draftQuizTagsState, data.tags);
+      set(draftQuizTitleState, data.title);
+      set(draftQuizCreatedAtState, data.createdAt);
+    }
   },
 });
 

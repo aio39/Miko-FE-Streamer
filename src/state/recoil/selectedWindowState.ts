@@ -1,7 +1,7 @@
-import { Message } from "@src/const";
+import { Message, WindowType } from "@src/const";
 import { atom } from "recoil";
 
-const selectedWindowState = atom({
+const selectedWindowState = atom<WindowType>({
   key: "selectedWindow",
   default: Message,
 });
