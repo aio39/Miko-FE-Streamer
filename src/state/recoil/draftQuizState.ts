@@ -75,4 +75,4 @@ const draftQuizState = selector<QuizMetaData>({
   },
 });
 
-export { draftQuizState, draftQuizDurationTimeState, draftQuizMainTitleState, draftQuizChoicesState };
+export { draftQuizState, draftQuizDurationTimeState, draftQuizMainTitleState, draftQuizChoicesState, draftQuizCreatedAtState, draftQuizTagsState, draftQuizTitleState };

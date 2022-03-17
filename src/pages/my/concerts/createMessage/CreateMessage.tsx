@@ -5,6 +5,7 @@ import { draftMsgMainTextState, draftMsgState, draftMsgSubTextState } from "@src
 import { useRecoilValue } from "recoil";
 import DraftMessagePreview from "./DraftMessagePreview";
 import DragTest from "./DragTest";
+import EditMsgCommonData from "./EidtMsgCommonData";
 import LinkInput from "./LinkInput";
 import MsgBoxEditor from "./MsgBoxEditor";
 import MsgResetBtn from "./MsgResetBtn";
@@ -32,6 +33,7 @@ const CreateMsg = () => {
         <MsgTextDataEditor atom={draftMsgSubTextState} type="sub" />
       </HStack>
       <LinkInput />
+      <EditMsgCommonData />
       <MsgResetBtn></MsgResetBtn>
       <DragTest />
       <SaveBtn />

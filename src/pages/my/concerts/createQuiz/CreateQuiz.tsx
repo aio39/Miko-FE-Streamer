@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import SaveMetaDataBtn from "../../../../components/button/SaveQuizBtn";
 import ChoiceAddBox from "./ChoiceAddBox";
 import ChoiceBox from "./ChoiceBox";
+import EditQuizCommonData from "./EditQuizCommonData";
 import EditQuizOptions from "./EditQuizOptions";
 import QuizTitle from "./QuizTitle";
 
@@ -53,6 +54,7 @@ const CreateQuiz = () => {
         </Center>
       </Screen169>
       <EditQuizOptions />
+      <EditQuizCommonData />
       <SaveMetaDataBtn savedMetaData={draftQuiz} />
     </Box>
   );

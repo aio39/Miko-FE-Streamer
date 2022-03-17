@@ -139,4 +139,7 @@ export {
   draftMsgAnimationTypeState,
   draftMsgTimeDurationState,
   draftMsgIsHasSubTextState,
+  draftMsgCreatedAtState,
+  draftMsgTagsState,
+  draftMsgTitleState,
 };
