@@ -1,5 +1,5 @@
 import { createStandaloneToast } from "@chakra-ui/react";
-import { LARAVEL_URL, NODE_URL } from "@src/const";
+import { LARAVEL_URL, NEST_URL } from "@src/const";
 import axios, { AxiosError } from "axios";
 
 const config = {
@@ -73,7 +73,7 @@ const fetcherForInfinite = (url: string) =>
 
 const nodeFetcher = (url: string) =>
   axiosI
-    .get(url, { baseURL: NODE_URL })
+    .get(url, { baseURL: NEST_URL })
     .then(res => {
       return res.data;
     })

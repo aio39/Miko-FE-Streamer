@@ -1,5 +1,5 @@
 import { Box, Button, Text } from "@chakra-ui/react";
-import { NODE_URL } from "@src/const";
+import { NEST_URL } from "@src/const";
 import { axiosI } from "@src/state/swr/fetcher";
 import { useConcert } from "@src/state/swr/useConcert";
 import { Concert } from "@src/types/share/Concert";
@@ -33,7 +33,7 @@ const ConcertInformation: FC = () => {
   } = concertData.data;
 
   const getKeyHandler = async () => {
-    const { data } = await axiosI.post<Concert>("/ivs", { name: concertData?.data.id }, { baseURL: NODE_URL, withCredentials: true });
+    const { data } = await axiosI.post<Concert>("/ivs", { name: concertData?.data.id }, { baseURL: NEST_URL, withCredentials: true });
     mutate();
     console.log("create channel", data);
   };

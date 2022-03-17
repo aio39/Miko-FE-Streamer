@@ -14,7 +14,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { Message, NODE_URL, Quiz } from "@src/const";
+import { Message, NEST_URL, Quiz } from "@src/const";
 import { draftMsgState } from "@src/state/recoil/draftMessageState";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
 import { metadataState } from "@src/state/recoil/metadataState";
@@ -31,7 +31,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const pushMetaData = async (channelArn: string, metadata: any) => {
   const result = await axios
-    .post<PushMetaDataResponse>(`${NODE_URL}/ivs/metadata`, {
+    .post<PushMetaDataResponse>(`${NEST_URL}/ivs/metadata`, {
       channelArn,
       metadata,
     })
