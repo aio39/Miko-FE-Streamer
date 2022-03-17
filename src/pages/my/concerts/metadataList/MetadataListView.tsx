@@ -14,15 +14,14 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { Message, NEST_URL, Quiz } from "@src/const";
+import { Message, Quiz } from "@src/const";
+import { pushMetaData } from "@src/helper/pushMetaData";
 import { draftMsgState } from "@src/state/recoil/draftMessageState";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { useConcert } from "@src/state/swr/useConcert";
-import { PushMetaDataResponse } from "@src/types/aws/ivs/pushMetaDataResponse";
 import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/TimeMetadataFormat";
-import axios from "axios";
 import produce from "immer";
 import { FC, useCallback } from "react";
 import { FcDoughnutChart } from "react-icons/fc";
@@ -162,16 +161,9 @@ const MetadataListContainer = () => {
 
   console.log(metadata);
 
-  const pushMetaData = useCallback(
+  const handlePushMetaData = useCallback(
     async (channelArn: string, metadata: MetaData) => {
-      const result = await axios
-        .post<PushMetaDataResponse>(`${NEST_URL}/ivs/metadata`, {
-          channelArn,
-          metadata,
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      const result = await pushMetaData(channelArn, metadata);
 
       if (result) {
         if (result.data.result.$metadata.httpStatusCode) {
@@ -196,7 +188,7 @@ const MetadataListContainer = () => {
       <VStack h="full">
         {metadata.map((data, idx) => {
           return (
-            <MetadataPreviewContainer key={data.createdAt} data={data} pushMetaData={pushMetaData}>
+            <MetadataPreviewContainer key={data.createdAt} data={data} pushMetaData={handlePushMetaData}>
               {metadataDrawSwitch(data, idx)}
             </MetadataPreviewContainer>
           );

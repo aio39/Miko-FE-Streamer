@@ -105,4 +105,17 @@ export type MessageMetadata = {
   type: "m";
 } & CommonMetaData;
 
+export type QuizResultMetaData = {
+  data: {
+    title: string;
+    durationTime: number;
+    choices: {
+      id: string;
+      value: number;
+    }[];
+  };
+  type: "qr";
+};
+
 export type MetaData = QuizMetaData | MessageMetadata;
+export type AllMetaData = MetaData | QuizResultMetaData;
