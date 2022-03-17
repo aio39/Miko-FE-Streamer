@@ -55,7 +55,6 @@ const MsgTextDataEditor: FC<{
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
-          f
         </HStack>
         <HStack>
           <Select placeholder="Font" value={font} onChange={handleChangeFont}>

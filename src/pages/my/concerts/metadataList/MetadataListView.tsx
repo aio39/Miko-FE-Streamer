@@ -14,16 +14,37 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { Message, Quiz } from "@src/const";
+import { Message, NODE_URL, Quiz } from "@src/const";
 import { draftMsgState } from "@src/state/recoil/draftMessageState";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
-import { MessageMainMetadata, MessageMetadata, MetaData, QuizMainMetadata, QuizMetaData } from "@src/types/TimeMetadataFormat";
+import { useConcert } from "@src/state/swr/useConcert";
+import { PushMetaDataResponse } from "@src/types/aws/ivs/pushMetaDataResponse";
+import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/TimeMetadataFormat";
+import axios from "axios";
 import produce from "immer";
 import { FC } from "react";
 import { FiDelete, FiEdit, FiSend } from "react-icons/fi";
+import { useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+
+const pushMetaData = async (channelArn: string, metadata: any) => {
+  const result = await axios
+    .post<PushMetaDataResponse>(`${NODE_URL}/ivs/metadata`, {
+      channelArn,
+      metadata,
+    })
+    .catch(e => {
+      console.log(e);
+    });
+
+  if (result) {
+    if (result.data.result.$metadata.httpStatusCode) {
+      console.log("성공");
+    }
+  }
+};
 
 const MetadataMsgPreview: FC<{ data: MessageMainMetadata }> = ({ data }) => {
   return (
@@ -41,7 +62,7 @@ const MetadataQuizPreview: FC<{ data: QuizMainMetadata }> = ({ data }) => {
       <Text fontSize="xl">Quiz</Text>
       <Text fontSize="2xl">{data.mainText}</Text>
       {choices.map((text, idx) => (
-        <Text fontSize="large">
+        <Text fontSize="large" key={idx}>
           {idx + 1}.{text}{" "}
         </Text>
       ))}
@@ -54,7 +75,9 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
   const setSelectedWindow = useSetRecoilState(selectedWindowState);
   const setDraftQuiz = useSetRecoilState(draftQuizState);
   const setDraftMsg = useSetRecoilState(draftMsgState);
-
+  // const concert = useRecoilValue(concertDataState);
+  const params = useParams();
+  const { data: concertData, mutate } = useConcert(parseInt(params.concertId as string));
   const setMetadata = useSetRecoilState(metadataState);
 
   const handleRemoveMetadata = () => {
@@ -68,14 +91,12 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
   };
 
   const handleEditBtn = () => {
-    console.log("handel edit", data);
-
     if (data.type === "q") {
-      setDraftQuiz(data as QuizMetaData);
+      setDraftQuiz(data);
       setSelectedWindow(Quiz);
     }
-    if (data.data.dataType === "m") {
-      setDraftMsg(data as MessageMetadata);
+    if (data.type === "m") {
+      setDraftMsg(data);
       setSelectedWindow(Message);
     }
   };
@@ -102,6 +123,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
           <ModalCloseButton />
           <ModalBody>
             <Text>예약하기</Text>
+            {concertData && <Button onClick={() => pushMetaData(concertData.data.channelArn, data)}>지금 보내기</Button>}
           </ModalBody>
 
           <ModalFooter>
@@ -137,7 +159,11 @@ const MetadataListContainer = () => {
       <Text>리스트</Text>
       <VStack h="full">
         {metadata.map((data, idx) => {
-          return <MetadataPreviewContainer data={data}>{metadataDrawSwitch(data, idx)}</MetadataPreviewContainer>;
+          return (
+            <MetadataPreviewContainer key={data.createdAt} data={data}>
+              {metadataDrawSwitch(data, idx)}
+            </MetadataPreviewContainer>
+          );
         })}
       </VStack>
     </Box>
