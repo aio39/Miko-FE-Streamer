@@ -24,27 +24,12 @@ import { PushMetaDataResponse } from "@src/types/aws/ivs/pushMetaDataResponse";
 import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/TimeMetadataFormat";
 import axios from "axios";
 import produce from "immer";
-import { FC } from "react";
+import { FC, useCallback } from "react";
+import { FcDoughnutChart } from "react-icons/fc";
 import { FiDelete, FiEdit, FiSend } from "react-icons/fi";
 import { useParams } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-
-const pushMetaData = async (channelArn: string, metadata: any) => {
-  const result = await axios
-    .post<PushMetaDataResponse>(`${NEST_URL}/ivs/metadata`, {
-      channelArn,
-      metadata,
-    })
-    .catch(e => {
-      console.log(e);
-    });
-
-  if (result) {
-    if (result.data.result.$metadata.httpStatusCode) {
-      console.log("성공");
-    }
-  }
-};
+import { useRecoilState, useSetRecoilState } from "recoil";
+import QuizChart from "./QuizChart";
 
 const MetadataMsgPreview: FC<{ data: MessageMainMetadata }> = ({ data }) => {
   return (
@@ -70,8 +55,9 @@ const MetadataQuizPreview: FC<{ data: QuizMainMetadata }> = ({ data }) => {
   );
 };
 
-const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: string, metadata: any) => Promise<void> }> = ({ children, data, pushMetaData }) => {
+  const { isOpen: editIsOpen, onOpen: editOnOpen, onClose: editOnClose } = useDisclosure();
+  const { isOpen: staticIsOpen, onOpen: staticOnOpen, onClose: staticOnClose } = useDisclosure();
   const setSelectedWindow = useSetRecoilState(selectedWindowState);
   const setDraftQuiz = useSetRecoilState(draftQuizState);
   const setDraftMsg = useSetRecoilState(draftMsgState);
@@ -105,10 +91,14 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
     <Box width="full" border="1px" position="relative">
       <Box>{children}</Box>
       <HStack position="absolute" right="0" bottom="0">
+        <Text>{data.used ? "사용" : "미사용"}</Text>
         <Center onClick={handleEditBtn}>
           <FiEdit size="30px" color="#39c7bb" />
         </Center>
-        <Center onClick={onOpen}>
+        <Center onClick={staticOnOpen}>
+          <FcDoughnutChart size="30px" />
+        </Center>
+        <Center onClick={editOnOpen}>
           <FiSend size="30px" color="#2b8ceb" />
         </Center>
         <Center onClick={handleRemoveMetadata}>
@@ -116,7 +106,25 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
         </Center>
       </HStack>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={staticIsOpen} onClose={staticOnClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>결과 학인</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text></Text>
+            {data.type === "q" && <QuizChart data={data} />}
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={staticOnClose}>
+              Close
+            </Button>
+            <Button variant="ghost">Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={editIsOpen} onClose={editOnClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>데이터 전송</ModalHeader>
@@ -127,7 +135,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme="blue" mr={3} onClick={editOnClose}>
               Close
             </Button>
             <Button variant="ghost">Secondary Action</Button>
@@ -139,7 +147,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData }> = ({ children, data }) =>
 };
 
 const MetadataListContainer = () => {
-  const metadata = useRecoilValue(metadataState);
+  const [metadata, setMetaData] = useRecoilState(metadataState);
 
   const metadataDrawSwitch = (data: MetaData, idx: number) => {
     switch (data.data.dataType) {
@@ -154,13 +162,41 @@ const MetadataListContainer = () => {
 
   console.log(metadata);
 
+  const pushMetaData = useCallback(
+    async (channelArn: string, metadata: MetaData) => {
+      const result = await axios
+        .post<PushMetaDataResponse>(`${NEST_URL}/ivs/metadata`, {
+          channelArn,
+          metadata,
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      if (result) {
+        if (result.data.result.$metadata.httpStatusCode) {
+          console.log("성공");
+          setMetaData(prev =>
+            produce(prev, draft => {
+              const idx = draft.findIndex(data => (data.createdAt = metadata.createdAt));
+              if (idx !== -1) {
+                draft[idx].used = true;
+              }
+            }),
+          );
+        }
+      }
+    },
+    [setMetaData],
+  );
+
   return (
     <Box w="full">
       <Text>리스트</Text>
       <VStack h="full">
         {metadata.map((data, idx) => {
           return (
-            <MetadataPreviewContainer key={data.createdAt} data={data}>
+            <MetadataPreviewContainer key={data.createdAt} data={data} pushMetaData={pushMetaData}>
               {metadataDrawSwitch(data, idx)}
             </MetadataPreviewContainer>
           );

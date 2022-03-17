@@ -38,6 +38,11 @@ const draftQuizTitleState = atom<string>({
   default: "",
 });
 
+const draftQuizUsedState = atom<boolean>({
+  key: "draftQuizUsedState",
+  default: false,
+});
+
 const draftQuizState = selector<QuizMetaData>({
   key: "draftQuiz",
   get: ({ get }) => {
@@ -52,6 +57,7 @@ const draftQuizState = selector<QuizMetaData>({
       tags: get(draftQuizTagsState),
       title: get(draftQuizTitleState),
       createdAt: get(draftQuizCreatedAtState),
+      used: get(draftQuizUsedState),
     };
   },
   set: ({ set, reset }, data) => {
@@ -64,6 +70,7 @@ const draftQuizState = selector<QuizMetaData>({
       reset(draftQuizTagsState);
       reset(draftQuizTitleState);
       reset(draftQuizCreatedAtState);
+      reset(draftQuizUsedState);
     } else {
       set(draftQuizMainTitleState, data.data.mainText);
       set(draftQuizDurationTimeState, data.data.durationTime);
@@ -71,6 +78,7 @@ const draftQuizState = selector<QuizMetaData>({
       set(draftQuizTagsState, data.tags);
       set(draftQuizTitleState, data.title);
       set(draftQuizCreatedAtState, data.createdAt);
+      set(draftQuizUsedState, data.used);
     }
   },
 });

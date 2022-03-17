@@ -82,6 +82,11 @@ const draftMsgTitleState = atom<string>({
   default: "",
 });
 
+const draftMsgUsedState = atom<boolean>({
+  key: "draftMsgUsedState",
+  default: false,
+});
+
 const draftMsgState = selector<MessageMetadata>({
   key: "draftMessage",
   get: ({ get }) => {
@@ -100,6 +105,7 @@ const draftMsgState = selector<MessageMetadata>({
       createdAt: get(draftMsgCreatedAtState),
       tags: get(draftMsgTagsState),
       title: get(draftMsgTitleState),
+      used: get(draftMsgUsedState),
     };
   },
   set: ({ set, reset }, data) => {
@@ -114,6 +120,7 @@ const draftMsgState = selector<MessageMetadata>({
       reset(draftMsgCreatedAtState);
       reset(draftMsgTagsState);
       reset(draftMsgTitleState);
+      reset(draftMsgUsedState);
     } else {
       set(draftMsgBoxDataState, data.data.boxData);
       set(draftMsgPositionState, data.data.positionIndex);
@@ -125,6 +132,7 @@ const draftMsgState = selector<MessageMetadata>({
       set(draftMsgCreatedAtState, data.createdAt);
       set(draftMsgTagsState, data.tags);
       set(draftMsgTitleState, data.title);
+      set(draftMsgUsedState, data.used);
     }
   },
 });

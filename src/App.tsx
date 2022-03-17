@@ -14,7 +14,13 @@ import Page404 from "@src/pages/Page404";
 import SignPage from "@src/pages/SignPage";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Socket } from "socket.io-client";
 import "./App.css";
+declare global {
+  interface Window {
+    socket: Socket;
+  }
+}
 
 function App() {
   return (

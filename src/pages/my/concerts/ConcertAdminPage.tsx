@@ -6,6 +6,7 @@ import { Suspense, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import SplitPane from "react-split-pane";
 import { useRecoilState } from "recoil";
+import AddSocketEventLayer from "./AddSocketEventLayer";
 import CreateMsg from "./createMessage/CreateMessage";
 import CreateQuiz from "./createQuiz/CreateQuiz";
 import ConcertInformation from "./information/ConcertInformation";
@@ -44,25 +45,27 @@ const ConcertAdminPageNoData = () => {
   }, [selectedWindow]);
 
   return (
-    <SplitPane defaultSize="80%" split="horizontal" style={{ height: "100vh" }}>
-      <SplitPane defaultSize="3%" split="vertical">
-        <div className="full_wh" style={{ border: "2px", borderBlockColor: "white" }}>
-          <SideBar></SideBar>
-          {/* <VStack width="full" height="full" bgColor="gray.100">
+    <AddSocketEventLayer>
+      <SplitPane defaultSize="80%" split="horizontal" style={{ height: "100vh" }}>
+        <SplitPane defaultSize="3%" split="vertical">
+          <div className="full_wh" style={{ border: "2px", borderBlockColor: "white" }}>
+            <SideBar></SideBar>
+            {/* <VStack width="full" height="full" bgColor="gray.100">
             aaaaaaaaaafsdfdssdf
           </VStack> */}
-        </div>
-        <SplitPane defaultSize="70%" split="vertical">
-          <div className="full_wh">{mainWindow()}</div>
-          <div className="full_wh">
-            <MetadataListView></MetadataListView>
           </div>
+          <SplitPane defaultSize="70%" split="vertical">
+            <div className="full_wh">{mainWindow()}</div>
+            <div className="full_wh">
+              <MetadataListView></MetadataListView>
+            </div>
+          </SplitPane>
         </SplitPane>
+        <div className="full_wh" style={{ backgroundColor: "#39c5bb33" }}>
+          {/* <TimeLine /> */}
+        </div>
       </SplitPane>
-      <div className="full_wh" style={{ backgroundColor: "#39c5bb33" }}>
-        {/* <TimeLine /> */}
-      </div>
-    </SplitPane>
+    </AddSocketEventLayer>
   );
 };
 

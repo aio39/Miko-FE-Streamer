@@ -92,6 +92,7 @@ type CommonMetaData = {
   createdAt: number;
   tags: string[];
   title: string;
+  used: boolean;
 };
 
 export type QuizMetaData = {
