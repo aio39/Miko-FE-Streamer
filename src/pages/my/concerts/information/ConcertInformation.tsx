@@ -5,6 +5,7 @@ import { useConcert } from "@src/state/swr/useConcert";
 import { Concert } from "@src/types/share/Concert";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
+import ScoreAddedChart from "../chart/ScoreAddedChart";
 
 const ConcertInformation: FC = () => {
   const params = useParams();
@@ -48,6 +49,7 @@ const ConcertInformation: FC = () => {
       <Text>streamKeyValue: {streamKeyValue}</Text>
       <Text>ingestEndpoint: {ingestEndpoint}</Text>
       {!streamKeyArn && <Button onClick={getKeyHandler}>Get Key</Button>}
+      <ScoreAddedChart />
     </Box>
   );
 };
