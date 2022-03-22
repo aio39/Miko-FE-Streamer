@@ -1,8 +1,6 @@
 import {
   Avatar,
   Box,
-  Drawer,
-  DrawerContent,
   Flex,
   FlexProps,
   HStack,
@@ -28,19 +26,19 @@ export default function SidebarWithHeader({}: // children,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
-      <SidebarContent onClose={() => onClose} display={{ base: "none", md: "block" }} />
-      <Drawer autoFocus={false} isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
+    <Flex w="100vw" bg={useColorModeValue("gray.100", "gray.900")}>
+      <SidebarContent onClose={() => onClose} />
+      {/* <Drawer autoFocus={false} isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
         <DrawerContent>
           <SidebarContent onClose={onClose} />
         </DrawerContent>
-      </Drawer>
+      </Drawer> */}
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <VStack flexGrow="1">
+        <MobileNav onOpen={onOpen} />
         <Outlet />
-      </Box>
-    </Box>
+      </VStack>
+    </Flex>
   );
 }
 
@@ -50,8 +48,7 @@ interface MobileProps extends FlexProps {
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 4 }}
+      w="full"
       height="20"
       alignItems="center"
       bg={useColorModeValue("white", "gray.900")}

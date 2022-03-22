@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const FullWidthHeightLayout = () => {
   return (
-    <Box width="full" height="100vh">
+    <Box width="100vw" height="100vh">
       <Outlet />
     </Box>
   );
