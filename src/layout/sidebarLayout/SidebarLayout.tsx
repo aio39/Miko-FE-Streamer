@@ -28,15 +28,11 @@ export default function SidebarWithHeader({}: // children,
   return (
     <Flex w="100vw" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent onClose={() => onClose} />
-      {/* <Drawer autoFocus={false} isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
-        </DrawerContent>
-      </Drawer> */}
-      {/* mobilenav */}
       <VStack flexGrow="1">
         <MobileNav onOpen={onOpen} />
-        <Outlet />
+        <Box width="full">
+          <Outlet />
+        </Box>
       </VStack>
     </Flex>
   );

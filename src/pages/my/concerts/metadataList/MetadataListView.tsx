@@ -20,7 +20,7 @@ import { draftMsgState } from "@src/state/recoil/draftMessageState";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
-import { useConcert } from "@src/state/swr/useConcert";
+import { useTicket } from "@src/state/swr/useTickets";
 import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/TimeMetadataFormat";
 import produce from "immer";
 import { FC, useCallback } from "react";
@@ -62,7 +62,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
   const setDraftMsg = useSetRecoilState(draftMsgState);
   // const concert = useRecoilValue(concertDataState);
   const params = useParams();
-  const { data: concertData, mutate } = useConcert(parseInt(params.concertId as string));
+  const { data: ticketData, mutate } = useTicket(parseInt(params.ticketId as string));
   const setMetadata = useSetRecoilState(metadataState);
 
   const handleRemoveMetadata = () => {
@@ -130,7 +130,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
           <ModalCloseButton />
           <ModalBody>
             <Text>예약하기</Text>
-            {concertData && <Button onClick={() => pushMetaData(concertData.data.channelArn, data)}>지금 보내기</Button>}
+            {ticketData && <Button onClick={() => pushMetaData(ticketData.data.channelArn, data)}>지금 보내기</Button>}
           </ModalBody>
 
           <ModalFooter>

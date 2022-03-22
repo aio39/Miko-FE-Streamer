@@ -3,7 +3,7 @@ import { ResponsivePie } from "@nivo/pie";
 import { pushMetaData } from "@src/helper/pushMetaData";
 import { nodeFetcher } from "@src/state/swr/fetcher";
 import laggy from "@src/state/swr/middleware/laggy";
-import { useConcert } from "@src/state/swr/useConcert";
+import { useTicket } from "@src/state/swr/useTickets";
 import { QuizMainMetadata, QuizMetaData } from "@src/types/TimeMetadataFormat";
 import { FC, Suspense } from "react";
 import { useParams } from "react-router-dom";
@@ -54,7 +54,7 @@ const QUIZ_RESULT_POLLING_MS = 2500;
 const MyResponsivePie: FC<{ id: number; data: QuizMainMetadata }> = ({ id, data }) => {
   // useMemo(() => {}, [d])
   const params = useParams();
-  const { data: concertData, mutate } = useConcert(parseInt(params.concertId as string));
+  const { data: ticketData, mutate } = useTicket(parseInt(params.ticketId as string));
   const { data: redisData } = useSWR<QuizRedisData>(`/concerts/quiz/${id}`, nodeFetcher, {
     use: [laggy],
     refreshInterval: QUIZ_RESULT_POLLING_MS,
@@ -69,7 +69,7 @@ const MyResponsivePie: FC<{ id: number; data: QuizMainMetadata }> = ({ id, data 
   //   },
   console.log("redis", redisData);
 
-  if (!redisData || !concertData) return <Box> no data</Box>;
+  if (!redisData || !ticketData) return <Box> no data</Box>;
 
   const result = data.choices.map((choice, idx) => {
     return {
@@ -81,7 +81,7 @@ const MyResponsivePie: FC<{ id: number; data: QuizMainMetadata }> = ({ id, data 
   });
 
   const handleSendResult = () => {
-    pushMetaData(concertData.data.channelArn, { data: { choices: result, title: data.mainText, durationTime: 10 }, type: "qr" });
+    pushMetaData(ticketData.data.channelArn, { data: { choices: result, title: data.mainText, durationTime: 10 }, type: "qr" });
   };
 
   return (

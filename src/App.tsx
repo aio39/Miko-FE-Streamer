@@ -43,9 +43,13 @@ function App() {
               <Route path="concerts" element={<ConcertListPage />} />
               <Route path="create" element={<ConcertCreatePage />} />
               <Route path="edit" element={<EditMyPage />} />
-              <Route path="concerts/:concertId" element={<ConcertDetailPage />} />
+              <Route path="concerts/:concertId">
+                <Route index element={<ConcertDetailPage />} />
+                <Route path="goods" element={<ConcertDetailPage />} />
+                <Route path="tickets" element={<ConcertDetailPage />} />
+              </Route>
             </Route>
-            <Route path="concerts/:concertId/:ticketId" element={<ConcertAdminPage />} />
+            <Route path="concerts/:concertId/admin/:ticketId" element={<ConcertAdminPage />} />
             {/* <Route path="concerts/:concertId" element={<ConcertAdminPage />} /> */}
           </Route>
 

@@ -1,13 +1,15 @@
-import { BoxProps, Flex, HStack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { BoxProps, Flex, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import { selectedConcertIdState } from "@src/state/recoil/myPageRecoil/myPageState";
 import { useMemo } from "react";
 import { IconType } from "react-icons";
+import { AiOutlineShopping } from "react-icons/ai";
 import { FiCompass, FiHome, FiSettings, FiStar, FiTrendingUp } from "react-icons/fi";
-import { useLocation } from "react-router-dom";
+import { IoTicketSharp } from "react-icons/io5";
+import { useLocation, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import SidebarNavItem from "./SidebarNavItem";
 interface LinkItemProps {
-  name: string;
+  name?: string;
   icon: IconType;
   url: string;
 }
@@ -19,6 +21,12 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Settings", icon: FiSettings, url: "/my/" },
 ];
 
+const ConcertLinkItems: Array<LinkItemProps> = [
+  { icon: FiHome, url: "/" },
+  { icon: AiOutlineShopping, url: "/goods" },
+  { icon: IoTicketSharp, url: "/tickets" },
+];
+
 interface SidebarProps extends BoxProps {
   onClose: () => void;
 }
@@ -26,6 +34,7 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const selectedConcertId = useRecoilValue(selectedConcertIdState);
   let location = useLocation();
+  let { concertId } = useParams();
 
   const isConcertDetailPage = useMemo(() => {
     const regex = /(\/my\/concerts\/)+[\d]/g;
@@ -35,29 +44,33 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   console.log("콘서트 디테일 페이지", isConcertDetailPage);
 
   return (
-    <HStack h="100vh">
-      <VStack w="150px" m="0" bg={useColorModeValue("white", "gray.900")} h="full" borderRightColor={useColorModeValue("gray.200", "gray.700")}>
+    <Flex h="100vh" w="fit-content" marginInlineStart="0" pr="10px">
+      <VStack w="220px" m="0" bg={useColorModeValue("white", "gray.900")} h="full" borderRightColor={useColorModeValue("gray.200", "gray.700")}>
         <Flex alignItems="center">
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
             Logo
           </Text>
         </Flex>
         {LinkItems.map(link => (
-          <SidebarNavItem key={link.name} icon={link.icon} url={link.url}>
-            {link.name}
+          <SidebarNavItem key={link.url} icon={link.icon} url={link.url}>
+            {link.name as string}
           </SidebarNavItem>
         ))}
       </VStack>
-      {isConcertDetailPage ? (
-        <VStack transition="3s ease" w="100px" h="full" bgColor="blackAlpha.400" m="0">
-          <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-            Logo
-          </Text>
-        </VStack>
-      ) : (
-        ""
-      )}
-    </HStack>
+      <VStack
+        transition="0.2s ease"
+        w={isConcertDetailPage ? "70px" : "0px"}
+        visibility={isConcertDetailPage ? "visible" : "hidden"}
+        h="full"
+        bgColor="cyan.400"
+        borderBottomRightRadius="3xl"
+        justifyContent="center"
+      >
+        {ConcertLinkItems.map(link => (
+          <SidebarNavItem fontSize="2xl" key={link.url} icon={link.icon} url={`/my/concerts/${concertId}` + link.url}></SidebarNavItem>
+        ))}
+      </VStack>
+    </Flex>
   );
 };
 export default SidebarContent;

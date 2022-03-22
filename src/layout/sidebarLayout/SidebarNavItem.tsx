@@ -6,7 +6,7 @@ import { Link as ReachLink } from "react-router-dom";
 interface NavItemProps extends FlexProps {
   icon: IconType;
   url: string;
-  children: ReactText;
+  children?: ReactText;
 }
 const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
   return (
@@ -24,6 +24,8 @@ const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
+        fontSize="16"
+        gap="4"
         _hover={{
           bg: "cyan.400",
           color: "white",
@@ -32,8 +34,6 @@ const SidebarNavItem = ({ icon, children, url, ...rest }: NavItemProps) => {
       >
         {icon && (
           <Icon
-            mr="4"
-            fontSize="16"
             _groupHover={{
               color: "white",
             }}

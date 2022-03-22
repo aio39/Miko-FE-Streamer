@@ -1,4 +1,4 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { NEST_URL } from "@src/const";
 import { axiosI } from "@src/state/swr/fetcher";
 import { useConcert } from "@src/state/swr/useConcert";
@@ -13,25 +13,7 @@ const ConcertInformation: FC = () => {
 
   if (!concertData) return <Box>No Data</Box>;
 
-  const {
-    allConcertEndDate,
-    allConcertStartDate,
-    artist,
-    categoryId,
-    channelArn,
-    content,
-    coverImage,
-    createdAt,
-    detail,
-    id,
-    isPublic,
-    ingestEndpoint,
-    playbackUrl,
-    streamKeyArn,
-    streamKeyValue,
-    title,
-    updatedAt,
-  } = concertData.data;
+  const { allConcertEndDate, allConcertStartDate, artist, categoryId, content, coverImage, createdAt, detail, id, isPublic, title, updatedAt } = concertData.data;
 
   const getKeyHandler = async () => {
     const { data } = await axiosI.post<Concert>("/ivs", { name: concertData?.data.id }, { baseURL: NEST_URL, withCredentials: true });
@@ -43,12 +25,12 @@ const ConcertInformation: FC = () => {
     <Box>
       <Text>{title}</Text>
       <Text>{detail}</Text>
-      <Text>streamKeyArn: {streamKeyArn}</Text>
+      {/* <Text>streamKeyArn: {streamKeyArn}</Text>
       <Text>channelArn: {channelArn}</Text>
       <Text>playbackUrl: {playbackUrl}</Text>
       <Text>streamKeyValue: {streamKeyValue}</Text>
       <Text>ingestEndpoint: {ingestEndpoint}</Text>
-      {!streamKeyArn && <Button onClick={getKeyHandler}>Get Key</Button>}
+      {!streamKeyArn && <Button onClick={getKeyHandler}>Get Key</Button>} */}
       <ScoreAddedChart />
     </Box>
   );
