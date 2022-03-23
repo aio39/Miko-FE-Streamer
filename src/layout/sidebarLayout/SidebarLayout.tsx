@@ -30,7 +30,7 @@ export default function SidebarWithHeader({}: // children,
       <SidebarContent onClose={() => onClose} />
       <VStack flexGrow="1">
         <MobileNav onOpen={onOpen} />
-        <Box width="full">
+        <Box width="full" height="full">
           <Outlet />
         </Box>
       </VStack>

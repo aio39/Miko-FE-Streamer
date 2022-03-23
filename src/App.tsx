@@ -16,7 +16,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Socket } from "socket.io-client";
 import "./App.css";
-import ConcertDetailPage from "./pages/my/ConcertDetailPage";
+import ConcertDetailPage from "./pages/my/concertDetail/ConcertDetailPage";
+import GoodsPage from "./pages/my/concertDetail/GoodsPage";
+import TicketListPage from "./pages/my/concertDetail/TicketListPage";
 declare global {
   interface Window {
     socket: Socket;
@@ -45,8 +47,8 @@ function App() {
               <Route path="edit" element={<EditMyPage />} />
               <Route path="concerts/:concertId">
                 <Route index element={<ConcertDetailPage />} />
-                <Route path="goods" element={<ConcertDetailPage />} />
-                <Route path="tickets" element={<ConcertDetailPage />} />
+                <Route path="goods" element={<GoodsPage />} />
+                <Route path="tickets" element={<TicketListPage />} />
               </Route>
             </Route>
             <Route path="concerts/:concertId/admin/:ticketId" element={<ConcertAdminPage />} />

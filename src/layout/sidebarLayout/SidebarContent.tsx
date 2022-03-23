@@ -22,7 +22,7 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 const ConcertLinkItems: Array<LinkItemProps> = [
-  { icon: FiHome, url: "/" },
+  { icon: FiHome, url: "" }, // NOTE  "/" 안 붙여도 됨.
   { icon: AiOutlineShopping, url: "/goods" },
   { icon: IoTicketSharp, url: "/tickets" },
 ];
@@ -40,8 +40,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     const regex = /(\/my\/concerts\/)+[\d]/g;
     return location.pathname.match(regex)?.length === 1 ? true : false;
   }, [location.pathname, location]);
-
-  console.log("콘서트 디테일 페이지", isConcertDetailPage);
 
   return (
     <Flex h="100vh" w="fit-content" marginInlineStart="0" pr="10px">

@@ -3,6 +3,7 @@ import AsLink from "@src/components/common/wrapChakra/AsLink";
 import { S3_URL } from "@src/const";
 import convertDate from "@src/helper/convertDate";
 import { useConcerts } from "@src/state/swr/useConcert";
+import { useUser } from "@src/state/swr/useUser";
 import { Concert } from "@src/types/share/Concert";
 import React, { FC } from "react";
 import { MdMusicNote, MdSchedule } from "react-icons/md";
@@ -60,7 +61,8 @@ const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
 };
 
 const ConcertCardList: FC = () => {
-  const { data } = useConcerts({});
+  const { data: userData } = useUser();
+  const { data } = useConcerts(userData && { filter: [["user_id", userData.id]] });
 
   return (
     <Flex
