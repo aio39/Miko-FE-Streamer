@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Box, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Heading, useDisclosure, VStack } from "@chakra-ui/react";
 import DateInputWrapper from "@src/components/common/inputs/DateInput";
 import { InputWrapper, SelectWrapper } from "@src/components/common/inputs/HookInput";
 import ImageUpload from "@src/components/common/inputs/ImageUpload";
@@ -13,6 +13,8 @@ import React, { useRef, useState } from "react";
 import { FilePond } from "react-filepond";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Descendant } from "slate";
+import RichTextExample from "../../components/markdownEditor/MarkDownEditor";
 
 interface FormInputs {
   name: string;
@@ -33,13 +35,17 @@ const ConcertCreatePage = () => {
   const [createdConcert, setCreatedConcert] = useState<Concert>();
   const imageUploadRef = useRef<FilePond>(null);
   const useDisclosureReturn = useDisclosure();
-
-  // if (isNotLogged) router.push('/')
+  const [content, setContent] = useState<Descendant[]>([
+    {
+      type: "paragraph",
+      children: [{ text: "This is editable " }],
+    },
+  ]);
 
   const onSubmit: SubmitHandler<CreateConcertData> = async inputData => {
     const formData = new FormData();
     Object.entries(inputData).forEach(([key, value]) => {
-      if (key === "category_id") value = categoryArray.indexOf(value as string) + 1;
+      if (key === "categoryId") value = categoryArray.indexOf(value as string) + 1;
       formData.set(key, value as string);
     });
 
@@ -47,6 +53,7 @@ const ConcertCreatePage = () => {
     if (image) {
       formData.set("cover_image", image.file);
     }
+    formData.set("content", JSON.stringify(content));
 
     const { data } = await axiosI.post<Concert>(`/concerts`, formData, {
       headers: {
@@ -75,6 +82,10 @@ const ConcertCreatePage = () => {
           <VStack spacing="10">
             <InputWrapper registerReturn={register("artist", { required: true })} error={errors.artist} data={["참가 아티스트 리스트", "ex) 가수A"]} />
             <InputWrapper registerReturn={register("detail", { required: true })} error={errors.detail} data={["설명", "설명"]} />
+            <Heading as="h3" size="lg">
+              コンテンツ
+            </Heading>
+            <RichTextExample value={content} setValue={setContent} />
             <SelectWrapper
               registerReturn={register("categoryId", {
                 required: "필수 선택입니다.",
@@ -84,8 +95,10 @@ const ConcertCreatePage = () => {
               selectList={categoryArray}
             />
             <InputWrapper registerReturn={register("title", { required: true })} error={errors.title} data={["콘서트 명", "콘서트 이름"]} />
-            <InputWrapper registerReturn={register("content", { required: true })} error={errors.content} data={["Content", "Content"]} />
+            {/* <InputWrapper registerReturn={register("content", { required: true })} error={errors.content} data={["Content", "Content"]} /> */}
+            <Heading size="md">콘서트 시작 시간</Heading>
             <DateInputWrapper setValue={setValue} registerReturn={register("allConcertStartDate")} />
+            <Heading size="md">콘서트 종료 시간</Heading>
             <DateInputWrapper setValue={setValue} registerReturn={register("allConcertEndDate")} />
           </VStack>
 
