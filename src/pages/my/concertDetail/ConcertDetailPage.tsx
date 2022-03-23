@@ -1,4 +1,5 @@
 import { Box, Divider, Heading, Image, Tag, Text } from "@chakra-ui/react";
+import { MarkDownView } from "@src/components/markdownEditor/MarkDownView";
 import { categoryArray, S3_URL } from "@src/const";
 import { useConcert } from "@src/state/swr/useConcert";
 import { useParams } from "react-router-dom";
@@ -21,7 +22,7 @@ const ConcertDetailPage = () => {
 
       <Divider />
       <Box>
-        <Text>{concertData.data.content}</Text>
+        <MarkDownView mdString={concertData.data.content} />
       </Box>
       <Box>
         <Text>{concertData.data.detail}</Text>

@@ -5,6 +5,7 @@ import { BaseEditor, createEditor, Descendant, Editor, Element as SlateElement, 
 import { HistoryEditor } from "slate-history";
 import { Editable, ReactEditor, Slate, useSlate, withReact } from "slate-react";
 import { Button, Icon, Toolbar } from "./markdownParts";
+import { RenderElements } from "./RenderElements";
 
 const HOTKEYS = {
   "mod+b": "bold",
@@ -28,7 +29,7 @@ declare module "slate" {
 }
 
 const RichTextExample: FC<{ value: Descendant[]; setValue: Dispatch<SetStateAction<Descendant[]>> }> = ({ setValue, value }) => {
-  const renderElement = useCallback(props => <Element {...props} />, []);
+  const renderElement = useCallback(props => <RenderElements {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withReact(createEditor()), []);
   console.log("value", JSON.stringify(value));
@@ -53,7 +54,7 @@ const RichTextExample: FC<{ value: Descendant[]; setValue: Dispatch<SetStateActi
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
-        placeholder="Enter some rich text…"
+        placeholder="コンサートの詳細を記入してください。"
         spellCheck
         autoFocus
         onKeyDown={event => {
@@ -123,54 +124,6 @@ const isBlockActive = (editor, format, blockType = "type") => {
 const isMarkActive = (editor, format) => {
   const marks = Editor.marks(editor);
   return marks ? marks[format] === true : false;
-};
-
-const Element = ({ attributes, children, element }) => {
-  const style = { textAlign: element.align };
-  switch (element.type) {
-    case "block-quote":
-      return (
-        <blockquote style={style} {...attributes}>
-          {children}
-        </blockquote>
-      );
-    case "bulleted-list":
-      return (
-        <ul style={style} {...attributes}>
-          {children}
-        </ul>
-      );
-    case "heading-one":
-      return (
-        <h1 style={style} {...attributes}>
-          {children}
-        </h1>
-      );
-    case "heading-two":
-      return (
-        <h2 style={style} {...attributes}>
-          {children}
-        </h2>
-      );
-    case "list-item":
-      return (
-        <li style={style} {...attributes}>
-          {children}
-        </li>
-      );
-    case "numbered-list":
-      return (
-        <ol style={style} {...attributes}>
-          {children}
-        </ol>
-      );
-    default:
-      return (
-        <p style={style} {...attributes}>
-          {children}
-        </p>
-      );
-  }
 };
 
 const Leaf = ({ attributes, children, leaf }) => {

@@ -114,7 +114,7 @@ const ConcertCreatePage = () => {
           close: "추가 생성",
           confirm: "콘서트 확인",
         }}
-        href="/seller/shop"
+        href="/my/concerts"
       >
         {createdConcert && <>성공</>}
       </ModalWrapper>
