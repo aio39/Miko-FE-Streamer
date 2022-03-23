@@ -2,6 +2,7 @@ import { Box, Divider, Heading, Image, Tag, Text } from "@chakra-ui/react";
 import { MarkDownView } from "@src/components/markdownEditor/MarkDownView";
 import { categoryArray, S3_URL } from "@src/const";
 import { useConcert } from "@src/state/swr/useConcert";
+import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 
 const ConcertDetailPage = () => {
@@ -10,7 +11,7 @@ const ConcertDetailPage = () => {
   const { data: concertData } = useConcert(parseInt(concertId as string));
   if (!concertData) return <Box>Error</Box>;
 
-  const { isPublic } = concertData.data;
+  const { isPublic, id } = concertData.data;
 
   return (
     <Box padding="6" bgColor="white" width="full" height="full" borderRadius="lg">
@@ -28,8 +29,9 @@ const ConcertDetailPage = () => {
         <Text>{concertData.data.detail}</Text>
       </Box>
       <Divider />
-
-      <Image width="400px" src={S3_URL + concertData.data.coverImage} alt="cover image" />
+      <motion.div transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1.0 }} layoutId={"concert-image-" + id}>
+        <Image width="400px" src={S3_URL + concertData.data.coverImage} alt="cover image" />
+      </motion.div>
       <Tag size="md" variant="solid" colorScheme="teal">
         {isPublic ? "공개" : "비공개"}
       </Tag>

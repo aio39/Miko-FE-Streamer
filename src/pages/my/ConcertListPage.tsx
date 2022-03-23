@@ -5,6 +5,7 @@ import convertDate from "@src/helper/convertDate";
 import { useConcerts } from "@src/state/swr/useConcert";
 import { useUser } from "@src/state/swr/useUser";
 import { Concert } from "@src/types/share/Concert";
+import { motion } from "framer-motion";
 import React, { FC } from "react";
 import { MdMusicNote, MdSchedule } from "react-icons/md";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -23,8 +24,9 @@ const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
         rounded="lg"
         overflow="hidden"
       >
-        <Image w="full" h={56} fit="cover" objectPosition="center" src={S3_URL + data.coverImage} alt="avatar" />
-
+        <motion.div transition={{ duration: 0 }} layoutId={"concert-image-" + data.id}>
+          <Image w="full" h={56} fit="cover" objectPosition="center" src={S3_URL + data.coverImage} alt="avatar" />
+        </motion.div>
         <Flex alignItems="center" px={6} py={3} bg="gray.900">
           <Icon as={MdSchedule} h={6} w={6} color="white" />
 

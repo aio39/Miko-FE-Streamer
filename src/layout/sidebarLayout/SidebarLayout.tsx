@@ -15,6 +15,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import React from "react";
 import { FiBell, FiChevronDown, FiMenu } from "react-icons/fi";
 import { Outlet } from "react-router-dom";
@@ -26,15 +27,19 @@ export default function SidebarWithHeader({}: // children,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Flex w="100vw" bg={useColorModeValue("gray.100", "gray.900")}>
-      <SidebarContent onClose={() => onClose} />
-      <VStack flexGrow="1">
-        <MobileNav onOpen={onOpen} />
-        <Box width="full" height="full">
-          <Outlet />
-        </Box>
-      </VStack>
-    </Flex>
+    <AnimateSharedLayout type="crossfade">
+      <AnimatePresence>
+        <Flex w="100vw" bg={useColorModeValue("gray.100", "gray.900")}>
+          <SidebarContent onClose={() => onClose} />
+          <VStack flexGrow="1" maxH="100vh" overflowX="scroll">
+            <MobileNav onOpen={onOpen} />
+            <Box width="full" height="full">
+              <Outlet />
+            </Box>
+          </VStack>
+        </Flex>
+      </AnimatePresence>
+    </AnimateSharedLayout>
   );
 }
 
