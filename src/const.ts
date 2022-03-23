@@ -8,7 +8,7 @@ export const Information = "information";
 export const GetChannel = "GetChannel";
 
 //
-export const categoryArray = ["콘서트", "음악"];
+export const categoryArray = ["J-POP", "K-POP", "애니메이션", "재즈/소울", "밴드", "발라드"];
 export const S3_URL = "https://miko-image.s3.ap-northeast-2.amazonaws.com/";
 
 //ENV
