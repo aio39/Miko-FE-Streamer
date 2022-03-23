@@ -1,3 +1,4 @@
+// @ts-nocheck
 export const RenderElements = ({ attributes, children, element }) => {
   const style = { textAlign: element.align };
   switch (element.type) {

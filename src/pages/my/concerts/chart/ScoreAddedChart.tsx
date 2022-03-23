@@ -9,6 +9,8 @@ const ScoreAddedChart: FC = () => {
 
   if (!data) return <Box>Error</Box>;
 
+  if (data.data.length === 0) return <Box>No Data</Box>;
+
   return (
     <Box width="full" h="40vh">
       차트

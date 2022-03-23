@@ -27,7 +27,7 @@ export default function SidebarWithHeader({}: // children,
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <AnimateSharedLayout type="crossfade">
+    <AnimateSharedLayout>
       <AnimatePresence>
         <Flex w="100vw" bg={useColorModeValue("gray.100", "gray.900")}>
           <SidebarContent onClose={() => onClose} />

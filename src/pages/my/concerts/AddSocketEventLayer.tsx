@@ -1,19 +1,21 @@
 import useSocket from "@src/state/hooks/useSocket";
-import { useConcert } from "@src/state/swr/useConcert";
+import { useTicket } from "@src/state/swr/useTickets";
 import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const AddSocketEventLayer: FC = ({ children }) => {
   const socket = useSocket();
-  const params = useParams();
-  const { data: concertData } = useConcert(parseInt(params.concertId as string));
-  useEffect(() => {
-    if (!socket || !concertData) return;
+  const { ticketId } = useParams();
 
-    socket.emit("fe-st-join-concert-room", concertData.data.id);
+  const { data: ticketData } = useTicket(parseInt(ticketId as string));
+
+  useEffect(() => {
+    if (!socket || !ticketData) return;
+
+    socket.emit("fe-st-join-concert-room", ticketData.data.id);
 
     return () => {};
-  }, [socket, concertData]);
+  }, [socket, ticketData]);
 
   return <>{children}</>;
 };
