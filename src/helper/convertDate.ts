@@ -4,6 +4,7 @@ const FORMAT = {
   YMD: "YYYY/MM/DD",
   YMDHM: "YYYY/MM/DD A hh:mm",
   YMDHMS: "YYYY/MM/DD A hh:mm:ss",
+  HMS: "A hh:mm:ss",
 };
 
 const convertDate = (data: dayjs.ConfigType, format: keyof typeof FORMAT = "YMD") => {

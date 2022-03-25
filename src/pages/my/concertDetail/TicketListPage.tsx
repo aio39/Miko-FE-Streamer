@@ -1,38 +1,54 @@
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Circle, Flex, Heading, HStack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import AsLink from "@src/components/common/wrapChakra/AsLink";
 import convertDate from "@src/helper/convertDate";
 import { useTickets } from "@src/state/swr/useTickets";
 import { Ticket } from "@src/types/share/Ticket";
 import { FC } from "react";
-import { BiLinkExternal } from "react-icons/bi";
+import { AiOutlineFieldTime } from "react-icons/ai";
+import { FaExpandArrowsAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 const TicketBox: FC<{ data: Ticket }> = ({ data }) => {
   const { archiveEndTime, concertEndDate, concertStartDate, price, runningTime, saleEndDate, saleStartDate, concertId, id } = data;
 
   return (
-    <Box
-      w="sm"
-      // mx="auto"
-      bg={useColorModeValue("white", "gray.800")}
-      shadow="md"
-      rounded="lg"
-      overflow="hidden"
-    >
-      <Box py={4} px={6}>
-        <Text> {price} </Text>
-        <Text> {runningTime} </Text>
-        <Text> {convertDate(archiveEndTime)} </Text>
-        <Text> {convertDate(concertEndDate)} </Text>
-        <Text> {convertDate(concertStartDate)} </Text>
-        <Text> {convertDate(saleEndDate)} </Text>
-        <Text> {convertDate(saleStartDate)} </Text>
-      </Box>
-      <Box>
-        <AsLink to={`/my/concerts/${concertId}/admin/${id}`}>
-          <BiLinkExternal />
-        </AsLink>
-      </Box>
+    <Box w="sm" bg={useColorModeValue("white", "gray.800")} shadow="md" rounded="lg" overflow="hidden">
+      <Flex alignItems="center" h="50px" w="full" color="white" bgColor="blackAlpha.800" pl="2">
+        <Heading size="md">日にち・{convertDate(concertStartDate, "YMDHMS")} </Heading>
+      </Flex>
+      <VStack py={4} px={6} gap="1" alignItems="start" position="relative">
+        <HStack>
+          <Circle size="30px" bg="blackAlpha.800" color="white">
+            円
+          </Circle>
+          <Text> {price} 円 </Text>
+        </HStack>
+        <HStack>
+          <Circle size="30px" bg="blackAlpha.800" color="white">
+            <AiOutlineFieldTime />
+          </Circle>
+          <Text> {runningTime}分 </Text>
+        </HStack>
+
+        <Heading size="sm">アーカイブ終了日にち</Heading>
+        <Text>
+          <Text> {convertDate(archiveEndTime, "YMDHMS")} </Text>
+        </Text>
+
+        <Heading size="sm">コンサー公演時間</Heading>
+        <Text>
+          {convertDate(concertStartDate, "YMDHMS")}~{convertDate(concertEndDate, "HMS")}{" "}
+        </Text>
+        <Heading size="sm">チケット販売期間</Heading>
+        <Text>
+          {convertDate(saleStartDate, "YMDHMS")}~{convertDate(saleEndDate, "HMS")}{" "}
+        </Text>
+        <Box position="absolute" right="10px" top="5px">
+          <AsLink to={`/my/concerts/${concertId}/admin/${id}`}>
+            <FaExpandArrowsAlt size="25px" />
+          </AsLink>
+        </Box>
+      </VStack>
     </Box>
   );
 };
