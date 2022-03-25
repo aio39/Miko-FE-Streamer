@@ -1,4 +1,5 @@
 import { LoginData, User } from "@src/types/share/User";
+import { useEffect } from "react";
 import { mutate } from "swr";
 import useSWRImmutable from "swr/immutable";
 import { axiosI, fetcher } from "./fetcher";
@@ -7,29 +8,45 @@ import laggy from "./middleware/laggy";
 const URL_USER = "/users";
 const URL_LOGIN = "/login";
 const URL_LOGOUT = "/logout";
+const URL_OAUTH_LOGIN = "/login/google";
 
 const useUser = () => {
   const aFetcher = (url: string) => {
-    const isExistToken = document.cookie.match(/^(.*;)?\s*isLogin\s*=\s*[^;]+(.*)?$/);
-    console.log("isExistToken", isExistToken);
-    if (!isExistToken) return Promise.resolve(undefined);
-    console.log("useUser 실행");
+    if (typeof window === "undefined") return Promise.resolve(undefined);
+
+    const isTokenExist = document.cookie.match(/^(.*;)?\s*isLogin\s*=\s*[^;]+(.*)?$/);
+    console.log("여기는 useUser 로그인 토큰", isTokenExist ? " 존재 ✅" : " 없음. ❌");
+    if (!isTokenExist) {
+      // NOTE  useSWR는 undefined일 경우 suspense가 안 끝남.
+      return Promise.resolve(null);
+    }
     return fetcher(url);
   };
 
-  const { data, error, mutate, isValidating } = useSWRImmutable<User>(URL_USER, aFetcher, {
-    errorRetryCount: 5,
+  const userResult = useSWRImmutable<User>(URL_USER, aFetcher, {
+    errorRetryCount: 2,
     use: [laggy],
+    suspense: true,
   });
 
-  const isNotLogged = !isValidating && !data; // 확인중이 아니며, 데이터가 undefined
+  useEffect(() => {
+    if (userResult.data?.uuid) {
+      window.localStorage.setItem("uuid", userResult.data.uuid);
+      // console.log(userResult.data);
+    } else {
+      window.localStorage.removeItem("uuid");
+    }
+  }, [userResult.data]);
 
-  return { data, error, mutate, isValidating, isNotLogged };
+  return userResult;
+
+  // 이렇게 하면 항상 새로운 Object가 만들어짐.
+  // return { data, error, mutate, isValidating, isNotLogged };
 };
 
 const useLogin = async (loginData: LoginData) => {
   try {
-    const { data, status } = await axiosI.post<User>(`${URL_LOGIN}`, loginData);
+    const { data } = await axiosI.post<User>(`${URL_LOGIN}`, loginData);
     mutate(URL_USER, data, false);
     return true;
   } catch (error) {

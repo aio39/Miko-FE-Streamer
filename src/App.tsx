@@ -1,4 +1,3 @@
-import LoginStatus from "@src/components/display/LoginStatus";
 import FullWidthHeightLayout from "@src/layout/FullWidthHeightLayout";
 import SidebarWithHeader from "@src/layout/sidebarLayout/SidebarLayout";
 import NotLoginGuard from "@src/pages/guard/NotLoginGuard";
@@ -28,7 +27,6 @@ declare global {
 function App() {
   return (
     <BrowserRouter>
-      <LoginStatus />
       <Routes>
         <Route element={<FullWidthHeightLayout />}>
           {/* Home Page */}

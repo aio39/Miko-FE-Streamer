@@ -31,7 +31,7 @@ const ConcertCreatePage = () => {
   } = useForm<CreateConcertData>({
     mode: "onChange",
   });
-  const { data: userData, isNotLogged } = useUser();
+  const { data: userData } = useUser();
   const [createdConcert, setCreatedConcert] = useState<Concert>();
   const imageUploadRef = useRef<FilePond>(null);
   const useDisclosureReturn = useDisclosure();

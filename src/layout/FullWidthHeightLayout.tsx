@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import ErrorBoundary from "@src/components/common/ErrorBoundary";
+import LoginStatus from "@src/components/display/LoginStatus";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -9,6 +10,7 @@ const FullWidthHeightLayout = () => {
       <ErrorBoundary>
         <Suspense fallback={() => <Box>loading</Box>}>
           <Outlet />
+          <LoginStatus />
         </Suspense>
       </ErrorBoundary>
     </Box>
