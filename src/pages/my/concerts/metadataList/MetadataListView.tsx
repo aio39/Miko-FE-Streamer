@@ -18,16 +18,17 @@ import { Message, Quiz } from "@src/const";
 import { pushMetaData } from "@src/helper/pushMetaData";
 import { draftMsgState } from "@src/state/recoil/draftMessageState";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
-import { metadataState } from "@src/state/recoil/metadataState";
+import { metadataListFilterState, metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { useTicket } from "@src/state/swr/useTickets";
 import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/TimeMetadataFormat";
 import produce from "immer";
-import { FC, useCallback } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { FcDoughnutChart } from "react-icons/fc";
 import { FiDelete, FiEdit, FiSend } from "react-icons/fi";
 import { useParams } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import MetadataListFilter from "./MetadataListFilter";
 import QuizChart from "./QuizChart";
 
 const MetadataMsgPreview: FC<{ data: MessageMainMetadata }> = ({ data }) => {
@@ -147,6 +148,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
 
 const MetadataListContainer = () => {
   const [metadata, setMetaData] = useRecoilState(metadataState);
+  const metadataFilter = useRecoilValue(metadataListFilterState);
 
   const metadataDrawSwitch = (data: MetaData, idx: number) => {
     switch (data.data.dataType) {
@@ -158,8 +160,6 @@ const MetadataListContainer = () => {
         break;
     }
   };
-
-  console.log(metadata);
 
   const handlePushMetaData = useCallback(
     async (channelArn: string, metadata: MetaData) => {
@@ -182,11 +182,24 @@ const MetadataListContainer = () => {
     [setMetaData],
   );
 
+  const filteredMetadata = useMemo(() => {
+    const { search, tag, used } = metadataFilter;
+    const usedFilter = (value: MetaData) => {
+      if (used === "all") return true;
+      if (used === "used" && value.used) return true;
+      if (used === "notUsed" && !value.used) return true;
+      return false;
+    };
+
+    return metadata.filter(usedFilter);
+  }, [metadata, metadataFilter]);
+
+  console.log(metadata);
+
   return (
     <Box w="full">
-      <Text>리스트</Text>
       <VStack h="full">
-        {metadata.map((data, idx) => {
+        {filteredMetadata.map((data, idx) => {
           return (
             <MetadataPreviewContainer key={data.createdAt} data={data} pushMetaData={handlePushMetaData}>
               {metadataDrawSwitch(data, idx)}
@@ -201,6 +214,7 @@ const MetadataListContainer = () => {
 const MetadataListView = () => {
   return (
     <VStack overflowY="scroll" h="full" w="full">
+      <MetadataListFilter />
       <MetadataListContainer></MetadataListContainer>
     </VStack>
   );
