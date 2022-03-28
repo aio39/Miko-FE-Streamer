@@ -1,4 +1,4 @@
-import { HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Text, VStack } from "@chakra-ui/react";
+import { Heading, HStack, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Text, VStack } from "@chakra-ui/react";
 import { MsgTextData } from "@src/types/TimeMetadataFormat";
 import { FC } from "react";
 import { RecoilState, useRecoilState } from "recoil";
@@ -32,8 +32,8 @@ const MsgTextDataEditor: FC<{
   };
 
   return (
-    <VStack>
-      <Text>{type === "main" ? "메인 텍스트" : "서브 텍스트"}</Text>
+    <VStack alignItems="start">
+      <Heading size="md">{type === "main" ? "メインテキスト" : "サブスク"}</Heading>
       <Input value={text} onChange={handleChangeText}></Input>
       <HStack>
         <HStack>
@@ -65,7 +65,10 @@ const MsgTextDataEditor: FC<{
           </Select>
         </HStack>
       </HStack>
-      <TextColorPicker color={hexColor} onChnage={handleChangeColor} />
+      <HStack>
+        <Text>色</Text>
+        <TextColorPicker color={hexColor} onChnage={handleChangeColor} />
+      </HStack>
     </VStack>
   );
 };

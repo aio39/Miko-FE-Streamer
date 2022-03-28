@@ -7,7 +7,7 @@ const MsgResetBtn = () => {
     // resetDraftMessage();
   };
 
-  return <Button onClick={handleReset}>Reset</Button>;
+  return <Button onClick={handleReset}>リセット</Button>;
 };
 
 export default MsgResetBtn;

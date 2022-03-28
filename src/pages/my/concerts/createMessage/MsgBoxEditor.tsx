@@ -1,4 +1,4 @@
-import { HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text, VStack } from "@chakra-ui/react";
+import { Flex, Heading, HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from "@chakra-ui/react";
 import { draftMsgBoxDataState } from "@src/state/recoil/draftMessageState";
 import { useRecoilState } from "recoil";
 import TextColorPicker from "./TextColorPicker";
@@ -29,8 +29,8 @@ const MsgBoxEditor = () => {
   };
 
   return (
-    <VStack alignItems="start">
-      <Text>메세지 창</Text>
+    <Flex flexDir="column" flexGrow="1" minW="250px" alignItems="start" gap="2">
+      <Heading size="md">メッセージボックス</Heading>
 
       <HStack>
         <HStack>
@@ -87,8 +87,11 @@ const MsgBoxEditor = () => {
           </NumberInput>
         </HStack>
       </HStack>
-      <TextColorPicker color={hexColor} onChnage={handleChangeColor} />
-    </VStack>
+      <HStack>
+        <Text>色</Text>
+        <TextColorPicker color={hexColor} onChnage={handleChangeColor} />
+      </HStack>
+    </Flex>
   );
 };
 

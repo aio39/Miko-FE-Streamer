@@ -35,28 +35,33 @@ const CreateQuiz = () => {
   }, [draftQuizChoices]);
 
   return (
-    <Box overflowY="scroll" h="full" px="2" py="2">
-      <Heading size="md">アンケート・クイズ</Heading>
-      <Screen169>
-        <Center w="full" h="full" flexDir="column">
-          <QuizTitle />
-          <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + "%"} height={height + "%"} gap="4" bgColor="#00000055" borderRadius="md">
-            {draftQuizChoices?.map((text, idx) => (
-              <ChoiceBox key={idx} text={text} idx={idx} />
-            ))}
-            {!isFull && <ChoiceAddBox />}
-          </Grid>
-        </Center>
-      </Screen169>
-      <Flex>
-        <EditQuizOptions />
-        <EditQuizCommonData />
-      </Flex>
-      <Divider my="4" />
-      <Flex justifyContent="end">
-        <SaveMetaDataBtn savedMetaData={draftQuiz} />
-      </Flex>
-    </Box>
+    <Flex h="full">
+      <Box flexGrow="1" px="2" py="2">
+        <Heading size="md">アンケート・クイズ</Heading>
+        <Screen169>
+          <Center w="full" h="full" flexDir="column">
+            <QuizTitle />
+            <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + "%"} height={height + "%"} gap="4" bgColor="#00000055" borderRadius="md">
+              {draftQuizChoices?.map((text, idx) => (
+                <ChoiceBox key={idx} text={text} idx={idx} />
+              ))}
+              {!isFull && <ChoiceAddBox />}
+            </Grid>
+          </Center>
+        </Screen169>
+      </Box>
+      <Box maxW="400px" h="full" overflowY="scroll" px="2">
+        <Flex flexWrap="wrap">
+          <EditQuizOptions />
+          <Divider my="4" />
+          <EditQuizCommonData />
+        </Flex>
+        <Divider my="4" />
+        <Flex justifyContent="end">
+          <SaveMetaDataBtn savedMetaData={draftQuiz} />
+        </Flex>
+      </Box>
+    </Flex>
   );
 };
 
