@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Tag,
   Text,
   useDisclosure,
   VStack,
@@ -33,7 +34,7 @@ import QuizChart from "./QuizChart";
 
 const MetadataMsgPreview: FC<{ data: MessageMainMetadata }> = ({ data }) => {
   return (
-    <Box width="full" h="100" border="1px">
+    <Box width="full" h="100">
       <Text>{data.mainTextData.text}</Text>
       {data.subTextData && <Text>{data.subTextData.text}</Text>}
     </Box>
@@ -43,7 +44,7 @@ const MetadataMsgPreview: FC<{ data: MessageMainMetadata }> = ({ data }) => {
 const MetadataQuizPreview: FC<{ data: QuizMainMetadata }> = ({ data }) => {
   const { choices, dataType, durationTime, mainText } = data;
   return (
-    <Box width="full" h="full" border="1px" padding="2">
+    <Box width="full" h="full" padding="2">
       <Text fontSize="xl">Quiz</Text>
       <Text fontSize="2xl">{data.mainText}</Text>
       {choices.map((text, idx) => (
@@ -88,8 +89,16 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
   };
 
   return (
-    <Box width="full" border="1px" position="relative">
-      <Box>{children}</Box>
+    <Box width="full" position="relative" border="1px" padding="2">
+      <Box>
+        {children}
+        <HStack>
+          {data.tags.map(tag => (
+            <Tag colorScheme="teal">{tag}</Tag>
+          ))}
+        </HStack>
+      </Box>
+
       <HStack position="absolute" right="0" bottom="0">
         <Text>{data.used ? "사용" : "미사용"}</Text>
         <Center onClick={handleEditBtn}>
@@ -191,10 +200,20 @@ const MetadataListContainer = () => {
       return false;
     };
 
-    return metadata.filter(usedFilter);
-  }, [metadata, metadataFilter]);
+    const tagFilter = (value: MetaData) => {
+      if (tag === " ") return true;
+      if (value.tags.includes(tag)) return true;
+      return false;
+    };
 
-  console.log(metadata);
+    const searchFilter = (value: MetaData) => {
+      if (search === "") return true;
+      if (value.title.startsWith(search)) return true;
+      return false;
+    };
+
+    return metadata.filter(usedFilter).filter(tagFilter).filter(searchFilter);
+  }, [metadata, metadataFilter]);
 
   return (
     <Box w="full">

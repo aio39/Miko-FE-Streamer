@@ -90,6 +90,7 @@ const draftMsgUsedState = atom<boolean>({
 const draftMsgState = selector<MessageMetadata>({
   key: "draftMessage",
   get: ({ get }) => {
+    console.log("draftMessage", get(draftMsgTagsState));
     return {
       data: {
         dataType: "m",

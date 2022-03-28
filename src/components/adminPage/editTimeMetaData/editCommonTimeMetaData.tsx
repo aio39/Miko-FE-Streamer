@@ -1,21 +1,20 @@
 import { Badge, Box, Button, Flex, Heading, Input, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
 import convertDate from "@src/helper/convertDate";
-import { draftQuizCreatedAtState, draftQuizTagsState, draftQuizTitleState } from "@src/state/recoil/draftQuizState";
 import produce from "immer";
 import { FC, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import { SetterOrUpdater, useRecoilState } from "recoil";
+import { SetterOrUpdater } from "recoil";
 
 interface Props {
   createdAt: number;
-  tag: [string[], SetterOrUpdater<string[]>];
-  title: [string, SetterOrUpdater<string>];
+  useTag: [string[], SetterOrUpdater<string[]>];
+  useTitle: [string, SetterOrUpdater<string>];
 }
 
-const EditCommonTimeMetaData: FC<Props> = () => {
-  const [createdAt, setCreatedAt] = useRecoilState(draftQuizCreatedAtState);
-  const [tags, setTags] = useRecoilState(draftQuizTagsState);
-  const [title, setTitle] = useRecoilState(draftQuizTitleState);
+const EditCommonTimeMetaData: FC<Props> = ({ useTag, useTitle, createdAt }) => {
+  // const [createdAt, setCreatedAt] = useRecoilState(draftQuizCreatedAtState);
+  const [tags, setTags] = useTag;
+  const [title, setTitle] = useTitle;
   const [newTag, setNewTag] = useState("");
   const handleChangeText: React.ChangeEventHandler<HTMLInputElement> = e => {
     setTitle(e.target.value);

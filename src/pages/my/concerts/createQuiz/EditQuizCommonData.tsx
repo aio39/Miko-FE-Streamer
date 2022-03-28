@@ -7,7 +7,7 @@ const EditQuizCommonData = () => {
   const tagState = useRecoilState(draftQuizTagsState);
   const title = useRecoilState(draftQuizTitleState);
 
-  return <EditCommonTimeMetaData tag={tagState} title={title} createdAt={createdAt} />;
+  return <EditCommonTimeMetaData useTag={tagState} useTitle={title} createdAt={createdAt} />;
 };
 
 export default EditQuizCommonData;

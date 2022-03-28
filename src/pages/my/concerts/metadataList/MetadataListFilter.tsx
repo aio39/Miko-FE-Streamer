@@ -1,6 +1,7 @@
 import { Badge, Box, Flex, Heading, Input, Select, Stack } from "@chakra-ui/react";
-import { metadataListFilterUsedState } from "@src/state/recoil/metadataState";
-import { useRecoilState } from "recoil";
+import { metadataListFilterTagState, metadataListFilterUsedState, metadataTagListState } from "@src/state/recoil/metadataState";
+import { ChangeEventHandler } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 const UsedFilter = () => {
   const [used, setUsed] = useRecoilState(metadataListFilterUsedState);
@@ -10,8 +11,6 @@ const UsedFilter = () => {
     if (used === "notUsed") return <Badge>使用前</Badge>;
     if (used === "used") return <Badge>使用済み</Badge>;
   };
-
-  console.log("used", used);
 
   const handleChangeUsed = () => {
     if (used === "all") return setUsed("notUsed");
@@ -26,10 +25,31 @@ const UsedFilter = () => {
   );
 };
 
+const TagFilter = () => {
+  const tagList = useRecoilValue(metadataTagListState);
+  const [tag, setTag] = useRecoilState(metadataListFilterTagState);
+
+  const handleTagSelect: ChangeEventHandler<HTMLSelectElement> = e => {
+    setTag(e.target.value);
+  };
+
+  return (
+    <Select placeholder="Select option" onChange={handleTagSelect} value={tag} defaultValue={tag}>
+      <option key={" "} value={" "}>
+        タグ
+      </option>
+      {tagList.map(tag => (
+        <option key={tag} value={tag}>
+          {tag}
+        </option>
+      ))}
+    </Select>
+  );
+};
+
 //  검색
 // 태그
-//  미사용
-//
+
 const MetadataListFilter = () => {
   return (
     <Flex flexDir="column">
@@ -38,11 +58,7 @@ const MetadataListFilter = () => {
         <UsedFilter />
         <Input />
         <Stack spacing={3}>
-          <Select placeholder="Select option">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </Select>
+          <TagFilter />
         </Stack>
       </Flex>
     </Flex>

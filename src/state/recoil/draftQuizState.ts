@@ -61,7 +61,6 @@ const draftQuizState = selector<QuizMetaData>({
     };
   },
   set: ({ set, reset }, data) => {
-    console.log("set quize", data);
     if (data instanceof DefaultValue) {
       console.log("draftQuizState selector reset", data);
       reset(draftQuizMainTitleState);

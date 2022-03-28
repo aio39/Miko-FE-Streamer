@@ -7,7 +7,7 @@ const EditMsgCommonData = () => {
   const tagState = useRecoilState(draftMsgTagsState);
   const title = useRecoilState(draftMsgTitleState);
 
-  return <EditCommonTimeMetaData tag={tagState} title={title} createdAt={createdAt} />;
+  return <EditCommonTimeMetaData useTag={tagState} useTitle={title} createdAt={createdAt} />;
 };
 
 export default EditMsgCommonData;

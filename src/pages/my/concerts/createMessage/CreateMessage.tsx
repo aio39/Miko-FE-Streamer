@@ -5,7 +5,7 @@ import { draftMsgMainTextState, draftMsgState, draftMsgSubTextState } from "@src
 import { useRecoilValue } from "recoil";
 import DraftMessagePreview from "./DraftMessagePreview";
 import DragTest from "./DragTest";
-import EditMsgCommonData from "./EidtMsgCommonData";
+import EditMsgCommonData from "./EditMsgCommonData";
 import LinkInput from "./LinkInput";
 import MsgBoxEditor from "./MsgBoxEditor";
 import MsgResetBtn from "./MsgResetBtn";
@@ -19,6 +19,8 @@ const SaveBtn = () => {
 };
 
 const CreateMsg = () => {
+  const msgMetaData = useRecoilValue(draftMsgState);
+  console.log(msgMetaData);
   return (
     <Flex h="full">
       <Box flexGrow="1" px="2" py="2">
