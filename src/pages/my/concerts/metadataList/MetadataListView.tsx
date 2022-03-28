@@ -46,6 +46,7 @@ const MetadataQuizPreview: FC<{ data: QuizMainMetadata }> = ({ data }) => {
   return (
     <Box width="full" h="full" padding="2">
       <Text fontSize="xl">Quiz</Text>
+      <Text> {mainText} </Text>
       <Text fontSize="2xl">{data.mainText}</Text>
       {choices.map((text, idx) => (
         <Text fontSize="large" key={idx}>
@@ -62,7 +63,6 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
   const setSelectedWindow = useSetRecoilState(selectedWindowState);
   const setDraftQuiz = useSetRecoilState(draftQuizState);
   const setDraftMsg = useSetRecoilState(draftMsgState);
-  // const concert = useRecoilValue(concertDataState);
   const params = useParams();
   const { data: ticketData, mutate } = useTicket(parseInt(params.ticketId as string));
   const setMetadata = useSetRecoilState(metadataState);
@@ -192,7 +192,14 @@ const MetadataListContainer = () => {
   );
 
   const filteredMetadata = useMemo(() => {
-    const { search, tag, used } = metadataFilter;
+    const { search, tag, used, type } = metadataFilter;
+
+    const typeFilter = (value: MetaData) => {
+      if (type === "all") return true;
+      if (type === value.type) return true;
+      return false;
+    };
+
     const usedFilter = (value: MetaData) => {
       if (used === "all") return true;
       if (used === "used" && value.used) return true;
@@ -212,7 +219,7 @@ const MetadataListContainer = () => {
       return false;
     };
 
-    return metadata.filter(usedFilter).filter(tagFilter).filter(searchFilter);
+    return metadata.filter(typeFilter).filter(usedFilter).filter(tagFilter).filter(searchFilter);
   }, [metadata, metadataFilter]);
 
   return (

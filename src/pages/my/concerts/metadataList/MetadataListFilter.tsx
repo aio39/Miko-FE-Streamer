@@ -1,7 +1,35 @@
 import { Badge, Box, Flex, Heading, Input, Select, Stack } from "@chakra-ui/react";
-import { metadataListFilterTagState, metadataListFilterUsedState, metadataTagListState } from "@src/state/recoil/metadataState";
+import {
+  metadataListFilterSearchState,
+  metadataListFilterTagState,
+  metadataListFilterTypeState,
+  metadataListFilterUsedState,
+  metadataTagListState,
+} from "@src/state/recoil/metadataState";
 import { ChangeEventHandler } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+
+const TypeFilter = () => {
+  const [type, setType] = useRecoilState(metadataListFilterTypeState);
+
+  const usedBadge = () => {
+    if (type === "all") return <Badge>全部</Badge>;
+    if (type === "m") return <Badge>メッセージ</Badge>;
+    if (type === "q") return <Badge>アンケート</Badge>;
+  };
+
+  const handleChangeUsed = () => {
+    if (type === "all") return setType("m");
+    if (type === "m") return setType("q");
+    if (type === "q") return setType("all");
+  };
+
+  return (
+    <Box w="100px" onClick={handleChangeUsed}>
+      {usedBadge()}
+    </Box>
+  );
+};
 
 const UsedFilter = () => {
   const [used, setUsed] = useRecoilState(metadataListFilterUsedState);
@@ -22,6 +50,19 @@ const UsedFilter = () => {
     <Box w="100px" onClick={handleChangeUsed}>
       {usedBadge()}
     </Box>
+  );
+};
+
+const SearchFilter = () => {
+  const [search, setSearch] = useRecoilState(metadataListFilterSearchState);
+
+  return (
+    <Input
+      value={search}
+      onChange={e => {
+        setSearch(e.target.value);
+      }}
+    />
   );
 };
 
@@ -47,16 +88,14 @@ const TagFilter = () => {
   );
 };
 
-//  검색
-// 태그
-
 const MetadataListFilter = () => {
   return (
     <Flex flexDir="column">
       <Heading size="md">メタデータリスト</Heading>
       <Flex>
+        <TypeFilter />
         <UsedFilter />
-        <Input />
+        <SearchFilter />
         <Stack spacing={3}>
           <TagFilter />
         </Stack>

@@ -1,4 +1,4 @@
-import { MetaData } from "@src/types/TimeMetadataFormat";
+import { MetaData, MetadataType } from "@src/types/TimeMetadataFormat";
 import { atom, selector } from "recoil";
 
 //  "" 일때 필터 작동 안함.
@@ -18,10 +18,16 @@ export const metadataListFilterUsedState = atom<"all" | "used" | "notUsed">({
   default: "all",
 });
 
+export const metadataListFilterTypeState = atom<"all" | MetadataType>({
+  key: "metadataListFilterTypeState",
+  default: "all",
+});
+
 export const metadataListFilterState = selector({
   key: "metadataListFilterState",
   get: ({ get }) => {
     return {
+      type: get(metadataListFilterTypeState),
       search: get(metadataListFilterSearchState),
       tag: get(metadataListFilterTagState),
       used: get(metadataListFilterUsedState),
