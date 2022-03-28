@@ -1,4 +1,4 @@
-import { Box, Center, Grid, Text } from "@chakra-ui/react";
+import { Box, Center, Divider, Flex, Grid, Heading } from "@chakra-ui/react";
 import Screen169 from "@src/components/hoc/Screen169";
 import { draftQuizChoicesState, draftQuizState } from "@src/state/recoil/draftQuizState";
 import { useMemo } from "react";
@@ -10,16 +10,11 @@ import EditQuizCommonData from "./EditQuizCommonData";
 import EditQuizOptions from "./EditQuizOptions";
 import QuizTitle from "./QuizTitle";
 
-// const ChoiceCreate = () => {
-//   return <GridItem bgColor="white" borderRadius="2xl" p="3"></GridItem>;
-// };
-
 const CreateQuiz = () => {
   const [draftQuizChoices, setDraftQuizChoices] = useRecoilState(draftQuizChoicesState);
   const [draftQuiz, setDraftQuiz] = useRecoilState(draftQuizState);
 
   const isFull = useMemo(() => draftQuizChoices.length >= 4, [draftQuizChoices]);
-  // const isShouldBe3Column = useMemo(() => draftQuiz.s.length >= 5, [draftQuiz]);
   const [width, height] = useMemo(() => {
     const l = draftQuizChoices.length;
     const [w, h] = [25, 35];
@@ -40,12 +35,12 @@ const CreateQuiz = () => {
   }, [draftQuizChoices]);
 
   return (
-    <Box overflowY="scroll" h="full">
-      <Text>설문 / 퀴즈 제작 </Text>
+    <Box overflowY="scroll" h="full" px="2" py="2">
+      <Heading size="md">アンケート・クイズ</Heading>
       <Screen169>
         <Center w="full" h="full" flexDir="column">
           <QuizTitle />
-          <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + "%"} height={height + "%"} gap="4" bgColor="gray.400">
+          <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + "%"} height={height + "%"} gap="4" bgColor="#00000055" borderRadius="md">
             {draftQuizChoices?.map((text, idx) => (
               <ChoiceBox key={idx} text={text} idx={idx} />
             ))}
@@ -53,9 +48,14 @@ const CreateQuiz = () => {
           </Grid>
         </Center>
       </Screen169>
-      <EditQuizOptions />
-      <EditQuizCommonData />
-      <SaveMetaDataBtn savedMetaData={draftQuiz} />
+      <Flex>
+        <EditQuizOptions />
+        <EditQuizCommonData />
+      </Flex>
+      <Divider my="4" />
+      <Flex justifyContent="end">
+        <SaveMetaDataBtn savedMetaData={draftQuiz} />
+      </Flex>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Box, HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from "@chakra-ui/react";
+import { Flex, Heading, HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from "@chakra-ui/react";
 import { draftQuizDurationTimeState } from "@src/state/recoil/draftQuizState";
 import { useRecoilState } from "recoil";
 
@@ -13,9 +13,11 @@ const EditQuizOptions = () => {
   };
 
   return (
-    <Box>
+    <Flex minW="300px" flexGrow="1" flexDir="column" gap="4">
+      <Heading size="md">詳細設定</Heading>
+
       <HStack>
-        <Text>지속 시간</Text>
+        <Text>表示時間</Text>
         <NumberInput
           w="5rem"
           step={1}
@@ -32,7 +34,7 @@ const EditQuizOptions = () => {
           </NumberInputStepper>
         </NumberInput>
       </HStack>
-    </Box>
+    </Flex>
   );
 };
 

@@ -21,7 +21,7 @@ const QuizTitle: FC = () => {
 
   return (
     <Box padding="5">
-      <Input value={title} onChange={handleOnChange} fontSize={fontSize + "px"} minW="300px" w={inputWidth}></Input>
+      <Input value={title} color="white" backgroundColor="#00000055" onChange={handleOnChange} fontSize={fontSize + "px"} minW="300px" w={inputWidth}></Input>
       <Box position="absolute" visibility="hidden" fontSize={fontSize + "px"} ref={hiddenTextRef} overflowWrap="normal"></Box>
     </Box>
   );

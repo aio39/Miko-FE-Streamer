@@ -30,7 +30,11 @@ const SaveMetaDataBtn: FC<{ savedMetaData: MetaData }> = ({ savedMetaData }) => 
     }
   };
 
-  return <Button onClick={handleSaveQuiz}>Save</Button>;
+  return (
+    <Button onClick={handleSaveQuiz} colorScheme="teal">
+      保存
+    </Button>
+  );
 };
 
 export default SaveMetaDataBtn;

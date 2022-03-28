@@ -36,7 +36,7 @@ const ChoiceBox: FC<{ text: string; idx: number }> = ({ text, idx }) => {
     <GridItem bgColor="white" borderRadius="2xl" p="3" position="relative">
       <Text>{idx + 1}</Text>
       <ChoiceEdit text={text} idx={idx} />
-      <Button onClick={handleDeleteChoice} position="absolute" top="-10" right="-10">
+      <Button size="xs" onClick={handleDeleteChoice} position="absolute" bottom="2" right="2" colorScheme="red">
         X
       </Button>
     </GridItem>

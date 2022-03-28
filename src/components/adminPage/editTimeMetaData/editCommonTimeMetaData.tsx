@@ -1,4 +1,5 @@
-import { Box, Button, HStack, Input, Tag, TagCloseButton, TagLabel, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, Heading, Input, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
+import convertDate from "@src/helper/convertDate";
 import { draftQuizCreatedAtState, draftQuizTagsState, draftQuizTitleState } from "@src/state/recoil/draftQuizState";
 import produce from "immer";
 import { FC, useState } from "react";
@@ -9,7 +10,6 @@ interface Props {
   createdAt: number;
   tag: [string[], SetterOrUpdater<string[]>];
   title: [string, SetterOrUpdater<string>];
-  //   title: ReturnType<typeof useRecoilState<string>>
 }
 
 const EditCommonTimeMetaData: FC<Props> = () => {
@@ -34,28 +34,39 @@ const EditCommonTimeMetaData: FC<Props> = () => {
   };
 
   const handleAddTag = () => {
-    setNewTag("");
-    setTags(prev => [...prev, newTag]);
+    if (newTag !== "") {
+      setNewTag("");
+      setTags(prev => [...prev, newTag]);
+    }
   };
 
   return (
-    <Box>
-      <Text>{createdAt === -1 ? "신규생성" : createdAt}</Text>
-      타이틀
-      <Input value={title} onChange={handleChangeText}></Input>
-      <HStack spacing={4}>
-        {tags.map((tag, idx) => (
-          <Tag size="md" key={tag + idx} borderRadius="full" variant="solid">
-            <TagLabel>{tag}</TagLabel>
-            <TagCloseButton onClick={() => handleTagRemove(idx)} />
-          </Tag>
-        ))}
-        <Input w="200px" value={newTag} onChange={handleChangeNewTag} />
-        <Button onClick={handleAddTag}>
-          <IoMdAdd />
-        </Button>
-      </HStack>
-    </Box>
+    <Flex gap="4" flexDir="column" minW="300px" flexGrow="1">
+      <Badge>{createdAt === -1 ? "新しいデータ" : convertDate(createdAt, "YMDHMS")}</Badge>
+
+      <Box>
+        <Heading size="md">保存名</Heading>
+        <Input value={title} onChange={handleChangeText}></Input>
+      </Box>
+
+      <Box>
+        <Heading size="md">タグ</Heading>
+        <Box>
+          <Input w="200px" value={newTag} onChange={handleChangeNewTag} />
+          <Button onClick={handleAddTag} disabled={newTag === ""}>
+            <IoMdAdd />
+          </Button>
+        </Box>
+        <Flex spacing={4} flexWrap="wrap" py="2">
+          {tags.map((tag, idx) => (
+            <Tag size="md" key={tag + idx} borderRadius="full" variant="solid">
+              <TagLabel>{tag}</TagLabel>
+              <TagCloseButton onClick={() => handleTagRemove(idx)} />
+            </Tag>
+          ))}
+        </Flex>
+      </Box>
+    </Flex>
   );
 };
 
