@@ -8,6 +8,7 @@ import ChoiceAddBox from "./ChoiceAddBox";
 import ChoiceBox from "./ChoiceBox";
 import EditQuizCommonData from "./EditQuizCommonData";
 import EditQuizOptions from "./EditQuizOptions";
+import QuizResetBtn from "./QuizResetBtn";
 import QuizTitle from "./QuizTitle";
 
 const CreateQuiz = () => {
@@ -58,6 +59,7 @@ const CreateQuiz = () => {
         </Flex>
         <Divider my="4" />
         <Flex justifyContent="end">
+          <QuizResetBtn />
           <SaveMetaDataBtn savedMetaData={draftQuiz} />
         </Flex>
       </Box>
