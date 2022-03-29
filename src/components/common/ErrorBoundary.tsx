@@ -1,4 +1,5 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Center, Heading } from "@chakra-ui/react";
+import React, { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -14,17 +15,25 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   public static getDerivedStateFromError(_: Error): State {
-    // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    console.error("Uncaught error:", error, errorInfo);
   }
 
   public render() {
     if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>;
+      return (
+        <Center h="100vh" bgColor="cyan.100" flexDir="column">
+          <Heading size="4xl" color="pink.400">
+            Error
+          </Heading>
+          <Heading size="2xl" color="black.500" py="10">
+            {`please refresh & check consol log`}
+          </Heading>
+        </Center>
+      );
     }
 
     return this.props.children;
