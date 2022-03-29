@@ -22,7 +22,7 @@ const LoginPage: FC = () => {
     console.log(result);
     if (result) {
       setLoginState(true);
-      navigate("/");
+      navigate("/my");
     }
   };
 
