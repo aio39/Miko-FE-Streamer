@@ -1,12 +1,14 @@
 import { Center, VStack } from "@chakra-ui/react";
-import { Information, Message, Quiz, Ranking, WindowType } from "@src/const";
+import { Chart, Information, Message, Quiz, Ranking, Sell, WindowType } from "@src/const";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
+import { ReactComponent as ChartLogo } from "@src/svg/chart.svg";
 import { ReactComponent as InformationLogo } from "@src/svg/information.svg";
 import { ReactComponent as MessageLogo } from "@src/svg/message.svg";
 import { ReactComponent as QuizLogo } from "@src/svg/quiz.svg";
 import { ReactComponent as RankingLogo } from "@src/svg/ranking.svg";
+import { ReactComponent as SellLogo } from "@src/svg/sell.svg";
 import { FC } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 const IconWrapper: FC<{ type: WindowType }> = ({ type, children }) => {
   const [selectedWindow, setSelectedWindow] = useRecoilState(selectedWindowState);
@@ -16,17 +18,15 @@ const IconWrapper: FC<{ type: WindowType }> = ({ type, children }) => {
   };
 
   return (
-    <Center w="full" h="full" onClick={handleChangeWindow}>
+    <Center w="full" h="full" onClick={handleChangeWindow} bgColor={type === selectedWindow ? "blue.100" : "#FFFFFF00"} p="2">
       {children}
     </Center>
   );
 };
 
 const SideBar = () => {
-  const selectedWindow = useRecoilValue(selectedWindowState);
-
   return (
-    <VStack pt="2" px="2">
+    <VStack pt="2">
       <IconWrapper type={Quiz}>
         <QuizLogo />
       </IconWrapper>
@@ -39,8 +39,11 @@ const SideBar = () => {
       <IconWrapper type={Ranking}>
         <RankingLogo />
       </IconWrapper>
-      <IconWrapper type={Ranking}>
-        <RankingLogo />
+      <IconWrapper type={Sell}>
+        <SellLogo />
+      </IconWrapper>
+      <IconWrapper type={Chart}>
+        <ChartLogo />
       </IconWrapper>
     </VStack>
   );

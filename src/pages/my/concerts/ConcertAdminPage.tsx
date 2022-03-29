@@ -1,5 +1,5 @@
 import { Center } from "@chakra-ui/react";
-import { GetChannel, Information, Message, Quiz } from "@src/const";
+import { GetChannel, Information, Message, Quiz, Sell } from "@src/const";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { useTicket } from "@src/state/swr/useTickets";
@@ -13,6 +13,7 @@ import CreateQuiz from "./createQuiz/CreateQuiz";
 import ConcertInformation from "./information/ConcertInformation";
 import ManageKeys from "./manageKeys/ManageKeys";
 import MetadataListView from "./metadataList/MetadataListView";
+import SellHistory from "./sellHistory/SellHistory";
 import SideBar from "./sideBar/SideBar";
 
 const SuspenseHOC = (WrappedComponent: () => JSX.Element) => {
@@ -49,6 +50,8 @@ const ConcertAdminPageNoData = () => {
         return <ConcertInformation />;
       case GetChannel:
         return <ManageKeys />;
+      case Sell:
+        return <SellHistory />;
       default:
         return <h1>No project match</h1>;
     }
@@ -56,7 +59,7 @@ const ConcertAdminPageNoData = () => {
 
   return (
     <AddSocketEventLayer>
-      <SplitPane defaultSize="80%" split="horizontal" style={{ height: "100vh" }}>
+      <SplitPane defaultSize="99%" split="horizontal" style={{ height: "100vh" }}>
         <SplitPane defaultSize="3%" split="vertical">
           <div className="full_wh" style={{ border: "2px", borderBlockColor: "white" }}>
             <SideBar></SideBar>
@@ -64,9 +67,9 @@ const ConcertAdminPageNoData = () => {
             aaaaaaaaaafsdfdssdf
           </VStack> */}
           </div>
-          <SplitPane defaultSize="70%" split="vertical">
+          <SplitPane defaultSize="80%" split="vertical">
             <div className="full_wh">{mainWindow()}</div>
-            <div className="full_wh">
+            <div className="full_wh ">
               <MetadataListView></MetadataListView>
             </div>
           </SplitPane>
