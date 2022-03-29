@@ -1,11 +1,12 @@
 import { Center } from "@chakra-ui/react";
 import { GetChannel, Information, Message, Quiz } from "@src/const";
+import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
-import { useConcert } from "@src/state/swr/useConcert";
-import { Suspense, useCallback } from "react";
+import { useTicket } from "@src/state/swr/useTickets";
+import { Suspense, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SplitPane from "react-split-pane";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import AddSocketEventLayer from "./AddSocketEventLayer";
 import CreateMsg from "./createMessage/CreateMessage";
 import CreateQuiz from "./createQuiz/CreateQuiz";
@@ -26,8 +27,17 @@ const SuspenseHOC = (WrappedComponent: () => JSX.Element) => {
 
 const ConcertAdminPageNoData = () => {
   const [selectedWindow, setSelectedWindow] = useRecoilState(selectedWindowState);
-  const params = useParams();
-  const { data } = useConcert(parseInt(params.concertId as string));
+  const setMetadataList = useSetRecoilState(metadataState);
+  const { ticketId } = useParams();
+  const { data: ticketData } = useTicket(+(ticketId as string));
+
+  useEffect(() => {
+    if (ticketData?.data.timeMetaData) {
+      setMetadataList(ticketData.data.timeMetaData);
+    }
+
+    return () => {};
+  }, [ticketData?.data]);
 
   const mainWindow = useCallback(() => {
     switch (selectedWindow) {

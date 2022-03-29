@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Tag, Text, Tooltip, useClipboard } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Tag, Text, Tooltip, useClipboard, useToast } from "@chakra-ui/react";
 import { NEST_URL } from "@src/const";
 import { axiosI } from "@src/state/swr/fetcher";
 import { useTicket } from "@src/state/swr/useTickets";
@@ -28,14 +28,24 @@ const KeyView: FC<{ keyName: string; tipText: string; keyValue: string }> = ({ k
 };
 
 const ConcertInformation: FC = () => {
-  const { ticketId } = useParams();
-
+  const { ticketId, concertId } = useParams();
+  const toast = useToast();
   const { data: ticketData, mutate } = useTicket(parseInt(ticketId as string));
 
-  if (!ticketData) return <Box>No Data</Box>;
+  if (!ticketData) return <Box>No Ticket Data</Box>;
 
   const getKeyHandler = async () => {
-    const { data } = await axiosI.post<Concert>("/ivs", { name: ticketData?.data.id }, { baseURL: NEST_URL, withCredentials: true });
+    const { data } = await axiosI.post<Concert>("/ivs", { name: concertId + "-" + ticketId, ticketId }, { baseURL: NEST_URL, withCredentials: true });
+    console.log("data", data);
+    if (data) {
+      mutate();
+    } else {
+      toast({
+        title: "ivs データの取得に失敗しました",
+        status: "error",
+        duration: 5000,
+      });
+    }
     mutate();
     console.log("create channel", data);
   };

@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Heading, Input, Select, Stack } from "@chakra-ui/react";
+import { Badge, Box, Flex, Input, Select, Stack } from "@chakra-ui/react";
 import {
   metadataListFilterSearchState,
   metadataListFilterTagState,
@@ -91,7 +91,6 @@ const TagFilter = () => {
 const MetadataListFilter = () => {
   return (
     <Flex flexDir="column">
-      <Heading size="md">メタデータリスト</Heading>
       <Flex>
         <TypeFilter />
         <UsedFilter />

@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Center,
+  Heading,
   HStack,
   Modal,
   ModalBody,
@@ -30,6 +31,7 @@ import { FiDelete, FiEdit, FiSend } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import MetadataListFilter from "./MetadataListFilter";
+import MetadataListSync from "./MetadataListSync";
 import QuizChart from "./QuizChart";
 
 const MetadataMsgPreview: FC<{ data: MessageMainMetadata }> = ({ data }) => {
@@ -159,6 +161,8 @@ const MetadataListContainer = () => {
   const [metadata, setMetaData] = useRecoilState(metadataState);
   const metadataFilter = useRecoilValue(metadataListFilterState);
 
+  console.log("metadata", metadata);
+
   const metadataDrawSwitch = (data: MetaData, idx: number) => {
     switch (data.data.dataType) {
       case "m":
@@ -240,6 +244,8 @@ const MetadataListContainer = () => {
 const MetadataListView = () => {
   return (
     <VStack overflowY="scroll" h="full" w="full">
+      <Heading size="md">メタデータリスト</Heading>
+      <MetadataListSync />
       <MetadataListFilter />
       <MetadataListContainer></MetadataListContainer>
     </VStack>
