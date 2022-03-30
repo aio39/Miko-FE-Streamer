@@ -1,5 +1,5 @@
 import { Center } from "@chakra-ui/react";
-import { Chart, GetChannel, Information, Message, Quiz, Sell } from "@src/const";
+import { Chart, GetChannel, Information, Message, Quiz, Ranking, Sell } from "@src/const";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { useTicket } from "@src/state/swr/useTickets";
@@ -14,6 +14,7 @@ import CreateQuiz from "./createQuiz/CreateQuiz";
 import ConcertInformation from "./information/ConcertInformation";
 import ManageKeys from "./manageKeys/ManageKeys";
 import MetadataListView from "./metadataList/MetadataListView";
+import RankingPage from "./ranking/RankingPage";
 import SellHistory from "./sellHistory/SellHistory";
 import SideBar from "./sideBar/SideBar";
 
@@ -55,6 +56,8 @@ const ConcertAdminPageNoData = () => {
         return <SellHistory />;
       case Chart:
         return <ChartPage />;
+      case Ranking:
+        return <RankingPage />;
       default:
         return <h1>No project match</h1>;
     }
