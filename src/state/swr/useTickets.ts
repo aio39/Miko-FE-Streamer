@@ -20,7 +20,7 @@ const useTickets = (query?: CommonFSW) => {
 };
 
 const useTicket = (ticketId: number) => {
-  const url = `${URL_TICKETS}/${ticketId}`;
+  const url = `${URL_TICKETS}/${ticketId}?${createFSWQueryString({ with: ["concert"] })}`;
 
   const swrResponses = useSWR<CommonDataResponse<Ticket>>(url, fetcher, {
     use: [laggy],
