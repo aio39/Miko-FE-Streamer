@@ -7,14 +7,14 @@ import dayjs, { ManipulateType } from "dayjs";
 import { FC, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const ScoreAddedChart: FC = () => {
+const SuperChatChart: FC = () => {
   const startRef = useRef(dayjs().subtract(1, "h"));
   const endRef = useRef(dayjs().add(1, "h"));
   const { ticketId } = useParams();
   const [start, setStart] = useState(convertDateUTC(startRef.current, "ISO8601NoZ"));
   const [end, setEnd] = useState(convertDateUTC(endRef.current, "ISO8601NoZ"));
   console.log(start, end);
-  const { data } = useData<ConcertAddedScorePerTime>("/data/caspt", { start, end, filter: [["ticket_id", ticketId as string]] });
+  const { data } = useData<ConcertAddedScorePerTime>("/data/ctascpt", { start, end, filter: [["ticket_id", ticketId as string]] });
 
   if (!data) return <Box>Error</Box>;
 
@@ -30,7 +30,7 @@ const ScoreAddedChart: FC = () => {
 
   return (
     <Box width="full" h="40vh">
-      <Heading>スコア増加値</Heading>
+      <Heading>スーパーチャット</Heading>
       <Text>
         {convertDate(startRef.current, "YMDHM")} ~ {convertDate(endRef.current, "YMDHM")}{" "}
       </Text>
@@ -133,4 +133,4 @@ const ScoreAddedChart: FC = () => {
   );
 };
 
-export default ScoreAddedChart;
+export default SuperChatChart;
