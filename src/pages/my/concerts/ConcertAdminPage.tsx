@@ -1,5 +1,5 @@
 import { Center } from "@chakra-ui/react";
-import { GetChannel, Information, Message, Quiz, Sell } from "@src/const";
+import { Chart, GetChannel, Information, Message, Quiz, Sell } from "@src/const";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { useTicket } from "@src/state/swr/useTickets";
@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import SplitPane from "react-split-pane";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import AddSocketEventLayer from "./AddSocketEventLayer";
+import ChartPage from "./chart/ChartPage";
 import CreateMsg from "./createMessage/CreateMessage";
 import CreateQuiz from "./createQuiz/CreateQuiz";
 import ConcertInformation from "./information/ConcertInformation";
@@ -52,6 +53,8 @@ const ConcertAdminPageNoData = () => {
         return <ManageKeys />;
       case Sell:
         return <SellHistory />;
+      case Chart:
+        return <ChartPage />;
       default:
         return <h1>No project match</h1>;
     }

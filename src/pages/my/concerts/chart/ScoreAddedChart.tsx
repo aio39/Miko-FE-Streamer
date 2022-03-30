@@ -1,19 +1,31 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { ResponsiveLine } from "@nivo/line";
+import convertDate, { convertDateUTC } from "@src/helper/convertDate";
 import { useData } from "@src/state/swr/useData";
 import { ConcertAddedScorePerTime } from "@src/types/entity/ConcertAddedScorePerTime";
-import { FC } from "react";
+import dayjs from "dayjs";
+import { FC, useRef, useState } from "react";
 
 const ScoreAddedChart: FC = () => {
-  const { data } = useData<ConcertAddedScorePerTime>("/data/caspt", { start: "2022-03-21T14:18:00", end: "2022-03-21T16:18:00" });
+  const startRef = useRef(dayjs().subtract(1, "h"));
+  const endRef = useRef(dayjs().add(1, "h"));
+
+  const [start, setStart] = useState(convertDateUTC(startRef.current, "ISO8601NoZ"));
+  const [end, setend] = useState(convertDateUTC(endRef.current, "ISO8601NoZ"));
+  console.log(start, end);
+  const { data } = useData<ConcertAddedScorePerTime>("/data/caspt", { start, end });
 
   if (!data) return <Box>Error</Box>;
 
   if (data.data.length === 0) return <Box>No Data</Box>;
 
+  console.log();
+
   return (
     <Box width="full" h="40vh">
-      차트
+      <Text>
+        {convertDate(startRef.current, "YMDHM")} ~ {convertDate(endRef.current, "YMDHM")}{" "}
+      </Text>
       <ResponsiveLine
         // 반드시 포맷을 지켜야함.
         data={[{ data: data.data, id: "score" }]}
@@ -28,7 +40,7 @@ const ScoreAddedChart: FC = () => {
         yScale={{
           type: "linear",
           stacked: false, // ?
-          min: 0,
+          min: "auto",
           max: "auto",
         }}
         // yFormat=" >-.2f"
@@ -112,32 +124,3 @@ const ScoreAddedChart: FC = () => {
 };
 
 export default ScoreAddedChart;
-
-const data = [
-  {
-    id: "fake corp. A",
-    data: [
-      { x: "2018-01-01", y: 7 },
-      { x: "2018-01-02", y: 5 },
-      { x: "2018-01-03", y: 11 },
-      { x: "2018-01-04", y: 9 },
-      { x: "2018-01-05", y: 12 },
-      { x: "2018-01-06", y: 16 },
-      { x: "2018-01-07", y: 13 },
-      { x: "2018-01-08", y: 13 },
-    ],
-  },
-  {
-    id: "fake corp. B",
-    data: [
-      { x: "2018-01-04", y: 14 },
-      { x: "2018-01-05", y: 14 },
-      { x: "2018-01-06", y: 15 },
-      { x: "2018-01-07", y: 11 },
-      { x: "2018-01-08", y: 10 },
-      { x: "2018-01-09", y: 12 },
-      { x: "2018-01-10", y: 9 },
-      { x: "2018-01-11", y: 7 },
-    ],
-  },
-];

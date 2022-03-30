@@ -7,7 +7,6 @@ import { Concert } from "@src/types/share/Concert";
 import { FC } from "react";
 import { BiCopyAlt } from "react-icons/bi";
 import { useParams } from "react-router-dom";
-import ScoreAddedChart from "../chart/ScoreAddedChart";
 
 const GridViewItem: FC<{ name: string; value: string | number }> = ({ value, name }) => {
   return (
@@ -125,7 +124,6 @@ const ConcertInformation: FC = () => {
         </Flex>
       )}
       {!channelArn && <Button onClick={getKeyHandler}>Get Key</Button>}
-      <ScoreAddedChart />
     </Center>
   );
 };
