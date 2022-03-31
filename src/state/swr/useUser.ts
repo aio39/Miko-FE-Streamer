@@ -1,6 +1,7 @@
+import { CommonDataResponse } from "@src/types/share/common/common";
 import { LoginData, User } from "@src/types/share/User";
 import { useEffect } from "react";
-import { mutate } from "swr";
+import useSWR, { mutate } from "swr";
 import useSWRImmutable from "swr/immutable";
 import { axiosI, fetcher } from "./fetcher";
 import laggy from "./middleware/laggy";
@@ -8,9 +9,10 @@ import laggy from "./middleware/laggy";
 const URL_USER = "/users";
 const URL_LOGIN = "/login";
 const URL_LOGOUT = "/logout";
+const URL_GET_COIN = URL_USER + "/coin";
 const URL_OAUTH_LOGIN = "/login/google";
 
-const useUser = () => {
+export const useUser = () => {
   const aFetcher = (url: string) => {
     if (typeof window === "undefined") return Promise.resolve(undefined);
 
@@ -44,7 +46,7 @@ const useUser = () => {
   // return { data, error, mutate, isValidating, isNotLogged };
 };
 
-const useLogin = async (loginData: LoginData) => {
+export const useLogin = async (loginData: LoginData) => {
   try {
     const { data } = await axiosI.post<User>(`${URL_LOGIN}`, loginData);
     mutate(URL_USER, data, false);
@@ -54,7 +56,7 @@ const useLogin = async (loginData: LoginData) => {
   }
 };
 
-const useLogOut = async () => {
+export const useLogOut = async () => {
   try {
     const { data, status } = await axiosI.get(`${URL_LOGOUT}`);
     return undefined;
@@ -62,4 +64,13 @@ const useLogOut = async () => {
     return undefined;
   }
 };
-export { useLogin, useUser, useLogOut };
+
+export const useMyCoin = () => {
+  const result = useSWR<CommonDataResponse<number>>(URL_GET_COIN, fetcher, {
+    errorRetryCount: 2,
+    use: [laggy],
+    suspense: true,
+    refreshInterval: 5000,
+  });
+  return result;
+};

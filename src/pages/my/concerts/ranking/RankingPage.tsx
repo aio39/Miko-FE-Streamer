@@ -1,6 +1,6 @@
 import { Box, BoxProps, Button, Center, Flex, Heading, HStack, Text, useToast } from "@chakra-ui/react";
 import useSocket from "@src/state/hooks/useSocket";
-import { AnimateSharedLayout, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -83,25 +83,39 @@ const RankingPage: FC = () => {
           </Button>
         </HStack>
       </HStack>
-
-      <AnimateSharedLayout>
-        <Flex flexDirection="column" h="680px" flexWrap="wrap" overflowX="scroll" alignContent="start" justifyContent="start">
-          {ranks.map(({ score, value }, idx) => {
-            return (
-              <MotionBox key={value + score} transition={{ duration: 0.3 }} animate={{ y: [10, 0] }} layoutId={value} w="200px" h="50px" m="2" px="2" py="2">
-                <Text w="full" py="4" isTruncated borderBottom="2px" borderColor="blackAlpha.300">
-                  {idx + 1 + start}: {value}- {score}
-                </Text>
-              </MotionBox>
-            );
-          })}
-          {ranks.length === 0 && (
-            <Center h="full" w="full">
-              <Heading>No Data</Heading>
-            </Center>
-          )}
-        </Flex>
-      </AnimateSharedLayout>
+      <Flex width="full">
+        <LayoutGroup>
+          <AnimatePresence>
+            <MotionBox
+              key={start}
+              display="flex"
+              flexDirection="column"
+              width="full"
+              h="680px"
+              flexWrap="wrap"
+              overflowX="scroll"
+              overflowY="hidden"
+              alignContent="start"
+              justifyContent="start"
+            >
+              {ranks.map(({ score, value }, idx) => {
+                return (
+                  <MotionBox key={value + score} transition={{ duration: 0.3 }} animate={{ y: [10, 0] }} layoutId={value} w="200px" h="50px" m="2" px="2" py="2">
+                    <Text w="full" py="4" isTruncated borderBottom="2px" borderColor="blackAlpha.300">
+                      {idx + 1 + start}: {value}- {score}
+                    </Text>
+                  </MotionBox>
+                );
+              })}
+              {ranks.length === 0 && (
+                <Center h="full" w="full">
+                  <Heading>No Data</Heading>
+                </Center>
+              )}
+            </MotionBox>
+          </AnimatePresence>
+        </LayoutGroup>
+      </Flex>
     </Box>
   );
 };

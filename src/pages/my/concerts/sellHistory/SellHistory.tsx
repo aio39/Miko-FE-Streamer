@@ -3,6 +3,7 @@ import { chType } from "@src/const";
 import convertDate from "@src/helper/convertDate";
 import { useCoinHistories } from "@src/state/swr/useCoinHistory";
 import { useTicket } from "@src/state/swr/useTickets";
+import { useMyCoin } from "@src/state/swr/useUser";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 
@@ -10,7 +11,7 @@ const SellHistory: FC = () => {
   const { ticketId, concertId } = useParams();
   const toast = useToast();
   const { data: ticketData, mutate } = useTicket(parseInt(ticketId as string));
-
+  const { data: coinData } = useMyCoin();
   const { data } = useCoinHistories({
     filter: [
       ["ticket_id", ticketId as string],
@@ -21,7 +22,7 @@ const SellHistory: FC = () => {
   return (
     <Box px="6" pt="10">
       <Heading size="md">販売履歴</Heading>
-
+      <Heading> coin : {coinData?.data || "NO COIN"}</Heading>
       <TableContainer>
         <Table variant="simple">
           <TableCaption>Imperial to metric conversion factors</TableCaption>
