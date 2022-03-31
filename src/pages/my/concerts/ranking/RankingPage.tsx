@@ -1,8 +1,6 @@
-import { Box, BoxProps, Button, Heading, useToast } from "@chakra-ui/react";
+import { Box, BoxProps, Button, Center, Flex, Heading, HStack, Text, useToast } from "@chakra-ui/react";
 import useSocket from "@src/state/hooks/useSocket";
-import { useCoinHistories } from "@src/state/swr/useCoinHistory";
-import { useTicket } from "@src/state/swr/useTickets";
-import { motion } from "framer-motion";
+import { AnimateSharedLayout, motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -29,66 +27,81 @@ function shuffle(array: any[]) {
 }
 
 const MotionBox = motion<Omit<BoxProps, "transition">>(Box);
-const PER_PAGE = 50;
+const MotionText = motion<Omit<BoxProps, "transition">>(Text);
+const PER_PAGE = 30;
 
 const RankingPage: FC = () => {
   const { ticketId, concertId } = useParams();
   const socket = useSocket();
   const toast = useToast();
-  const { data: ticketData, mutate } = useTicket(parseInt(ticketId as string));
   const [ranks, setRanks] = useState<Rank[]>([]);
   const [start, setStart] = useState(0);
-
-  const { data } = useCoinHistories({
-    filter: [
-      ["ticket_id", ticketId as string],
-      ["type", 5],
-    ],
-  });
 
   useEffect(() => {
     const getRank = (newRanks: Rank[]) => {
       setRanks(newRanks);
     };
     socket.on("be-all-rank", getRank);
-    return () => {};
+    return () => {
+      socket.off("be-all-rank", getRank);
+    };
   }, [socket]);
 
   useEffect(() => {
     const requestNewRanks = () => {
-      socket.emit("fe-all-rank", ticketId, start, start + PER_PAGE);
+      socket.emit("fe-all-rank", ticketId, start, start + PER_PAGE - 1);
     };
 
+    requestNewRanks(); // interval은 ms 후에 첫 실행됨.
     const intervalId = setInterval(requestNewRanks, 1000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [socket]);
+  }, [socket, start]);
 
   return (
-    <Box px="6" pt="10">
+    <Box px="6" pt="10" h="full" overflowY="scroll">
       <Heading size="md">ランキング</Heading>
-      <Button disabled={start === 0} onClick={() => setStart(prev => prev + PER_PAGE)}>
-        Before 50{" "}
-      </Button>
-      <Button disabled={ranks.length < PER_PAGE} onClick={() => setStart(prev => prev + PER_PAGE)}>
-        Next 50
-      </Button>
-      <Button
-        onClick={() => {
-          setRanks(prev => shuffle(prev));
-        }}
-      >
-        test - shuffle
-      </Button>
-      {ranks.map(({ score, value }, idx) => {
-        return (
-          <MotionBox key={value + score} layoutId={value} borderBottom="2px" borderColor="blackAlpha.300" w="300px" m="2" px="2" py="2">
-            {idx + 1 + start}: {value}- {score}
-          </MotionBox>
-        );
-      })}
+      <HStack gap="6">
+        <Heading flexGrow="1">
+          {start + 1} ~ {start + PER_PAGE}{" "}
+        </Heading>
+        <HStack gap="2">
+          <Button disabled={start === 0} onClick={() => setStart(prev => prev - PER_PAGE)}>
+            Before {PER_PAGE}
+          </Button>
+          <Button disabled={ranks.length < PER_PAGE} onClick={() => setStart(prev => prev + PER_PAGE)}>
+            Next {PER_PAGE}
+          </Button>
+          <Button
+            onClick={() => {
+              setRanks(prev => shuffle(prev));
+            }}
+          >
+            test - shuffle
+          </Button>
+        </HStack>
+      </HStack>
+
+      <AnimateSharedLayout>
+        <Flex flexDirection="column" h="680px" flexWrap="wrap" overflowX="scroll" alignContent="start" justifyContent="start">
+          {ranks.map(({ score, value }, idx) => {
+            return (
+              <MotionBox key={value + score} transition={{ duration: 0.3 }} animate={{ y: [10, 0] }} layoutId={value} w="200px" h="50px" m="2" px="2" py="2">
+                <Text w="full" py="4" isTruncated borderBottom="2px" borderColor="blackAlpha.300">
+                  {idx + 1 + start}: {value}- {score}
+                </Text>
+              </MotionBox>
+            );
+          })}
+          {ranks.length === 0 && (
+            <Center h="full" w="full">
+              <Heading>No Data</Heading>
+            </Center>
+          )}
+        </Flex>
+      </AnimateSharedLayout>
     </Box>
   );
 };
