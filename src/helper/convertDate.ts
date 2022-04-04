@@ -9,9 +9,10 @@ const FORMAT = {
   YMDHM: "YYYY/MM/DD A hh:mm",
   YMDHMS: "YYYY/MM/DD A hh:mm:ss",
   HMS: "A hh:mm:ss",
+  HM: "A hh:mm",
   ISO8601NoZ: "YYYY-MM-DDTHH:mm:ss",
+  // NOTE HH를 hh로 써서 차트 데이터가 이상했음.
 };
-// NOTE HH를 hh로 써서 차트 데이터가 이상했음.
 
 const convertDate = (data: dayjs.ConfigType, format: keyof typeof FORMAT = "YMD") => {
   return dayjs(data).format(FORMAT[format]);

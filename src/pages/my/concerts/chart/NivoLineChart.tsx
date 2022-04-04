@@ -1,23 +1,16 @@
-import { Box, Button, Center, Heading, Spinner, Text } from "@chakra-ui/react";
+import { Box, Center, Heading, HStack } from "@chakra-ui/react";
 import { ResponsiveLineCanvas } from "@nivo/line";
-import convertDate, { convertDateUTC, roundDayJsBy30 } from "@src/helper/convertDate";
+import { BiData } from "@react-icons/all-files/bi/BiData";
+import { convertDateUTC } from "@src/helper/convertDate";
 import { useData } from "@src/state/swr/useData";
 import { ConcertAddedScorePerTime } from "@src/types/entity/ConcertAddedScorePerTime";
-import dayjs, { ManipulateType } from "dayjs";
-import { FC, Suspense, useMemo, useRef, useState } from "react";
+import dayjs from "dayjs";
+import { FC, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const LEFT_MARGIN = 60;
 
-const Loading = () => {
-  return (
-    <Center w="full" h="full">
-      <Spinner size="lg" />
-    </Center>
-  );
-};
-
-const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, type }) => {
+const NivoLineChart: FC<{ start: string; end: string; type: string; colors?: string | string[] }> = ({ end, start, type, colors }) => {
   const [left, setLeft] = useState(100);
   const { ticketId } = useParams();
   const { data } = useData<ConcertAddedScorePerTime>(`/data/${type}`, { start, end, filter: [["ticket_id", ticketId as string]] });
@@ -84,7 +77,12 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
   return (
     <>
       {data.data.length === 0 ? (
-        <Box>No Data</Box>
+        <Center w="full" h="full">
+          <HStack fontSize="4xl">
+            <BiData fontSize="60px" color="#39c5bb" />
+            <Heading>No Data</Heading>
+          </HStack>
+        </Center>
       ) : (
         <Box position="relative" w="full" h="full">
           {/* <Box position="absolute" left={left + "px"} w="1px" h="full" bgColor="black" pointerEvents="none"></Box> */}
@@ -155,7 +153,7 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
             // -- Color --
             // colors={{ scheme: "set1" }}
             // colors={{ datum: "color" }}
-            colors={["hsl(54,78%,72%)"]}
+            colors={colors || ["hsl(54,78%,72%)"]}
             // -- Line --
             lineWidth={2}
             // -- Area --
@@ -208,35 +206,4 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
   );
 };
 
-const ScoreAddedChart: FC = () => {
-  const startRef = useRef(roundDayJsBy30(dayjs()).subtract(30, "m"));
-  const endRef = useRef(roundDayJsBy30(dayjs()).add(30, "m"));
-
-  const [start, setStart] = useState(convertDateUTC(startRef.current, "ISO8601NoZ"));
-  const [end, setEnd] = useState(convertDateUTC(endRef.current, "ISO8601NoZ"));
-
-  const handleSetTime = (value: number, unit: ManipulateType) => {
-    // NOTE dayjs immutable하다
-    startRef.current = startRef.current.add(value, unit);
-    endRef.current = endRef.current.add(value, unit);
-    setStart(convertDateUTC(startRef.current, "ISO8601NoZ"));
-    setEnd(convertDateUTC(endRef.current, "ISO8601NoZ"));
-  };
-
-  return (
-    <Box width="full" h="50vh" mb="150px">
-      <Heading>スコア増加値</Heading>
-      {/* <Button onClick={handleDraw}>draw</Button> */}
-      <Text>
-        {convertDate(startRef.current, "YMDHM")} ~ {convertDate(endRef.current, "YMDHM")}{" "}
-      </Text>
-      <Button onClick={() => handleSetTime(-30, "m")}> -30m </Button>
-      <Button onClick={() => handleSetTime(30, "m")}> +30m </Button>
-      <Suspense fallback={<Loading />}>
-        <Chart start={start} end={end} type="caspt" />
-      </Suspense>
-    </Box>
-  );
-};
-
-export default ScoreAddedChart;
+export default NivoLineChart;
