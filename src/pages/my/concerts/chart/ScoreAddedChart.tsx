@@ -1,6 +1,6 @@
 import { Box, Button, Center, Heading, Spinner, Text } from "@chakra-ui/react";
 import { ResponsiveLineCanvas } from "@nivo/line";
-import convertDate, { convertDateUTC } from "@src/helper/convertDate";
+import convertDate, { convertDateUTC, roundDayJsBy30 } from "@src/helper/convertDate";
 import { useData } from "@src/state/swr/useData";
 import { ConcertAddedScorePerTime } from "@src/types/entity/ConcertAddedScorePerTime";
 import dayjs, { ManipulateType } from "dayjs";
@@ -87,14 +87,23 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
         <Box>No Data</Box>
       ) : (
         <Box position="relative" w="full" h="full">
-          <Box position="absolute" left={left + "px"} w="1px" h="full" bgColor="black"></Box>
-
+          {/* <Box position="absolute" left={left + "px"} w="1px" h="full" bgColor="black" pointerEvents="none"></Box> */}
           <ResponsiveLineCanvas
+            // -- SVG --
+            // animate={false}
+            // motionConfig="wobbly"
+            // enableSlices="x"
+            enableSlices="x"
+            isInteractive
+            //
             onClick={(point, e) => {
-              // console.log("onClick", point, e);
               setLeft(point.x + LEFT_MARGIN);
             }}
-            data={[{ data: newData, id: "score" }]}
+            // onMouseMove={(point, e) => {
+            //   setLeft(point.x + LEFT_MARGIN);
+            // }}
+            data={[{ data: newData, id: `score-${start}=${end}` }]}
+            //  -- X axis --
             xScale={{
               type: "time",
               //   format: "%Y-%m-%d",
@@ -103,6 +112,7 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
               precision: "minute",
             }}
             xFormat="time:%Y-%m-%dT%H:%M:%S"
+            //  -- Y axis --
             yScale={{
               type: "linear",
               stacked: false, // ?
@@ -110,12 +120,10 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
               max: "auto",
             }}
             // yFormat=" >-.2f"
-            curve="step"
-            enableArea={false}
+            curve="linear" // or Step
             margin={{ top: 5, right: 50, bottom: 50, left: LEFT_MARGIN }}
             axisTop={null}
             axisRight={{
-              tickValues: [0, 500, 1000, 1500, 2000, 2500],
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
@@ -136,7 +144,6 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
               //   legendPosition: "middle",
             }}
             axisLeft={{
-              tickValues: [0, 500, 1000, 1500, 2000, 2500],
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
@@ -145,19 +152,29 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
               legendOffset: -40,
               legendPosition: "middle",
             }}
-            enableGridX={true}
-            enableGridY={true}
-            colors={{ scheme: "set1" }}
-            lineWidth={1}
-            pointSize={4}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={1}
-            pointBorderColor={{ from: "colserieColor" }}
-            // pointLabelYOffset={-12}
+            // -- Color --
+            // colors={{ scheme: "set1" }}
+            // colors={{ datum: "color" }}
+            colors={["hsl(54,78%,72%)"]}
+            // -- Line --
+            lineWidth={2}
+            // -- Area --
+            enableArea={true}
+            areaOpacity={0.3}
+            // -- Point --
+            pointSize={6}
+            // pointColor={{ from: "color" }}
+            pointColor={"white"}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: "serieColor" }}
             // useMesh={true}
-            gridXValues={[0, 20, 40, 60, 80, 100, 120]}
-            gridYValues={[0, 500, 1000, 1500, 2000, 2500]}
-            // 레전드
+            //  -- Grid --
+            enableGridX={false}
+            enableGridY={true}
+            // gridXValues={[0, 20, 40, 60, 80, 100, 120]}
+            // gridYValues={[0, 500, 1000, 1500, 2000, 2500]}
+
+            // -- 레전드 --
             legends={[
               {
                 anchor: "bottom-right",
@@ -192,8 +209,8 @@ const Chart: FC<{ start: string; end: string; type: string }> = ({ end, start, t
 };
 
 const ScoreAddedChart: FC = () => {
-  const startRef = useRef(dayjs().subtract(1, "h"));
-  const endRef = useRef(dayjs().add(1, "h"));
+  const startRef = useRef(roundDayJsBy30(dayjs()).subtract(30, "m"));
+  const endRef = useRef(roundDayJsBy30(dayjs()).add(30, "m"));
 
   const [start, setStart] = useState(convertDateUTC(startRef.current, "ISO8601NoZ"));
   const [end, setEnd] = useState(convertDateUTC(endRef.current, "ISO8601NoZ"));
@@ -213,8 +230,8 @@ const ScoreAddedChart: FC = () => {
       <Text>
         {convertDate(startRef.current, "YMDHM")} ~ {convertDate(endRef.current, "YMDHM")}{" "}
       </Text>
-      <Button onClick={() => handleSetTime(-1, "h")}> -1H </Button>
-      <Button onClick={() => handleSetTime(1, "h")}> +1H </Button>
+      <Button onClick={() => handleSetTime(-30, "m")}> -30m </Button>
+      <Button onClick={() => handleSetTime(30, "m")}> +30m </Button>
       <Suspense fallback={<Loading />}>
         <Chart start={start} end={end} type="caspt" />
       </Suspense>

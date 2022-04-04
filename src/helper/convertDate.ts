@@ -22,3 +22,12 @@ export const convertDateUTC = (data: dayjs.ConfigType, format: keyof typeof FORM
 };
 
 export default convertDate;
+
+export const roundDayJsBy30 = (aDay: dayjs.Dayjs) => {
+  const m = aDay.get("m");
+  if (m >= 30) {
+    return aDay.set("m", 30).set("s", 0);
+  } else {
+    return aDay.set("m", 0).set("s", 0);
+  }
+};
