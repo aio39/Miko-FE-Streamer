@@ -1,7 +1,7 @@
 export interface ConcertAddedScorePerTime {
   id: number;
-  createdAt: string;
-  addedScore: number;
+  x: string;
+  y: number;
   concertId: number;
   ticketId: number;
 }
