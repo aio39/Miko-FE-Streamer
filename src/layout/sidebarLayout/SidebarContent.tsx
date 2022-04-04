@@ -1,10 +1,14 @@
 import { BoxProps, Flex, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { AiOutlineShopping } from "@react-icons/all-files/ai/AiOutlineShopping";
+import { FiCompass } from "@react-icons/all-files/fi/FiCompass";
+import { FiHome } from "@react-icons/all-files/fi/FiHome";
+import { FiSettings } from "@react-icons/all-files/fi/FiSettings";
+import { FiStar } from "@react-icons/all-files/fi/FiStar";
+import { FiTrendingUp } from "@react-icons/all-files/fi/FiTrendingUp";
+import { IoTicketSharp } from "@react-icons/all-files/io5/IoTicketSharp";
+import { IconType } from "@react-icons/all-files/lib";
 import { selectedConcertIdState } from "@src/state/recoil/myPageRecoil/myPageState";
 import { useMemo } from "react";
-import { IconType } from "react-icons";
-import { AiOutlineShopping } from "react-icons/ai";
-import { FiCompass, FiHome, FiSettings, FiStar, FiTrendingUp } from "react-icons/fi";
-import { IoTicketSharp } from "react-icons/io5";
 import { useLocation, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import SidebarNavItem from "./SidebarNavItem";

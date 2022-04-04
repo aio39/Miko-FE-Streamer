@@ -1,9 +1,8 @@
 import { Avatar, Box, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { FiChevronDown } from "@react-icons/all-files/fi/FiChevronDown";
 import { useUser } from "@src/state/swr/useUser";
 import React from "react";
-import { FiChevronDown } from "react-icons/fi";
 import { LogoutMenuItem } from "./LogoutMenuItem";
-
 const LoginUserInfo = () => {
   const { data } = useUser();
 

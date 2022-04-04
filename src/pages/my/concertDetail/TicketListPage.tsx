@@ -1,11 +1,11 @@
 import { Box, Circle, Flex, Heading, HStack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { AiOutlineFieldTime } from "@react-icons/all-files/ai/AiOutlineFieldTime";
+import { FaExpandArrowsAlt } from "@react-icons/all-files/fa/FaExpandArrowsAlt";
 import AsLink from "@src/components/common/wrapChakra/AsLink";
 import convertDate from "@src/helper/convertDate";
 import { useTickets } from "@src/state/swr/useTickets";
 import { Ticket } from "@src/types/share/Ticket";
 import { FC } from "react";
-import { AiOutlineFieldTime } from "react-icons/ai";
-import { FaExpandArrowsAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 const TicketBox: FC<{ data: Ticket }> = ({ data }) => {

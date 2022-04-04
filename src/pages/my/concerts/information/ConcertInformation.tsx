@@ -1,11 +1,11 @@
 import { Box, Button, Center, Divider, Flex, Heading, Tag, Text, Tooltip, useClipboard, useToast, VStack } from "@chakra-ui/react";
+import { BiCopyAlt } from "@react-icons/all-files/bi/BiCopyAlt";
 import { categoryArray, NEST_URL } from "@src/const";
 import convertDate from "@src/helper/convertDate";
 import { axiosI } from "@src/state/swr/fetcher";
 import { useTicket } from "@src/state/swr/useTickets";
 import { Concert } from "@src/types/share/Concert";
 import { FC } from "react";
-import { BiCopyAlt } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 
 const GridViewItem: FC<{ name: string; value: string | number }> = ({ value, name }) => {

@@ -16,6 +16,10 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { FcDoughnutChart } from "@react-icons/all-files/fc/FcDoughnutChart";
+import { FiDelete } from "@react-icons/all-files/fi/FiDelete";
+import { FiEdit } from "@react-icons/all-files/fi/FiEdit";
+import { FiSend } from "@react-icons/all-files/fi/FiSend";
 import { Message, Quiz } from "@src/const";
 import { pushMetaData } from "@src/helper/pushMetaData";
 import { draftMsgState } from "@src/state/recoil/draftMessageState";
@@ -26,8 +30,6 @@ import { useTicket } from "@src/state/swr/useTickets";
 import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/TimeMetadataFormat";
 import produce from "immer";
 import { FC, useCallback, useMemo } from "react";
-import { FcDoughnutChart } from "react-icons/fc";
-import { FiDelete, FiEdit, FiSend } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import MetadataListFilter from "./MetadataListFilter";

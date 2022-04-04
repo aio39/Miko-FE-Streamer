@@ -1,11 +1,10 @@
 import { Box, Flex, FlexProps, IconButton, Text, useColorModeValue, useDisclosure, VStack } from "@chakra-ui/react";
+import { FiMenu } from "@react-icons/all-files/fi/FiMenu";
 import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import React from "react";
-import { FiMenu } from "react-icons/fi";
 import { Outlet } from "react-router-dom";
 import SidebarContent from "./SidebarContent";
 import TopNav from "./topNav/TopNav";
-
 export default function SidebarWithHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
