@@ -100,10 +100,31 @@ const RankingPage: FC = () => {
             >
               {ranks.map(({ score, value }, idx) => {
                 return (
-                  <MotionBox key={value + score} transition={{ duration: 0.3 }} animate={{ y: [10, 0] }} layoutId={value} w="200px" h="50px" m="2" px="2" py="2">
-                    <Text w="full" py="4" isTruncated borderBottom="2px" borderColor="blackAlpha.300">
-                      {idx + 1 + start}: {value}- {score}
-                    </Text>
+                  <MotionBox
+                    key={value + score}
+                    transition={{ duration: 0.3 }}
+                    animate={{ y: [10, 0] }}
+                    layoutId={value}
+                    w="250px"
+                    h="50px"
+                    m="2"
+                    px="4"
+                    py="2"
+                    display="flex"
+                    border="1px"
+                    borderRadius="3xl"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    shadow="base"
+                  >
+                    <Box w="80px">
+                      <Heading display="inline-block">{idx + 1 + start} </Heading>
+                    </Box>
+                    <Box>
+                      <Heading w="full" fontSize="md" isTruncated>
+                        {value} / {score}
+                      </Heading>
+                    </Box>
                   </MotionBox>
                 );
               })}
