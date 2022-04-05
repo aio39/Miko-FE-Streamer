@@ -56,7 +56,7 @@ const TicketBox: FC<{ data: Ticket }> = ({ data }) => {
 const TicketCardList: FC = () => {
   let { concertId } = useParams();
 
-  const { data } = useTickets({ per_page: 40, filter: [["concert_id", concertId as string]] });
+  const { data } = useTickets({ per_page: 40, filter: [["concert_id", concertId as string]], sort: ["id"] });
 
   if (!data) return <Box>no data</Box>;
 

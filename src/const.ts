@@ -11,6 +11,16 @@ export type WindowType = typeof Message | typeof Quiz | typeof Information | typ
 //
 export const categoryArray = ["J-POP", "K-POP", "アニメ", "ジャズ", "バンド", "バラード"];
 export const chType = ["チャージ", "チケット購入", "SC送り", "アイテム使用", "グッズ購入", "チケット販売", "グッズ販売", "SC受け", "アイテム受け"];
+export const chChargeIdx = 0;
+export const chTicketBuyIdx = 1;
+export const chSuperChatSendIdx = 2;
+export const chDoneItemSendIdx = 3;
+export const chGoodsBuyIdx = 4;
+export const chTicketSoldIdx = 5;
+export const chGoodsSoldIdx = 6;
+export const chSuperChatSendedIdx = 7;
+export const chSuperDoneItemSendedIdx = 8;
+
 export const S3_URL = "https://miko-image.s3.ap-northeast-2.amazonaws.com/";
 
 //ENV
