@@ -1,4 +1,4 @@
-import { MessageMainMetadata, MessageMetadata } from "@src/types/TimeMetadataFormat";
+import { MessageMainMetadata, MessageMetadata } from "@src/types/share/TimeMetadataFormat";
 import { atom, DefaultValue, selector } from "recoil";
 
 const draftMsgBoxDataState = atom<MessageMainMetadata["boxData"]>({

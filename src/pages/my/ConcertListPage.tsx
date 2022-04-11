@@ -1,10 +1,10 @@
-import { Box, chakra, Flex, Icon, Image, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Box, chakra, Flex, Heading, Icon, Image, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import { MdMusicNote } from "@react-icons/all-files/md/MdMusicNote";
 import { MdSchedule } from "@react-icons/all-files/md/MdSchedule";
 import AsLink from "@src/components/common/wrapChakra/AsLink";
 import { S3_URL } from "@src/const";
 import convertDate from "@src/helper/convertDate";
-import { useConcerts } from "@src/state/swr/useConcert";
+import { usePageLaravel } from "@src/state/swr/useLaravel";
 import { useUser } from "@src/state/swr/useUser";
 import { Concert } from "@src/types/share/Concert";
 import { motion } from "framer-motion";
@@ -45,7 +45,7 @@ const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
           <chakra.h1 fontSize="xl" fontWeight="bold" color={useColorModeValue("gray.800", "white")}>
             {data.title}
           </chakra.h1>
-
+          <Heading size="sm">ID: {data.id}</Heading>
           <chakra.p py={2} color={useColorModeValue("gray.700", "gray.400")}>
             {data.detail}
           </chakra.p>
@@ -65,7 +65,7 @@ const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
 
 const ConcertCardList: FC = () => {
   const { data: userData } = useUser();
-  const { data } = useConcerts(userData && { filter: [["user_id", userData.id]] });
+  const { data } = usePageLaravel("/concerts", userData && { filter: [["user_id", userData.id]] });
 
   return (
     <Flex

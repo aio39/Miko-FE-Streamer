@@ -3,8 +3,8 @@ import { ResponsivePie } from "@nivo/pie";
 import { pushMetaData } from "@src/helper/pushMetaData";
 import { nodeFetcher } from "@src/state/swr/fetcher";
 import laggy from "@src/state/swr/middleware/laggy";
-import { useTicket } from "@src/state/swr/useTickets";
-import { QuizMainMetadata, QuizMetaData } from "@src/types/TimeMetadataFormat";
+import { useSingleLaravel } from "@src/state/swr/useLaravel";
+import { QuizMainMetadata, QuizMetaData } from "@src/types/share/TimeMetadataFormat";
 import { FC, memo, PropsWithChildren, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
@@ -120,7 +120,7 @@ PieChart.displayName = "PieChat";
 const MyResponsivePie: FC<{ id: number; data: QuizMainMetadata }> = ({ id, data }) => {
   // useMemo(() => {}, [d])
   const params = useParams();
-  const { data: ticketData, mutate } = useTicket(parseInt(params.ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(params.ticketId as string));
   const { data: redisData } = useSWR<QuizRedisData>(`/concerts/quiz/${id}`, nodeFetcher, {
     use: [laggy],
     refreshInterval: QUIZ_RESULT_POLLING_MS,

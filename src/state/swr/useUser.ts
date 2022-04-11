@@ -1,4 +1,4 @@
-import { CommonDataResponse } from "@src/types/share/common/common";
+import { CommonDataResponse } from "@src/types/share/common";
 import { LoginData, User } from "@src/types/share/User";
 import { useEffect } from "react";
 import useSWR, { mutate } from "swr";

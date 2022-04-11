@@ -1,4 +1,4 @@
-import { MetaData, MetadataType } from "@src/types/TimeMetadataFormat";
+import { MetaData, MetadataType } from "@src/types/share/TimeMetadataFormat";
 import { atom, selector } from "recoil";
 
 //  "" 일때 필터 작동 안함.

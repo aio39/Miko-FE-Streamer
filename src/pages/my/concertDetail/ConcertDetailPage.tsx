@@ -1,14 +1,14 @@
 import { Box, Divider, Heading, Image, Tag, Text } from "@chakra-ui/react";
 import { MarkDownView } from "@src/components/markdownEditor/MarkDownView";
 import { categoryArray, S3_URL } from "@src/const";
-import { useConcert } from "@src/state/swr/useConcert";
+import { useSingleLaravel } from "@src/state/swr/useLaravel";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 
 const ConcertDetailPage = () => {
   let { concertId } = useParams();
 
-  const { data: concertData } = useConcert(parseInt(concertId as string));
+  const { data: concertData } = useSingleLaravel("/concerts", parseInt(concertId as string));
   if (!concertData) return <Box>Error</Box>;
 
   const { isPublic, id } = concertData.data;

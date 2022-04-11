@@ -3,7 +3,7 @@ import { AiOutlineFieldTime } from "@react-icons/all-files/ai/AiOutlineFieldTime
 import { FaExpandArrowsAlt } from "@react-icons/all-files/fa/FaExpandArrowsAlt";
 import AsLink from "@src/components/common/wrapChakra/AsLink";
 import convertDate from "@src/helper/convertDate";
-import { useTickets } from "@src/state/swr/useTickets";
+import { usePageLaravel } from "@src/state/swr/useLaravel";
 import { Ticket } from "@src/types/share/Ticket";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ const TicketBox: FC<{ data: Ticket }> = ({ data }) => {
           </Circle>
           <Text> {runningTime}分 </Text>
         </HStack>
-
+        <Heading size="md">ID {id} </Heading>
         <Heading size="sm">アーカイブ終了日にち</Heading>
         <Text>
           <Text> {convertDate(archiveEndTime, "YMDHMS")} </Text>
@@ -56,7 +56,7 @@ const TicketBox: FC<{ data: Ticket }> = ({ data }) => {
 const TicketCardList: FC = () => {
   let { concertId } = useParams();
 
-  const { data } = useTickets({ per_page: 40, filter: [["concert_id", concertId as string]], sort: ["id"] });
+  const { data } = usePageLaravel("/tickets", { perPage: 40, filter: [["concert_id", concertId as string]], sort: ["id"] });
 
   if (!data) return <Box>no data</Box>;
 

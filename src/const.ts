@@ -6,7 +6,8 @@ export const Information = "information";
 export const GetChannel = "GetChannel";
 export const Sell = "Sell";
 export const Chart = "Chart";
-export type WindowType = typeof Message | typeof Quiz | typeof Information | typeof Ranking | typeof GetChannel | typeof Sell | typeof Chart;
+export const Recording = "Recording";
+export type WindowType = typeof Message | typeof Quiz | typeof Information | typeof Ranking | typeof GetChannel | typeof Sell | typeof Chart | typeof Recording;
 
 //
 export const categoryArray = ["J-POP", "K-POP", "アニメ", "ジャズ", "バンド", "バラード"];

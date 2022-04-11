@@ -3,10 +3,9 @@ import PaginationBtn from "@src/components/button/PaginationBtn";
 import { chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx, chTicketSoldIdx, chType } from "@src/const";
 import convertDate from "@src/helper/convertDate";
 import { withSuspense } from "@src/layout/withSuspenseHOC";
-import { useCoinHistories } from "@src/state/swr/useCoinHistory";
-import { useTicket } from "@src/state/swr/useTickets";
+import { usePageLaravel, useSingleLaravel } from "@src/state/swr/useLaravel";
 import { useMyCoin } from "@src/state/swr/useUser";
-import { CommonFSW } from "@src/types/share/common/common";
+import { CommonFSW } from "@src/types/share/common";
 import produce from "immer";
 import { ChangeEventHandler, FC, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -25,7 +24,7 @@ type Props = {
 };
 
 const SellHistoryDataFetch = withSuspense<Props>(({ query, page, perPage, handelPageChange }) => {
-  const { data } = useCoinHistories(query);
+  const { data } = usePageLaravel("/coin_histories", query);
 
   if (!data) return <Box>Error</Box>;
 
@@ -67,7 +66,7 @@ const SellHistoryDataFetch = withSuspense<Props>(({ query, page, perPage, handel
 const SellHistory: FC = () => {
   const { ticketId, concertId } = useParams<{ ticketId: string; concertId: string }>();
   const toast = useToast();
-  const { data: ticketData, mutate } = useTicket(parseInt(ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(ticketId as string));
   const { data: coinData } = useMyCoin();
   const [perPage, setPerPage] = useState(20);
   const [page, setPage] = useState(1);
@@ -77,7 +76,7 @@ const SellHistory: FC = () => {
       ["ticket_id", ticketId as string],
       ["type", type],
     ],
-    per_page: perPage,
+    perPage: perPage,
     page: page,
   });
 
@@ -87,7 +86,7 @@ const SellHistory: FC = () => {
     setPerPage(newPerPage);
     setQueryData(
       produce(draft => {
-        draft.per_page = newPerPage;
+        draft.perPage = newPerPage;
         draft.page = 1;
       }),
     );

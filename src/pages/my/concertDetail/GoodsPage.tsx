@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import { useProducts } from "@src/state/swr/useGoods";
+import { usePageLaravel } from "@src/state/swr/useLaravel";
 import { Product } from "@src/types/share/Product";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
@@ -13,7 +13,7 @@ const ProductBox: FC<{ data: Product }> = ({ data }) => {
 const GoodsPage = () => {
   let { concertId } = useParams();
 
-  const { data } = useProducts({ per_page: 40, filter: [["concert_id", concertId as string]] });
+  const { data } = usePageLaravel("/products", { perPage: 40, filter: [["concert_id", concertId as string]] });
 
   if (!data) return <Box>no data</Box>;
 

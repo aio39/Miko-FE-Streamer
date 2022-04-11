@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import { draftMsgState } from "@src/state/recoil/draftMessageState";
-import { MsgTextData } from "@src/types/TimeMetadataFormat";
+import { MsgTextData } from "@src/types/share/TimeMetadataFormat";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
 

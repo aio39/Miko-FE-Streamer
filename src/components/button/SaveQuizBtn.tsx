@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
 import { metadataState } from "@src/state/recoil/metadataState";
-import { MetaData } from "@src/types/TimeMetadataFormat";
+import { MetaData } from "@src/types/share/TimeMetadataFormat";
 import produce from "immer";
 import { FC } from "react";
 import { useResetRecoilState, useSetRecoilState } from "recoil";

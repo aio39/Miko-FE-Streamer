@@ -1,8 +1,8 @@
 import { Center } from "@chakra-ui/react";
-import { Chart, GetChannel, Information, Message, Quiz, Ranking, Sell } from "@src/const";
+import { Chart, GetChannel, Information, Message, Quiz, Ranking, Recording, Sell } from "@src/const";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
-import { useTicket } from "@src/state/swr/useTickets";
+import { useSingleLaravel } from "@src/state/swr/useLaravel";
 import { Suspense, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SplitPane from "react-split-pane";
@@ -15,6 +15,7 @@ import ConcertInformation from "./information/ConcertInformation";
 import ManageKeys from "./manageKeys/ManageKeys";
 import MetadataListView from "./metadataList/MetadataListView";
 import RankingPage from "./ranking/RankingPage";
+import RecordingPage from "./recordingPage";
 import SellHistory from "./sellHistory/SellHistory";
 import SideBar from "./sideBar/SideBar";
 
@@ -32,7 +33,7 @@ const ConcertAdminPageNoData = () => {
   const [selectedWindow, setSelectedWindow] = useRecoilState(selectedWindowState);
   const setMetadataList = useSetRecoilState(metadataState);
   const { ticketId } = useParams();
-  const { data: ticketData } = useTicket(+(ticketId as string));
+  const { data: ticketData } = useSingleLaravel("/tickets", +(ticketId as string));
 
   useEffect(() => {
     if (ticketData?.data.timeMetaData) {
@@ -58,6 +59,8 @@ const ConcertAdminPageNoData = () => {
         return <ChartPage />;
       case Ranking:
         return <RankingPage />;
+      case Recording:
+        return <RecordingPage />;
       default:
         return <h1>No project match</h1>;
     }

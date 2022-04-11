@@ -1,5 +1,5 @@
 import { Center, VStack } from "@chakra-ui/react";
-import { Chart, Information, Message, Quiz, Ranking, Sell, WindowType } from "@src/const";
+import { Chart, Information, Message, Quiz, Ranking, Recording, Sell, WindowType } from "@src/const";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { ReactComponent as ChartLogo } from "@src/svg/chart.svg";
 import { ReactComponent as InformationLogo } from "@src/svg/information.svg";
@@ -43,6 +43,9 @@ const SideBar = () => {
         <SellLogo />
       </IconWrapper>
       <IconWrapper type={Chart}>
+        <ChartLogo />
+      </IconWrapper>
+      <IconWrapper type={Recording}>
         <ChartLogo />
       </IconWrapper>
     </VStack>

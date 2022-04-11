@@ -26,8 +26,8 @@ import { draftMsgState } from "@src/state/recoil/draftMessageState";
 import { draftQuizState } from "@src/state/recoil/draftQuizState";
 import { metadataListFilterState, metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
-import { useTicket } from "@src/state/swr/useTickets";
-import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/TimeMetadataFormat";
+import { useSingleLaravel } from "@src/state/swr/useLaravel";
+import { MessageMainMetadata, MetaData, QuizMainMetadata } from "@src/types/share/TimeMetadataFormat";
 import produce from "immer";
 import { FC, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
@@ -68,7 +68,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
   const setDraftQuiz = useSetRecoilState(draftQuizState);
   const setDraftMsg = useSetRecoilState(draftMsgState);
   const params = useParams();
-  const { data: ticketData, mutate } = useTicket(parseInt(params.ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(params.ticketId as string));
   const setMetadata = useSetRecoilState(metadataState);
 
   const handleRemoveMetadata = () => {

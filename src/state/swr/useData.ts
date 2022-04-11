@@ -1,7 +1,7 @@
-import { CommonFSW, Pagination } from "@src/types/share/common/common";
+import { CommonFSW, Pagination } from "@src/types/share/common";
 import useSWR from "swr";
-import { createFSWQueryString } from "./createQueryStringKey";
 import { fetcher } from "./fetcher";
+import { createFSWQueryString } from "./helper/createQueryStringKey";
 import laggy from "./middleware/laggy";
 
 const useData = <T>(url: string, query?: CommonFSW) => {

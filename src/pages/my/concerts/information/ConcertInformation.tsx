@@ -3,7 +3,7 @@ import { BiCopyAlt } from "@react-icons/all-files/bi/BiCopyAlt";
 import { categoryArray, NEST_URL } from "@src/const";
 import convertDate from "@src/helper/convertDate";
 import { axiosI } from "@src/state/swr/fetcher";
-import { useTicket } from "@src/state/swr/useTickets";
+import { useSingleLaravel } from "@src/state/swr/useLaravel";
 import { Concert } from "@src/types/share/Concert";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
@@ -39,7 +39,7 @@ const KeyView: FC<{ keyName: string; tipText?: string; keyValue: string }> = ({ 
 const ConcertInformation: FC = () => {
   const { ticketId, concertId } = useParams();
   const toast = useToast();
-  const { data: ticketData, mutate } = useTicket(parseInt(ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(ticketId as string));
 
   if (!ticketData) return <Box>No Ticket Data</Box>;
 
@@ -75,7 +75,7 @@ const ConcertInformation: FC = () => {
     concert,
   } = ticketData.data;
 
-  const { allConcertEndDate, allConcertStartDate, artist, categoryId, isPublic, title } = concert;
+  const { allConcertEndDate, allConcertStartDate, artist, categoryId, isPublic, title } = concert as Concert;
 
   return (
     <Center w="full" h="full" overflowY="scroll" px="10" pt="20" flexDir="column">
