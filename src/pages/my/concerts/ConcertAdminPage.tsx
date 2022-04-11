@@ -1,5 +1,7 @@
 import { Center } from "@chakra-ui/react";
+import MiniPlayer from "@src/components/ivs/VideoPlayer";
 import { Chart, GetChannel, Information, Message, Quiz, Ranking, Recording, Sell } from "@src/const";
+import { isIvsScriptLoadedState } from "@src/state/recoil";
 import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { useSingleLaravel } from "@src/state/swr/useLaravel";
@@ -34,6 +36,7 @@ const ConcertAdminPageNoData = () => {
   const setMetadataList = useSetRecoilState(metadataState);
   const { ticketId } = useParams();
   const { data: ticketData } = useSingleLaravel("/tickets", +(ticketId as string));
+  const setIsIvsScriptLoadedState = useSetRecoilState(isIvsScriptLoadedState);
 
   useEffect(() => {
     if (ticketData?.data.timeMetaData) {
@@ -68,6 +71,8 @@ const ConcertAdminPageNoData = () => {
 
   return (
     <AddSocketEventLayer>
+      <script src="https://player.live-video.net/1.8.0/amazon-ivs-player.min.js" onLoad={() => setIsIvsScriptLoadedState(true)}></script>
+      <MiniPlayer />
       <SplitPane defaultSize="99%" split="horizontal" style={{ height: "100vh" }}>
         <SplitPane defaultSize="3%" split="vertical">
           <div className="full_wh" style={{ border: "2px", borderBlockColor: "white" }}>
