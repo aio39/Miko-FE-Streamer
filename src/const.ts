@@ -9,6 +9,9 @@ export const Chart = "Chart";
 export const Recording = "Recording";
 export type WindowType = typeof Message | typeof Quiz | typeof Information | typeof Ranking | typeof GetChannel | typeof Sell | typeof Chart | typeof Recording;
 
+// num
+export const THUMBNAIL_INTERVAL_S = 60;
+
 //
 export const categoryArray = ["J-POP", "K-POP", "アニメ", "ジャズ", "バンド", "バラード"];
 export const chType = ["チャージ", "チケット購入", "SC送り", "アイテム使用", "グッズ購入", "チケット販売", "グッズ販売", "SC受け", "アイテム受け"];

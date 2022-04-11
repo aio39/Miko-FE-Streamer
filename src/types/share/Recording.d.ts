@@ -3,7 +3,7 @@ export interface Recording {
   ticketId: number;
   prefix: string;
   stream_id: string;
-  end: string;
+  end?: string;
   start: string;
   avl_archive: number;
   createdAt: string;

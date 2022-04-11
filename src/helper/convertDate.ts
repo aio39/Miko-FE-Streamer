@@ -1,3 +1,4 @@
+import { THUMBNAIL_INTERVAL_S } from "@src/const";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
@@ -31,4 +32,10 @@ export const roundDayJsBy30 = (aDay: dayjs.Dayjs) => {
   } else {
     return aDay.set("m", 0).set("s", 0);
   }
+};
+
+export const getTimeOfThumb = (start: string, idx: number) => {
+  return dayjs(start)
+    .add(idx * THUMBNAIL_INTERVAL_S, "s")
+    .format("YYYY/MM/DD A hh:mm:ss");
 };
