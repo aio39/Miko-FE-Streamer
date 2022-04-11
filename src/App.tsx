@@ -11,6 +11,7 @@ import EditMyPage from "@src/pages/my/EditMyPage";
 import MyPage from "@src/pages/my/MyPage";
 import Page404 from "@src/pages/Page404";
 import SignPage from "@src/pages/SignPage";
+import type * as ivs from "amazon-ivs-player";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Socket } from "socket.io-client";
@@ -21,6 +22,7 @@ import TicketListPage from "./pages/my/concertDetail/TicketListPage";
 declare global {
   interface Window {
     socket: Socket;
+    IVSPlayer: typeof ivs;
   }
 }
 
