@@ -1,5 +1,6 @@
 import { CoinHistory, Concert, Ticket, UserTicket } from "@src/types/share";
 import { CommonDataResponse, CommonFindId, CommonFSW, Pagination } from "@src/types/share/common";
+import { Recording } from "@src/types/share/Recording";
 import useSWR, { SWRConfiguration } from "swr";
 import { Product } from "./../../types/share/Product";
 import { fetcher } from "./fetcher";
@@ -15,6 +16,10 @@ type DataTypeDict = {
   "/user_tickets": UserTicket;
   "/coin_histories": CoinHistory;
   "/products": Product;
+  "/chats": any;
+  "/orders": any;
+  "/order_products": any;
+  "/recordings": Recording;
 };
 
 export const usePageLaravel = <K extends keyof DataTypeDict, T = DataTypeDict[K], PT = Pagination<T>>(url: K, query?: CommonFSW, option?: SWRConfiguration<PT>) => {
