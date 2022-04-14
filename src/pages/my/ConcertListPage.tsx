@@ -65,7 +65,7 @@ const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
 
 const ConcertCardList: FC = () => {
   const { data: userData } = useUser();
-  const { data } = usePageLaravel("/concerts", userData && { filter: [["user_id", userData.id]] });
+  const { data } = usePageLaravel("/concerts", userData ? { filter: [["user_id", userData.id]] } : null);
 
   return (
     <Flex
