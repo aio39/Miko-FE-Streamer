@@ -25,11 +25,11 @@ export const chGoodsSoldIdx = 6;
 export const chSuperChatSendedIdx = 7;
 export const chSuperDoneItemSendedIdx = 8;
 
-export const S3_URL = "https://miko-image.s3.ap-northeast-2.amazonaws.com/";
+export const S3_URL = "https://img.mikopj.live/";
 
 //ENV
 export const LARAVEL_URL = process.env.REACT_APP_LARAVEL_URL ?? "http://localhost:8080/api/";
 export const NEST_URL = process.env.REACT_APP_NEST_URL ?? "http://localhost:3001/api";
-export const SOCKET_URL = process.env.REACT_APP_SOCKET_SERVER ?? "http://localhost:3002";
+export const SOCKET_URL = process.env.REACT_APP_SOCKET_SERVER ?? "http://localhost:3001";
 
 export const S3_IVS_URL = process.env.REACT_APP_IVS_S3 as string;

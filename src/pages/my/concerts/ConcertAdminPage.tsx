@@ -6,6 +6,7 @@ import { metadataState } from "@src/state/recoil/metadataState";
 import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
 import { useSingleLaravel } from "@src/state/swr/useLaravel";
 import { Suspense, useCallback, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import SplitPane from "react-split-pane";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -35,7 +36,7 @@ const ConcertAdminPageNoData = () => {
   const [selectedWindow, setSelectedWindow] = useRecoilState(selectedWindowState);
   const setMetadataList = useSetRecoilState(metadataState);
   const { ticketId } = useParams();
-  const { data: ticketData } = useSingleLaravel("/tickets", +(ticketId as string));
+  const { data: ticketData } = useSingleLaravel("/tickets", +(ticketId as string), {});
   const setIsIvsScriptLoadedState = useSetRecoilState(isIvsScriptLoadedState);
 
   useEffect(() => {
@@ -71,7 +72,9 @@ const ConcertAdminPageNoData = () => {
 
   return (
     <AddSocketEventLayer>
-      <script src="https://player.live-video.net/1.8.0/amazon-ivs-player.min.js" onLoad={() => setIsIvsScriptLoadedState(true)}></script>
+      <Helmet>
+        <script src="https://player.live-video.net/1.8.0/amazon-ivs-player.min.js" onLoad={() => setIsIvsScriptLoadedState(true)}></script>
+      </Helmet>
       <MiniPlayer />
       <SplitPane defaultSize="99%" split="horizontal" style={{ height: "100vh" }}>
         <SplitPane defaultSize="3%" split="vertical">

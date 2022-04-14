@@ -39,7 +39,7 @@ const KeyView: FC<{ keyName: string; tipText?: string; keyValue: string }> = ({ 
 const ConcertInformation: FC = () => {
   const { ticketId, concertId } = useParams();
   const toast = useToast();
-  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(ticketId as string), { with: ["concert"] });
 
   if (!ticketData) return <Box>No Ticket Data</Box>;
 

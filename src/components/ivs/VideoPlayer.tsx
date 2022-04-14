@@ -1,10 +1,10 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useIvsPlayer } from "@src/state/hooks/dynamicHooks";
-import { m3u8State } from "@src/state/recoil";
+import { isOnMiniPlayerState, m3u8State } from "@src/state/recoil";
 import type * as ivs from "amazon-ivs-player";
 import React, { FC, useEffect, useRef, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 const jwt =
   "eyJhbGciOiJFUzM4NCIsInR5cCI6IkpXVCJ9.eyJhd3M6Y2hhbm5lbC1hcm4iOiJhcm46YXdzOml2czp1cy1lYXN0LTE6MTIxMzIzNjg0MTI4OmNoYW5uZWwvQ2o1eW5rOTdzRUp2IiwiYXdzOmFjY2Vzcy1jb250cm9sLWFsbG93LW9yaWdpbiI6IioiLCJleHAiOjE2NDY4MDg2MjQsImlhdCI6MTY0NDM4OTg2OX0.fmdaERbkxkNAThbJtFNv-JScxNl0dy1TSsS7gYWZmOWokUS-teTlZrMKwRvfaIXrUPRpBH7KQoI0n6wOOuOqwODM24mOpgv7OrUb6GBfTllKFes0XZ3sMCpey6bnkzya";
@@ -22,6 +22,7 @@ const MiniPlayer: FC = () => {
   const player = useRef<ivs.MediaPlayer>(null);
   const videoEl = useRef<HTMLVideoElement>(null);
   const m3u8 = useRecoilValue(m3u8State);
+  const [isOneMiniPlayer, setIsOnMiniPlayer] = useRecoilState(isOnMiniPlayerState);
   const [loading, setLoading] = useState(true);
   const [selectableQuality, setSelectableQuality] = useState<ivs.Quality[]>([]);
 
@@ -33,14 +34,16 @@ const MiniPlayer: FC = () => {
     const { isPlayerSupported } = IVSPlayer;
 
     // @ts-ignore
-    const aPlayer = IVSPlayer.create(); // web 버전이어서 wasm 넣어줄 필요는 없음.
+    // const aPlayer = ; // web 버전이어서 wasm 넣어줄 필요는 없음.
     // @ts-ignore
-    player.current = aPlayer;
+    player.current = IVSPlayer.create();
+    console.log("bbbbbb", player.current);
     player.current.setLiveLowLatencyEnabled(true);
     player.current.setRebufferToLive(true); // NOTE
     console.log("is low?", player.current.isLiveLowLatency());
     // @ts-ignore
-    player.current.load(m3u8 + "?token=" + jwt);
+    // player.current.load(m3u8 + "?token=" + jwt);
+    player.current.load(m3u8);
     player.current.attachHTMLVideoElement(videoEl.current as HTMLVideoElement);
 
     player.current.setAutoplay(true);
@@ -56,7 +59,7 @@ const MiniPlayer: FC = () => {
       if (!player.current) return;
 
       const playerState = player.current.getState();
-
+      console.log("change state", playerState);
       setLoading(playerState === READY || playerState === BUFFERING);
 
       switch (playerState) {
@@ -101,19 +104,31 @@ const MiniPlayer: FC = () => {
   }, [IVSPlayer]);
 
   useEffect(() => {
+    console.log("aaaaa", m3u8, player.current);
     if (!player.current || !m3u8) return;
-
     player.current.load(m3u8);
     player.current.play();
     return () => {};
   }, [m3u8]);
 
+  const handleStopVideo = () => {
+    player.current?.pause();
+  };
+
+  const handelCloseVideo = () => {
+    player.current?.pause();
+    setIsOnMiniPlayer(false);
+  };
+
   return (
-    <Box color="white" position="fixed" right="10" bottom="10" bgColor="red.100" w="300px" h="160px">
+    <Box color="white" position="fixed" zIndex="100" right="10" bottom="10" bgColor="red.100" w="300px" h="160px" visibility={isOneMiniPlayer ? "visible" : "hidden"}>
       <Video ref={videoEl} playsInline></Video>
-      <Text position="absolute" w="full">
-        m3u8 : {m3u8}
-      </Text>
+      <Box position="absolute" w="full">
+        <Button onClick={handleStopVideo}>stop</Button>
+        <Button onClick={handelCloseVideo}>close</Button>
+        <Text> {isOneMiniPlayer ? "on" : "off"} </Text>
+        {/* m3u8 : {m3u8} */}
+      </Box>
     </Box>
   );
 };

@@ -66,7 +66,7 @@ const SellHistoryDataFetch = withSuspense<Props>(({ query, page, perPage, handel
 const SellHistory: FC = () => {
   const { ticketId, concertId } = useParams<{ ticketId: string; concertId: string }>();
   const toast = useToast();
-  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(ticketId as string), {});
   const { data: coinData } = useMyCoin();
   const [perPage, setPerPage] = useState(20);
   const [page, setPage] = useState(1);

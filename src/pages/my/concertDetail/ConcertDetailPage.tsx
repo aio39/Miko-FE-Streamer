@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 const ConcertDetailPage = () => {
   let { concertId } = useParams();
 
-  const { data: concertData } = useSingleLaravel("/concerts", parseInt(concertId as string));
+  const { data: concertData } = useSingleLaravel("/concerts", parseInt(concertId as string), {});
   if (!concertData) return <Box>Error</Box>;
 
   const { isPublic, id } = concertData.data;

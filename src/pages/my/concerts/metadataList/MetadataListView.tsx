@@ -68,7 +68,7 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
   const setDraftQuiz = useSetRecoilState(draftQuizState);
   const setDraftMsg = useSetRecoilState(draftMsgState);
   const params = useParams();
-  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(params.ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(params.ticketId as string), {});
   const setMetadata = useSetRecoilState(metadataState);
 
   const handleRemoveMetadata = () => {
@@ -91,6 +91,8 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
       setSelectedWindow(Message);
     }
   };
+
+  console.log("ticketdata", ticketData);
 
   return (
     <Box width="full" position="relative" border="1px" padding="2">

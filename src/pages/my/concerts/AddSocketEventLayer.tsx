@@ -7,7 +7,7 @@ const AddSocketEventLayer: FC = ({ children }) => {
   const socket = useSocket();
   const { ticketId } = useParams();
 
-  const { data: ticketData } = useSingleLaravel("/tickets", parseInt(ticketId as string));
+  const { data: ticketData } = useSingleLaravel("/tickets", parseInt(ticketId as string), {});
 
   useEffect(() => {
     if (!socket || !ticketData) return;

@@ -120,7 +120,7 @@ PieChart.displayName = "PieChat";
 const MyResponsivePie: FC<{ id: number; data: QuizMainMetadata }> = ({ id, data }) => {
   // useMemo(() => {}, [d])
   const params = useParams();
-  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(params.ticketId as string));
+  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(params.ticketId as string), {});
   const { data: redisData } = useSWR<QuizRedisData>(`/concerts/quiz/${id}`, nodeFetcher, {
     use: [laggy],
     refreshInterval: QUIZ_RESULT_POLLING_MS,

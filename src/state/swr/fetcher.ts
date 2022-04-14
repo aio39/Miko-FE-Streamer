@@ -55,9 +55,11 @@ const fetcher = (url: string) =>
   axiosI
     .get(url)
     .then(res => {
+      console.log("aaaaa", res);
       return res.data;
     })
     .catch(err => {
+      console.log("err", err);
       throw new Error("An error occurred while fetching the data.");
     });
 
