@@ -1,31 +1,32 @@
-import { Flex, Heading, HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from "@chakra-ui/react";
-import { draftMsgBoxDataState } from "@src/state/recoil/draftMessageState";
-import { useRecoilState } from "recoil";
-import TextColorPicker from "./TextColorPicker";
+import { Flex, Heading, HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from '@chakra-ui/react';
+import { draftMsgBoxDataState } from '@src/state/recoil/draftMessageState';
+import { useRecoilState } from 'recoil';
+
+import TextColorPicker from './TextColorPicker';
 
 const MsgBoxEditor = () => {
   const [msgBoxData, setMsgBoxData] = useRecoilState(draftMsgBoxDataState);
   const { width, height, padding, round, spacing, hexColor } = msgBoxData;
 
   const handleChangeWidth = (value: number) => {
-    setMsgBoxData(prev => ({ ...prev, width: value }));
+    setMsgBoxData((prev) => ({ ...prev, width: value }));
   };
 
   const handleChangeHeight = (value: number) => {
-    setMsgBoxData(prev => ({ ...prev, height: value }));
+    setMsgBoxData((prev) => ({ ...prev, height: value }));
   };
   const handleChangePadding = (value: number) => {
-    setMsgBoxData(prev => ({ ...prev, padding: value }));
+    setMsgBoxData((prev) => ({ ...prev, padding: value }));
   };
   const handleChangeRound = (value: number) => {
-    setMsgBoxData(prev => ({ ...prev, round: value }));
+    setMsgBoxData((prev) => ({ ...prev, round: value }));
   };
   const handleChangeSpacing = (value: number) => {
-    setMsgBoxData(prev => ({ ...prev, spacing: value }));
+    setMsgBoxData((prev) => ({ ...prev, spacing: value }));
   };
 
   const handleChangeColor = (color: string) => {
-    setMsgBoxData(prev => ({ ...prev, hexColor: color }));
+    setMsgBoxData((prev) => ({ ...prev, hexColor: color }));
   };
 
   return (

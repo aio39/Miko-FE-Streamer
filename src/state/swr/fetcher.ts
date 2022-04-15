@@ -1,6 +1,6 @@
-import { createStandaloneToast } from "@chakra-ui/react";
-import { LARAVEL_URL, NEST_URL } from "@src/const";
-import axios, { AxiosError } from "axios";
+import { createStandaloneToast } from '@chakra-ui/react';
+import { LARAVEL_URL, NEST_URL } from '@src/const';
+import axios, { AxiosError } from 'axios';
 
 const config = {
   baseURL: LARAVEL_URL,
@@ -19,11 +19,11 @@ const requestInterceptor = axiosI.interceptors.request.use(
   },
   function (error) {
     // 오류 요청을 보내기전 수행할 일
-    console.error("❌ response error", error.toJSON());
+    console.error('❌ response error', error.toJSON());
     toast({
       title: error.name,
       description: error.message,
-      status: "error",
+      status: 'error',
       duration: 1000,
       isClosable: true,
     });
@@ -39,11 +39,11 @@ const responseInterceptor = axiosI.interceptors.response.use(
   },
   function (error: AxiosError) {
     // 오류 응답을 처리
-    console.error("❌ response error", error.toJSON());
+    console.error('❌ response error', error.toJSON());
     toast({
       title: error.name,
       description: error.message,
-      status: "error",
+      status: 'error',
       duration: 1000,
       isClosable: true,
     });
@@ -54,33 +54,33 @@ const responseInterceptor = axiosI.interceptors.response.use(
 const fetcher = (url: string) =>
   axiosI
     .get(url)
-    .then(res => {
-      console.log("aaaaa", res);
+    .then((res) => {
+      console.log('aaaaa', res);
       return res.data;
     })
-    .catch(err => {
-      console.log("err", err);
-      throw new Error("An error occurred while fetching the data.");
+    .catch((err) => {
+      console.log('err', err);
+      throw new Error('An error occurred while fetching the data.');
     });
 
 const fetcherForInfinite = (url: string) =>
   axiosI
     .get(url)
-    .then(res => {
+    .then((res) => {
       return res.data;
     })
-    .catch(err => {
-      throw new Error("An error occurred while fetching the data.");
+    .catch((err) => {
+      throw new Error('An error occurred while fetching the data.');
     });
 
 const nodeFetcher = (url: string) =>
   axiosI
     .get(url, { baseURL: NEST_URL })
-    .then(res => {
+    .then((res) => {
       return res.data;
     })
-    .catch(err => {
-      throw new Error("An error occurred while fetching the data.");
+    .catch((err) => {
+      throw new Error('An error occurred while fetching the data.');
     });
 
-export { fetcher, axiosI, fetcherForInfinite, nodeFetcher };
+export { axiosI, fetcher, fetcherForInfinite, nodeFetcher };

@@ -1,52 +1,53 @@
-import { atom, DefaultValue, selector } from "recoil";
-import { QuizMetaData } from "../../types/share/TimeMetadataFormat";
+import { atom, DefaultValue, selector } from 'recoil';
+
+import { QuizMetaData } from '../../types/share/TimeMetadataFormat';
 
 const draftQuizDurationTimeState = atom<number>({
-  key: "draftQuizDurationTime",
+  key: 'draftQuizDurationTime',
   default: 30,
 });
 
 const draftQuizMainTitleState = atom<string>({
-  key: "draftQuizMainTitleState",
-  default: "",
+  key: 'draftQuizMainTitleState',
+  default: '',
 });
 
 const draftQuizChoicesState = atom<string[]>({
-  key: "draftQuizChoices",
+  key: 'draftQuizChoices',
   default: [],
 });
 
 const draftQuizCreatedAtState = atom<number>({
-  key: "draftQuizCreatedAtState",
+  key: 'draftQuizCreatedAtState',
   default: -1,
 });
 
 const draftQuizTagsState = atom<string[]>({
-  key: "draftQuizTagsState",
+  key: 'draftQuizTagsState',
   default: [],
 });
 
 const draftQuizTitleState = atom<string>({
-  key: "draftQuizTitleState",
-  default: "",
+  key: 'draftQuizTitleState',
+  default: '',
 });
 
 const draftQuizUsedState = atom<boolean>({
-  key: "draftQuizUsedState",
+  key: 'draftQuizUsedState',
   default: false,
 });
 
 const draftQuizState = selector<QuizMetaData>({
-  key: "draftQuiz",
+  key: 'draftQuiz',
   get: ({ get }) => {
     return {
       data: {
-        dataType: "q",
+        dataType: 'q',
         mainText: get(draftQuizMainTitleState),
         durationTime: get(draftQuizDurationTimeState),
         choices: get(draftQuizChoicesState),
       },
-      type: "q",
+      type: 'q',
       tags: get(draftQuizTagsState),
       title: get(draftQuizTitleState),
       createdAt: get(draftQuizCreatedAtState),
@@ -55,7 +56,7 @@ const draftQuizState = selector<QuizMetaData>({
   },
   set: ({ set, reset }, data) => {
     if (data instanceof DefaultValue) {
-      console.log("draftQuizState selector reset", data);
+      console.log('draftQuizState selector reset', data);
       reset(draftQuizMainTitleState);
       reset(draftQuizDurationTimeState);
       reset(draftQuizChoicesState);
@@ -75,4 +76,4 @@ const draftQuizState = selector<QuizMetaData>({
   },
 });
 
-export { draftQuizState, draftQuizDurationTimeState, draftQuizMainTitleState, draftQuizChoicesState, draftQuizCreatedAtState, draftQuizTagsState, draftQuizTitleState };
+export { draftQuizChoicesState, draftQuizCreatedAtState, draftQuizDurationTimeState, draftQuizMainTitleState, draftQuizState, draftQuizTagsState, draftQuizTitleState };

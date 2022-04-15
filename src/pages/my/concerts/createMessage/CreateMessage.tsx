@@ -1,16 +1,17 @@
-import { Box, Divider, Flex, Heading } from "@chakra-ui/react";
-import SaveMetaDataBtn from "@src/components/button/SaveQuizBtn";
-import Screen169 from "@src/components/hoc/Screen169";
-import { draftMsgMainTextState, draftMsgState, draftMsgSubTextState } from "@src/state/recoil/draftMessageState";
-import { useRecoilValue } from "recoil";
-import DraftMessagePreview from "./DraftMessagePreview";
-import DragTest from "./DragTest";
-import EditMsgCommonData from "./EditMsgCommonData";
-import LinkInput from "./LinkInput";
-import MsgBoxEditor from "./MsgBoxEditor";
-import MsgResetBtn from "./MsgResetBtn";
-import MsgTextDataEditor from "./MsgTextDataEditor";
-import { PositionSelector } from "./PositionSelector";
+import { Box, Divider, Flex, Heading } from '@chakra-ui/react';
+import SaveMetaDataBtn from '@src/components/button/SaveQuizBtn';
+import Screen169 from '@src/components/hoc/Screen169';
+import { draftMsgMainTextState, draftMsgState, draftMsgSubTextState } from '@src/state/recoil/draftMessageState';
+import { useRecoilValue } from 'recoil';
+
+import DraftMessagePreview from './DraftMessagePreview';
+import DragTest from './DragTest';
+import EditMsgCommonData from './EditMsgCommonData';
+import LinkInput from './LinkInput';
+import MsgBoxEditor from './MsgBoxEditor';
+import MsgResetBtn from './MsgResetBtn';
+import MsgTextDataEditor from './MsgTextDataEditor';
+import { PositionSelector } from './PositionSelector';
 
 const SaveBtn = () => {
   const msgMetaData = useRecoilValue(draftMsgState);

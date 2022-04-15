@@ -12,11 +12,11 @@ import {
   PopoverContent,
   PopoverTrigger,
   Text,
-} from "@chakra-ui/react";
-import convertDate from "@src/helper/convertDate";
-import { FC, useEffect, useState } from "react";
-import { UseFormRegisterReturn, UseFormSetValue } from "react-hook-form";
-import { Calendar, DayValue, Locale } from "react-modern-calendar-datepicker";
+} from '@chakra-ui/react';
+import convertDate from '@src/helper/convertDate';
+import { FC, useEffect, useState } from 'react';
+import { UseFormRegisterReturn, UseFormSetValue } from 'react-hook-form';
+import { Calendar, DayValue, Locale } from 'react-modern-calendar-datepicker';
 
 const DateInputWrapper: FC<{
   registerReturn: UseFormRegisterReturn;
@@ -24,7 +24,7 @@ const DateInputWrapper: FC<{
 }> = ({ registerReturn, setValue }) => {
   const { name } = registerReturn;
 
-  const [viewingDate, setViewingDate] = useState<string>(convertDate(new Date(), "YMDHM"));
+  const [viewingDate, setViewingDate] = useState<string>(convertDate(new Date(), 'YMDHM'));
 
   const [calendarState, setCalendarState] = useState<DayValue>();
   const [hours, setHours] = useState(0);
@@ -38,7 +38,7 @@ const DateInputWrapper: FC<{
 
     const timestamp = date.getTime();
     setValue(name, timestamp);
-    setViewingDate(convertDate(timestamp, "YMDHM"));
+    setViewingDate(convertDate(timestamp, 'YMDHM'));
   }, [calendarState, hours, minutes, name, setValue]);
 
   return (
@@ -69,7 +69,7 @@ const DateInputWrapper: FC<{
               <NumberInput
                 defaultValue={0}
                 value={hours}
-                onChange={value => {
+                onChange={(value) => {
                   setHours(parseInt(value));
                 }}
                 min={0}
@@ -85,7 +85,7 @@ const DateInputWrapper: FC<{
               <NumberInput
                 defaultValue={0}
                 value={minutes}
-                onChange={value => {
+                onChange={(value) => {
                   setMinutes(parseInt(value));
                 }}
                 min={0}
@@ -110,38 +110,38 @@ export default DateInputWrapper;
 
 const myCustomLocale: Locale = {
   // months list by order
-  months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+  months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 
   // week days by order
   weekDays: [
     {
-      name: "Sunday", // used for accessibility
-      short: "S", // displayed at the top of days' rows
+      name: 'Sunday', // used for accessibility
+      short: 'S', // displayed at the top of days' rows
       isWeekend: true, // is it a formal weekend or not?
     },
     {
-      name: "Monday",
-      short: "M",
+      name: 'Monday',
+      short: 'M',
     },
     {
-      name: "Tuesday",
-      short: "T",
+      name: 'Tuesday',
+      short: 'T',
     },
     {
-      name: "Wednesday",
-      short: "W",
+      name: 'Wednesday',
+      short: 'W',
     },
     {
-      name: "Thursday",
-      short: "T",
+      name: 'Thursday',
+      short: 'T',
     },
     {
-      name: "Friday",
-      short: "F",
+      name: 'Friday',
+      short: 'F',
     },
     {
-      name: "Saturday",
-      short: "S",
+      name: 'Saturday',
+      short: 'S',
       isWeekend: true,
     },
   ],
@@ -170,20 +170,20 @@ const myCustomLocale: Locale = {
   },
 
   // texts in the date picker
-  nextMonth: "다음 달",
-  previousMonth: "전 달",
-  openMonthSelector: "월 선택",
-  openYearSelector: "연도 선택",
-  closeMonthSelector: "월 선택 닫기",
-  closeYearSelector: "연도 선택 닫기",
-  defaultPlaceholder: "선택...",
+  nextMonth: '다음 달',
+  previousMonth: '전 달',
+  openMonthSelector: '월 선택',
+  openYearSelector: '연도 선택',
+  closeMonthSelector: '월 선택 닫기',
+  closeYearSelector: '연도 선택 닫기',
+  defaultPlaceholder: '선택...',
 
   // for input range value
-  from: "from",
-  to: "to",
+  from: 'from',
+  to: 'to',
 
   // used for input value when multi dates are selected
-  digitSeparator: ",",
+  digitSeparator: ',',
 
   // if your provide -2 for example, year will be 2 digited
   yearLetterSkip: 0,

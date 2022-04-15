@@ -1,6 +1,6 @@
-import { Button, Center, Flex, Heading } from "@chakra-ui/react";
-import { Meta } from "@src/types/share/common";
-import { ComponentProps, FC } from "react";
+import { Button, Center, Flex, Heading } from '@chakra-ui/react';
+import { Meta } from '@src/types/share/common';
+import { ComponentProps, FC } from 'react';
 
 type Props = {
   data: Meta;

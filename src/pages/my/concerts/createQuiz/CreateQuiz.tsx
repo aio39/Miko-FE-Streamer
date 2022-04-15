@@ -1,15 +1,16 @@
-import { Box, Center, Divider, Flex, Grid, Heading } from "@chakra-ui/react";
-import Screen169 from "@src/components/hoc/Screen169";
-import { draftQuizChoicesState, draftQuizState } from "@src/state/recoil/draftQuizState";
-import { useMemo } from "react";
-import { useRecoilState } from "recoil";
-import SaveMetaDataBtn from "../../../../components/button/SaveQuizBtn";
-import ChoiceAddBox from "./ChoiceAddBox";
-import ChoiceBox from "./ChoiceBox";
-import EditQuizCommonData from "./EditQuizCommonData";
-import EditQuizOptions from "./EditQuizOptions";
-import QuizResetBtn from "./QuizResetBtn";
-import QuizTitle from "./QuizTitle";
+import { Box, Center, Divider, Flex, Grid, Heading } from '@chakra-ui/react';
+import Screen169 from '@src/components/hoc/Screen169';
+import { draftQuizChoicesState, draftQuizState } from '@src/state/recoil/draftQuizState';
+import { useMemo } from 'react';
+import { useRecoilState } from 'recoil';
+
+import SaveMetaDataBtn from '../../../../components/button/SaveQuizBtn';
+import ChoiceAddBox from './ChoiceAddBox';
+import ChoiceBox from './ChoiceBox';
+import EditQuizCommonData from './EditQuizCommonData';
+import EditQuizOptions from './EditQuizOptions';
+import QuizResetBtn from './QuizResetBtn';
+import QuizTitle from './QuizTitle';
 
 const CreateQuiz = () => {
   const [draftQuizChoices, setDraftQuizChoices] = useRecoilState(draftQuizChoicesState);
@@ -42,7 +43,7 @@ const CreateQuiz = () => {
         <Screen169>
           <Center w="full" h="full" flexDir="column">
             <QuizTitle />
-            <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + "%"} height={height + "%"} gap="4" bgColor="#00000055" borderRadius="md">
+            <Grid templateColumns={`repeat(${width / 25}, 1fr)`} width={width + '%'} height={height + '%'} gap="4" bgColor="#00000055" borderRadius="md">
               {draftQuizChoices?.map((text, idx) => (
                 <ChoiceBox key={idx} text={text} idx={idx} />
               ))}

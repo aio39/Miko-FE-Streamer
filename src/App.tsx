@@ -1,24 +1,26 @@
-import FullWidthHeightLayout from "@src/layout/FullWidthHeightLayout";
-import SidebarWithHeader from "@src/layout/sidebarLayout/SidebarLayout";
-import NotLoginGuard from "@src/pages/guard/NotLoginGuard";
-import RequiredLoginGuard from "@src/pages/guard/RequiredLoginGuard";
-import HomePage from "@src/pages/HomePage";
-import LoginPage from "@src/pages/LoginPage";
-import ConcertCreatePage from "@src/pages/my/ConcertCreatePage";
-import ConcertListPage from "@src/pages/my/ConcertListPage";
-import ConcertAdminPage from "@src/pages/my/concerts/ConcertAdminPage";
-import EditMyPage from "@src/pages/my/EditMyPage";
-import MyPage from "@src/pages/my/MyPage";
-import Page404 from "@src/pages/Page404";
-import SignPage from "@src/pages/SignPage";
-import type * as ivs from "amazon-ivs-player";
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Socket } from "socket.io-client";
-import "./App.css";
-import ConcertDetailPage from "./pages/my/concertDetail/ConcertDetailPage";
-import GoodsPage from "./pages/my/concertDetail/GoodsPage";
-import TicketListPage from "./pages/my/concertDetail/TicketListPage";
+import './App.css';
+
+import FullWidthHeightLayout from '@src/layout/FullWidthHeightLayout';
+import SidebarWithHeader from '@src/layout/sidebarLayout/SidebarLayout';
+import NotLoginGuard from '@src/pages/guard/NotLoginGuard';
+import RequiredLoginGuard from '@src/pages/guard/RequiredLoginGuard';
+import HomePage from '@src/pages/HomePage';
+import LoginPage from '@src/pages/LoginPage';
+import ConcertCreatePage from '@src/pages/my/ConcertCreatePage';
+import ConcertListPage from '@src/pages/my/ConcertListPage';
+import ConcertAdminPage from '@src/pages/my/concerts/ConcertAdminPage';
+import EditMyPage from '@src/pages/my/EditMyPage';
+import MyPage from '@src/pages/my/MyPage';
+import Page404 from '@src/pages/Page404';
+import SignPage from '@src/pages/SignPage';
+import type * as ivs from 'amazon-ivs-player';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Socket } from 'socket.io-client';
+
+import ConcertDetailPage from './pages/my/concertDetail/ConcertDetailPage';
+import GoodsPage from './pages/my/concertDetail/GoodsPage';
+import TicketListPage from './pages/my/concertDetail/TicketListPage';
 declare global {
   interface Window {
     socket: Socket;

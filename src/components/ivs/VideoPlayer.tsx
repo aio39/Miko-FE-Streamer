@@ -1,13 +1,13 @@
-import { Box, Button, Text } from "@chakra-ui/react";
-import styled from "@emotion/styled";
-import { useIvsPlayer } from "@src/state/hooks/dynamicHooks";
-import { isOnMiniPlayerState, m3u8State } from "@src/state/recoil";
-import type * as ivs from "amazon-ivs-player";
-import React, { FC, useEffect, useRef, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Box, Button, Text } from '@chakra-ui/react';
+import styled from '@emotion/styled';
+import { useIvsPlayer } from '@src/state/hooks/dynamicHooks';
+import { isOnMiniPlayerState, m3u8State } from '@src/state/recoil';
+import type * as ivs from 'amazon-ivs-player';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const jwt =
-  "eyJhbGciOiJFUzM4NCIsInR5cCI6IkpXVCJ9.eyJhd3M6Y2hhbm5lbC1hcm4iOiJhcm46YXdzOml2czp1cy1lYXN0LTE6MTIxMzIzNjg0MTI4OmNoYW5uZWwvQ2o1eW5rOTdzRUp2IiwiYXdzOmFjY2Vzcy1jb250cm9sLWFsbG93LW9yaWdpbiI6IioiLCJleHAiOjE2NDY4MDg2MjQsImlhdCI6MTY0NDM4OTg2OX0.fmdaERbkxkNAThbJtFNv-JScxNl0dy1TSsS7gYWZmOWokUS-teTlZrMKwRvfaIXrUPRpBH7KQoI0n6wOOuOqwODM24mOpgv7OrUb6GBfTllKFes0XZ3sMCpey6bnkzya";
+  'eyJhbGciOiJFUzM4NCIsInR5cCI6IkpXVCJ9.eyJhd3M6Y2hhbm5lbC1hcm4iOiJhcm46YXdzOml2czp1cy1lYXN0LTE6MTIxMzIzNjg0MTI4OmNoYW5uZWwvQ2o1eW5rOTdzRUp2IiwiYXdzOmFjY2Vzcy1jb250cm9sLWFsbG93LW9yaWdpbiI6IioiLCJleHAiOjE2NDY4MDg2MjQsImlhdCI6MTY0NDM4OTg2OX0.fmdaERbkxkNAThbJtFNv-JScxNl0dy1TSsS7gYWZmOWokUS-teTlZrMKwRvfaIXrUPRpBH7KQoI0n6wOOuOqwODM24mOpgv7OrUb6GBfTllKFes0XZ3sMCpey6bnkzya';
 
 const Video = styled.video`
   background-color: #292929;
@@ -37,10 +37,10 @@ const MiniPlayer: FC = () => {
     // const aPlayer = ; // web 버전이어서 wasm 넣어줄 필요는 없음.
     // @ts-ignore
     player.current = IVSPlayer.create();
-    console.log("bbbbbb", player.current);
+    console.log('bbbbbb', player.current);
     player.current.setLiveLowLatencyEnabled(true);
     player.current.setRebufferToLive(true); // NOTE
-    console.log("is low?", player.current.isLiveLowLatency());
+    console.log('is low?', player.current.isLiveLowLatency());
     // @ts-ignore
     // player.current.load(m3u8 + "?token=" + jwt);
     player.current.load(m3u8);
@@ -59,7 +59,7 @@ const MiniPlayer: FC = () => {
       if (!player.current) return;
 
       const playerState = player.current.getState();
-      console.log("change state", playerState);
+      console.log('change state', playerState);
       setLoading(playerState === READY || playerState === BUFFERING);
 
       switch (playerState) {
@@ -69,7 +69,7 @@ const MiniPlayer: FC = () => {
           player.current.setQuality(qualities[0], true); // 왜 이거 안해주면 버퍼링 오래 걸리지
           break;
         case BUFFERING:
-          console.log("NOW BUFFERING");
+          console.log('NOW BUFFERING');
           break;
         case PLAYING:
           break;
@@ -104,7 +104,7 @@ const MiniPlayer: FC = () => {
   }, [IVSPlayer]);
 
   useEffect(() => {
-    console.log("aaaaa", m3u8, player.current);
+    console.log('aaaaa', m3u8, player.current);
     if (!player.current || !m3u8) return;
     player.current.load(m3u8);
     player.current.play();
@@ -121,12 +121,12 @@ const MiniPlayer: FC = () => {
   };
 
   return (
-    <Box color="white" position="fixed" zIndex="100" right="10" bottom="10" bgColor="red.100" w="300px" h="160px" visibility={isOneMiniPlayer ? "visible" : "hidden"}>
+    <Box color="white" position="fixed" zIndex="100" right="10" bottom="10" bgColor="red.100" w="300px" h="160px" visibility={isOneMiniPlayer ? 'visible' : 'hidden'}>
       <Video ref={videoEl} playsInline></Video>
       <Box position="absolute" w="full">
         <Button onClick={handleStopVideo}>stop</Button>
         <Button onClick={handelCloseVideo}>close</Button>
-        <Text> {isOneMiniPlayer ? "on" : "off"} </Text>
+        <Text> {isOneMiniPlayer ? 'on' : 'off'} </Text>
         {/* m3u8 : {m3u8} */}
       </Box>
     </Box>

@@ -1,6 +1,6 @@
-import { Button } from "@chakra-ui/react";
-import { draftMsgState } from "@src/state/recoil/draftMessageState";
-import { useResetRecoilState } from "recoil";
+import { Button } from '@chakra-ui/react';
+import { draftMsgState } from '@src/state/recoil/draftMessageState';
+import { useResetRecoilState } from 'recoil';
 
 const MsgResetBtn = () => {
   const resetDraftMessage = useResetRecoilState(draftMsgState);

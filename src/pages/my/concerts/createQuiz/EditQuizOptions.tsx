@@ -1,6 +1,6 @@
-import { Flex, Heading, HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from "@chakra-ui/react";
-import { draftQuizDurationTimeState } from "@src/state/recoil/draftQuizState";
-import { useRecoilState } from "recoil";
+import { Flex, Heading, HStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text } from '@chakra-ui/react';
+import { draftQuizDurationTimeState } from '@src/state/recoil/draftQuizState';
+import { useRecoilState } from 'recoil';
 
 const MIN_QUIZ_DURATION_SECONDS = 10;
 const MAX_QUIZ_DURATION_SECONDS = 300;

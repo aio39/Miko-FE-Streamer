@@ -1,14 +1,15 @@
-import { Text } from "@chakra-ui/react";
-import { FC, useCallback, useMemo, useState } from "react";
-import { BaseEditor, createEditor, Descendant } from "slate";
-import { HistoryEditor } from "slate-history";
-import { Editable, ReactEditor, Slate, withReact } from "slate-react";
-import { RenderElements } from "./RenderElements";
+import { Text } from '@chakra-ui/react';
+import { FC, useCallback, useMemo, useState } from 'react';
+import { BaseEditor, createEditor, Descendant } from 'slate';
+import { HistoryEditor } from 'slate-history';
+import { Editable, ReactEditor, Slate, withReact } from 'slate-react';
 
-type CustomElement = { type: "paragraph"; children: CustomText[] };
+import { RenderElements } from './RenderElements';
+
+type CustomElement = { type: 'paragraph'; children: CustomText[] };
 type CustomText = { text: string; bold?: true };
 
-declare module "slate" {
+declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor & HistoryEditor;
     Element: CustomElement;
@@ -18,7 +19,7 @@ declare module "slate" {
 
 export const MarkDownView: FC<{ mdString: string }> = ({ mdString }) => {
   const editor = useMemo(() => withReact(createEditor()), []);
-  const renderElement = useCallback(props => <RenderElements {...props} />, []);
+  const renderElement = useCallback((props) => <RenderElements {...props} />, []);
   const [, setValue] = useState<Descendant[]>([]);
 
   let descendants;
@@ -32,7 +33,7 @@ export const MarkDownView: FC<{ mdString: string }> = ({ mdString }) => {
   if (!isArray) return <Text>no contents</Text>;
 
   return (
-    <Slate editor={editor} value={descendants} onChange={newValue => setValue(newValue)}>
+    <Slate editor={editor} value={descendants} onChange={(newValue) => setValue(newValue)}>
       <Editable readOnly renderElement={renderElement} />
     </Slate>
   );

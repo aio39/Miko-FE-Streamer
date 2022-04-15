@@ -1,6 +1,6 @@
-import EditCommonTimeMetaData from "@src/components/adminPage/editTimeMetaData/editCommonTimeMetaData";
-import { draftMsgCreatedAtState, draftMsgTagsState, draftMsgTitleState } from "@src/state/recoil/draftMessageState";
-import { useRecoilState, useRecoilValue } from "recoil";
+import EditCommonTimeMetaData from '@src/components/adminPage/editTimeMetaData/editCommonTimeMetaData';
+import { draftMsgCreatedAtState, draftMsgTagsState, draftMsgTitleState } from '@src/state/recoil/draftMessageState';
+import { useRecoilState, useRecoilValue } from 'recoil';
 //   createdAt: number;
 const EditMsgCommonData = () => {
   const createdAt = useRecoilValue(draftMsgCreatedAtState);

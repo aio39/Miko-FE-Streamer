@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const selectedConcertIdState = atom<number | undefined>({
-  key: "selectedConcertIdState",
+  key: 'selectedConcertIdState',
   default: undefined,
 });

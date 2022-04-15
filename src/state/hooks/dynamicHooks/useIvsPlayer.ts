@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export const useIvsPlayer = () => {
   const [IVSPlayer, setIVSPlayer] = useState(window.IVSPlayer);

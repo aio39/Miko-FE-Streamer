@@ -1,4 +1,4 @@
-import { ComponentProps, Suspense, useEffect, useState } from "react";
+import { ComponentProps, Suspense, useEffect, useState } from 'react';
 
 function useMounted() {
   const [mounted, setMounted] = useState(false);

@@ -1,26 +1,27 @@
 // @ts-nocheck
-import isHotkey from "is-hotkey";
-import { default as React, Dispatch, FC, SetStateAction, useCallback, useMemo } from "react";
-import { BaseEditor, createEditor, Descendant, Editor, Element as SlateElement, Transforms } from "slate";
-import { HistoryEditor } from "slate-history";
-import { Editable, ReactEditor, Slate, useSlate, withReact } from "slate-react";
-import { Button, Icon, Toolbar } from "./markdownParts";
-import { RenderElements } from "./RenderElements";
+import isHotkey from 'is-hotkey';
+import { default as React, Dispatch, FC, SetStateAction, useCallback, useMemo } from 'react';
+import { BaseEditor, createEditor, Descendant, Editor, Element as SlateElement, Transforms } from 'slate';
+import { HistoryEditor } from 'slate-history';
+import { Editable, ReactEditor, Slate, useSlate, withReact } from 'slate-react';
+
+import { Button, Icon, Toolbar } from './markdownParts';
+import { RenderElements } from './RenderElements';
 
 const HOTKEYS = {
-  "mod+b": "bold",
-  "mod+i": "italic",
-  "mod+u": "underline",
-  "mod+`": "code",
+  'mod+b': 'bold',
+  'mod+i': 'italic',
+  'mod+u': 'underline',
+  'mod+`': 'code',
 };
 
-const LIST_TYPES = ["numbered-list", "bulleted-list"];
-const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"];
+const LIST_TYPES = ['numbered-list', 'bulleted-list'];
+const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
 
-type CustomElement = { type: "paragraph"; children: CustomText[] };
+type CustomElement = { type: 'paragraph'; children: CustomText[] };
 type CustomText = { text: string; bold?: true };
 
-declare module "slate" {
+declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor & HistoryEditor;
     Element: CustomElement;
@@ -29,13 +30,13 @@ declare module "slate" {
 }
 
 const RichTextExample: FC<{ value: Descendant[]; setValue: Dispatch<SetStateAction<Descendant[]>> }> = ({ setValue, value }) => {
-  const renderElement = useCallback(props => <RenderElements {...props} />, []);
-  const renderLeaf = useCallback(props => <Leaf {...props} />, []);
+  const renderElement = useCallback((props) => <RenderElements {...props} />, []);
+  const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
   const editor = useMemo(() => withReact(createEditor()), []);
-  console.log("value", JSON.stringify(value));
+  console.log('value', JSON.stringify(value));
 
   return (
-    <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+    <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
       <Toolbar>
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
@@ -57,7 +58,7 @@ const RichTextExample: FC<{ value: Descendant[]; setValue: Dispatch<SetStateActi
         placeholder="コンサートの詳細を記入してください。"
         spellCheck
         autoFocus
-        onKeyDown={event => {
+        onKeyDown={(event) => {
           for (const hotkey in HOTKEYS) {
             if (isHotkey(hotkey, event as any)) {
               event.preventDefault();
@@ -72,11 +73,11 @@ const RichTextExample: FC<{ value: Descendant[]; setValue: Dispatch<SetStateActi
 };
 
 const toggleBlock = (editor, format) => {
-  const isActive = isBlockActive(editor, format, TEXT_ALIGN_TYPES.includes(format) ? "align" : "type");
+  const isActive = isBlockActive(editor, format, TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type');
   const isList = LIST_TYPES.includes(format);
 
   Transforms.unwrapNodes(editor, {
-    match: n => !Editor.isEditor(n) && SlateElement.isElement(n) && LIST_TYPES.includes(n.type) && !TEXT_ALIGN_TYPES.includes(format),
+    match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && LIST_TYPES.includes(n.type) && !TEXT_ALIGN_TYPES.includes(format),
     split: true,
   });
   let newProperties: Partial<SlateElement>;
@@ -86,7 +87,7 @@ const toggleBlock = (editor, format) => {
     };
   } else {
     newProperties = {
-      type: isActive ? "paragraph" : isList ? "list-item" : format,
+      type: isActive ? 'paragraph' : isList ? 'list-item' : format,
     };
   }
   Transforms.setNodes<SlateElement>(editor, newProperties);
@@ -107,14 +108,14 @@ const toggleMark = (editor, format) => {
   }
 };
 
-const isBlockActive = (editor, format, blockType = "type") => {
+const isBlockActive = (editor, format, blockType = 'type') => {
   const { selection } = editor;
   if (!selection) return false;
 
   const [match] = Array.from(
     Editor.nodes(editor, {
       at: Editor.unhangRange(editor, selection),
-      match: n => !Editor.isEditor(n) && SlateElement.isElement(n) && n[blockType] === format,
+      match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && n[blockType] === format,
     }),
   );
 
@@ -150,8 +151,8 @@ const BlockButton = ({ format, icon }) => {
   const editor = useSlate();
   return (
     <Button
-      active={isBlockActive(editor, format, TEXT_ALIGN_TYPES.includes(format) ? "align" : "type")}
-      onMouseDown={event => {
+      active={isBlockActive(editor, format, TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type')}
+      onMouseDown={(event) => {
         event.preventDefault();
         toggleBlock(editor, format);
       }}
@@ -166,7 +167,7 @@ const MarkButton = ({ format, icon }) => {
   return (
     <Button
       active={isMarkActive(editor, format)}
-      onMouseDown={event => {
+      onMouseDown={(event) => {
         event.preventDefault();
         toggleMark(editor, format);
       }}

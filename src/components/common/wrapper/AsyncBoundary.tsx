@@ -1,7 +1,8 @@
-import { Center, Spinner } from "@chakra-ui/react";
-import { ComponentProps } from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import SSRSuspense from "./SSRSuspense";
+import { Center, Spinner } from '@chakra-ui/react';
+import { ComponentProps } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+
+import SSRSuspense from './SSRSuspense';
 
 type ErrorBoundaryProps = ComponentProps<typeof ErrorBoundary>;
 
@@ -13,7 +14,7 @@ function DefaultLoading() {
   );
 }
 
-function DefaultErrorFallback({ error, resetErrorBoundary }: ComponentProps<NonNullable<ErrorBoundaryProps["FallbackComponent"]>>) {
+function DefaultErrorFallback({ error, resetErrorBoundary }: ComponentProps<NonNullable<ErrorBoundaryProps['FallbackComponent']>>) {
   return (
     <div role="alert">
       <p>Something went wrong:</p>
@@ -23,9 +24,9 @@ function DefaultErrorFallback({ error, resetErrorBoundary }: ComponentProps<NonN
   );
 }
 //  LINK https://github.com/bvaughn/react-error-boundary
-interface Props extends Pick<ErrorBoundaryProps, "children" | "onReset" | "onError" | "resetKeys" | "onResetKeysChange"> {
-  pendingFallback?: ComponentProps<typeof SSRSuspense>["fallback"];
-  rejectedFallback?: ErrorBoundaryProps["FallbackComponent"];
+interface Props extends Pick<ErrorBoundaryProps, 'children' | 'onReset' | 'onError' | 'resetKeys' | 'onResetKeysChange'> {
+  pendingFallback?: ComponentProps<typeof SSRSuspense>['fallback'];
+  rejectedFallback?: ErrorBoundaryProps['FallbackComponent'];
 }
 
 function AsyncBoundary({ pendingFallback = <DefaultLoading />, rejectedFallback = DefaultErrorFallback, children, ...errorBoundaryProps }: Props) {

@@ -1,53 +1,53 @@
-import { MessageMainMetadata, MessageMetadata } from "@src/types/share/TimeMetadataFormat";
-import { atom, DefaultValue, selector } from "recoil";
+import { MessageMainMetadata, MessageMetadata } from '@src/types/share/TimeMetadataFormat';
+import { atom, DefaultValue, selector } from 'recoil';
 
-const draftMsgBoxDataState = atom<MessageMainMetadata["boxData"]>({
-  key: "draftMsgBoxData",
+const draftMsgBoxDataState = atom<MessageMainMetadata['boxData']>({
+  key: 'draftMsgBoxData',
   default: {
     width: 200,
     height: 100,
     round: 10,
     padding: 10,
     spacing: 10,
-    hexColor: "#FFFFFFFF",
+    hexColor: '#FFFFFFFF',
   },
 });
 
 const initMsgMainTextData = {
-  text: "",
+  text: '',
   size: 20,
   bold: 600,
-  font: "serif",
-  hexColor: "#111111FF",
+  font: 'serif',
+  hexColor: '#111111FF',
 };
 
-const draftMsgMainTextState = atom<MessageMainMetadata["mainTextData"]>({
-  key: "draftMsgMainText",
+const draftMsgMainTextState = atom<MessageMainMetadata['mainTextData']>({
+  key: 'draftMsgMainText',
   default: initMsgMainTextData,
 });
 
-const draftMsgSubTextState = atom<MessageMainMetadata["subTextData"]>({
-  key: "draftMsgSubText",
+const draftMsgSubTextState = atom<MessageMainMetadata['subTextData']>({
+  key: 'draftMsgSubText',
   default: initMsgMainTextData,
 });
 
-const draftMsgPositionState = atom<MessageMainMetadata["positionIndex"]>({
-  key: "draftPosition",
+const draftMsgPositionState = atom<MessageMainMetadata['positionIndex']>({
+  key: 'draftPosition',
   default: 1,
 });
 
-const draftMsgUrlState = atom<MessageMainMetadata["urlString"]>({
-  key: "draftUrl",
+const draftMsgUrlState = atom<MessageMainMetadata['urlString']>({
+  key: 'draftUrl',
   default: undefined,
 });
 
-const draftMsgAnimationTypeState = atom<MessageMainMetadata["animationType"]>({
-  key: "draftMsgAnimationTypeState",
+const draftMsgAnimationTypeState = atom<MessageMainMetadata['animationType']>({
+  key: 'draftMsgAnimationTypeState',
   default: undefined,
 });
 
-const draftMsgTimeDurationState = atom<MessageMainMetadata["durationTime"]>({
-  key: "draftTimeDuration",
+const draftMsgTimeDurationState = atom<MessageMainMetadata['durationTime']>({
+  key: 'draftTimeDuration',
   default: 5,
 });
 
@@ -61,39 +61,39 @@ const draftMsgTimeDurationState = atom<MessageMainMetadata["durationTime"]>({
 // });
 
 const draftMsgIsHasSubTextState = selector<boolean>({
-  key: "draftMsgIsHasSubText",
+  key: 'draftMsgIsHasSubText',
   get: ({ get }) => {
     return !!get(draftMsgSubTextState);
   },
 });
 
 const draftMsgCreatedAtState = atom<number>({
-  key: "draftMsgCreatedAtState",
+  key: 'draftMsgCreatedAtState',
   default: -1,
 });
 
 const draftMsgTagsState = atom<string[]>({
-  key: "draftMsgTagsState",
+  key: 'draftMsgTagsState',
   default: [],
 });
 
 const draftMsgTitleState = atom<string>({
-  key: "draftMsgTitleState",
-  default: "",
+  key: 'draftMsgTitleState',
+  default: '',
 });
 
 const draftMsgUsedState = atom<boolean>({
-  key: "draftMsgUsedState",
+  key: 'draftMsgUsedState',
   default: false,
 });
 
 const draftMsgState = selector<MessageMetadata>({
-  key: "draftMessage",
+  key: 'draftMessage',
   get: ({ get }) => {
-    console.log("draftMessage", get(draftMsgTagsState));
+    console.log('draftMessage', get(draftMsgTagsState));
     return {
       data: {
-        dataType: "m",
+        dataType: 'm',
         boxData: get(draftMsgBoxDataState),
         positionIndex: get(draftMsgPositionState),
         mainTextData: get(draftMsgMainTextState),
@@ -102,7 +102,7 @@ const draftMsgState = selector<MessageMetadata>({
         animationType: get(draftMsgAnimationTypeState),
         durationTime: get(draftMsgTimeDurationState),
       },
-      type: "m",
+      type: 'm',
       createdAt: get(draftMsgCreatedAtState),
       tags: get(draftMsgTagsState),
       title: get(draftMsgTitleState),
@@ -139,16 +139,16 @@ const draftMsgState = selector<MessageMetadata>({
 });
 
 export {
-  draftMsgState,
-  draftMsgBoxDataState,
-  draftMsgMainTextState,
-  draftMsgSubTextState,
-  draftMsgPositionState,
-  draftMsgUrlState,
   draftMsgAnimationTypeState,
-  draftMsgTimeDurationState,
-  draftMsgIsHasSubTextState,
+  draftMsgBoxDataState,
   draftMsgCreatedAtState,
+  draftMsgIsHasSubTextState,
+  draftMsgMainTextState,
+  draftMsgPositionState,
+  draftMsgState,
+  draftMsgSubTextState,
   draftMsgTagsState,
+  draftMsgTimeDurationState,
   draftMsgTitleState,
+  draftMsgUrlState,
 };

@@ -1,23 +1,24 @@
-import { CommonDataResponse } from "@src/types/share/common";
-import { LoginData, User } from "@src/types/share/User";
-import { useEffect } from "react";
-import useSWR, { mutate } from "swr";
-import useSWRImmutable from "swr/immutable";
-import { axiosI, fetcher } from "./fetcher";
-import laggy from "./middleware/laggy";
+import { CommonDataResponse } from '@src/types/share/common';
+import { LoginData, User } from '@src/types/share/User';
+import { useEffect } from 'react';
+import useSWR, { mutate } from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
-const URL_USER = "/users";
-const URL_LOGIN = "/login";
-const URL_LOGOUT = "/logout";
-const URL_GET_COIN = URL_USER + "/coin";
-const URL_OAUTH_LOGIN = "/login/google";
+import { axiosI, fetcher } from './fetcher';
+import laggy from './middleware/laggy';
+
+const URL_USER = '/users';
+const URL_LOGIN = '/login';
+const URL_LOGOUT = '/logout';
+const URL_GET_COIN = URL_USER + '/coin';
+const URL_OAUTH_LOGIN = '/login/google';
 
 export const useUser = () => {
   const aFetcher = (url: string) => {
-    if (typeof window === "undefined") return Promise.resolve(undefined);
+    if (typeof window === 'undefined') return Promise.resolve(undefined);
 
     const isTokenExist = document.cookie.match(/^(.*;)?\s*isLogin\s*=\s*[^;]+(.*)?$/);
-    console.log("여기는 useUser 로그인 토큰", isTokenExist ? " 존재 ✅" : " 없음. ❌");
+    console.log('여기는 useUser 로그인 토큰', isTokenExist ? ' 존재 ✅' : ' 없음. ❌');
     if (!isTokenExist) {
       // NOTE  useSWR는 undefined일 경우 suspense가 안 끝남.
       return Promise.resolve(null);
@@ -33,10 +34,10 @@ export const useUser = () => {
 
   useEffect(() => {
     if (userResult.data?.uuid) {
-      window.localStorage.setItem("uuid", userResult.data.uuid);
+      window.localStorage.setItem('uuid', userResult.data.uuid);
       // console.log(userResult.data);
     } else {
-      window.localStorage.removeItem("uuid");
+      window.localStorage.removeItem('uuid');
     }
   }, [userResult.data]);
 

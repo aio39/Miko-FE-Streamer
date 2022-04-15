@@ -1,19 +1,19 @@
-import { Box, Button } from "@chakra-ui/react";
-import { screenImageState } from "@src/state/recoil/screenImage";
-import { ChangeEventHandler, MouseEventHandler, useRef } from "react";
-import { useSetRecoilState } from "recoil";
+import { Box, Button } from '@chakra-ui/react';
+import { screenImageState } from '@src/state/recoil/screenImage';
+import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 const FileInputBtn = () => {
   const setImageUrl = useSetRecoilState(screenImageState);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
-  const handleClick: MouseEventHandler<HTMLButtonElement> = event => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     if (hiddenFileInput.current) {
       hiddenFileInput.current.click();
     }
   };
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     if (event.target.files) {
       const fileUploaded = event.target.files[0];
       const objectUrl = URL.createObjectURL(fileUploaded);
@@ -26,7 +26,7 @@ const FileInputBtn = () => {
       <Button onClick={handleClick} size="sm" colorScheme="blackAlpha" opacity="0.8">
         背景画像
       </Button>
-      <input type="file" aria-label="upload screen background image" ref={hiddenFileInput} onChange={handleChange} style={{ display: "none" }} />
+      <input type="file" aria-label="upload screen background image" ref={hiddenFileInput} onChange={handleChange} style={{ display: 'none' }} />
     </Box>
   );
 };

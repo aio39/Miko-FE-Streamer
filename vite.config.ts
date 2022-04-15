@@ -5,11 +5,11 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    server: {
+  server: {
     port: 4000,
   },
   build: {
-    outDir: "build",
+    outDir: 'build',
   },
-  plugins: [ svgr(), react(), tsconfigPaths()],
+  plugins: [svgr(), react(), tsconfigPaths()],
 });

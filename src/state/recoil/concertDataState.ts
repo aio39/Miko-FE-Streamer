@@ -1,8 +1,8 @@
-import { Concert } from "@src/types/share/Concert";
-import { atom } from "recoil";
+import { Concert } from '@src/types/share/Concert';
+import { atom } from 'recoil';
 
 const concertDataState = atom<Concert | undefined>({
-  key: "concertData",
+  key: 'concertData',
   default: undefined,
 });
 

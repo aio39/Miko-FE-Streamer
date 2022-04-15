@@ -1,16 +1,16 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const m3u8State = atom<string | undefined>({
-  key: "m3u8State",
+  key: 'm3u8State',
   default: undefined,
 });
 
 export const isOnMiniPlayerState = atom({
-  key: "isOnMiniPlayerState",
+  key: 'isOnMiniPlayerState',
   default: false,
 });
 
 export const isIvsScriptLoadedState = atom({
-  key: "isIvsScriptLoadedState",
+  key: 'isIvsScriptLoadedState',
   default: window.IVSPlayer ? true : false,
 });

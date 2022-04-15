@@ -1,8 +1,8 @@
-import { Box, BoxProps, Button, Center, Flex, Heading, HStack, Text, useToast } from "@chakra-ui/react";
-import useSocket from "@src/state/hooks/useSocket";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Box, BoxProps, Button, Center, Flex, Heading, HStack, Text, useToast } from '@chakra-ui/react';
+import useSocket from '@src/state/hooks/useSocket';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 type Rank = {
   score: number;
@@ -26,8 +26,8 @@ function shuffle(array: any[]) {
   return [...array];
 }
 
-const MotionBox = motion<Omit<BoxProps, "transition">>(Box);
-const MotionText = motion<Omit<BoxProps, "transition">>(Text);
+const MotionBox = motion<Omit<BoxProps, 'transition'>>(Box);
+const MotionText = motion<Omit<BoxProps, 'transition'>>(Text);
 const PER_PAGE = 30;
 
 const RankingPage: FC = () => {
@@ -41,15 +41,15 @@ const RankingPage: FC = () => {
     const getRank = (newRanks: Rank[]) => {
       setRanks(newRanks);
     };
-    socket.on("be-all-rank", getRank);
+    socket.on('be-all-rank', getRank);
     return () => {
-      socket.off("be-all-rank", getRank);
+      socket.off('be-all-rank', getRank);
     };
   }, [socket]);
 
   useEffect(() => {
     const requestNewRanks = () => {
-      socket.emit("fe-all-rank", ticketId, start, start + PER_PAGE - 1);
+      socket.emit('fe-all-rank', ticketId, start, start + PER_PAGE - 1);
     };
 
     requestNewRanks(); // interval은 ms 후에 첫 실행됨.
@@ -65,18 +65,18 @@ const RankingPage: FC = () => {
       <Heading size="md">ランキング</Heading>
       <HStack gap="6">
         <Heading flexGrow={1}>
-          {start + 1} ~ {start + PER_PAGE}{" "}
+          {start + 1} ~ {start + PER_PAGE}{' '}
         </Heading>
         <HStack gap="2">
-          <Button disabled={start === 0} onClick={() => setStart(prev => prev - PER_PAGE)}>
+          <Button disabled={start === 0} onClick={() => setStart((prev) => prev - PER_PAGE)}>
             Before {PER_PAGE}
           </Button>
-          <Button disabled={ranks.length < PER_PAGE} onClick={() => setStart(prev => prev + PER_PAGE)}>
+          <Button disabled={ranks.length < PER_PAGE} onClick={() => setStart((prev) => prev + PER_PAGE)}>
             Next {PER_PAGE}
           </Button>
           <Button
             onClick={() => {
-              setRanks(prev => shuffle(prev));
+              setRanks((prev) => shuffle(prev));
             }}
           >
             test - shuffle

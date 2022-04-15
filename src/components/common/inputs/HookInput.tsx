@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputProps } from "@chakra-ui/input";
+import { Input, InputGroup, InputProps } from '@chakra-ui/input';
 import {
   FormControl,
   FormErrorMessage,
@@ -9,9 +9,9 @@ import {
   NumberInputField,
   NumberInputStepper,
   Select,
-} from "@chakra-ui/react";
-import React, { FC, memo } from "react";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+} from '@chakra-ui/react';
+import React, { FC, memo } from 'react';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 type placeholder = string | undefined;
 type label = string;
@@ -90,4 +90,4 @@ const NumberInputWrapper: FC<NumberP> = memo(({ registerReturn, error, data, isN
   );
 });
 
-export { InputWrapper, SelectWrapper, NumberInputWrapper };
+export { InputWrapper, NumberInputWrapper, SelectWrapper };

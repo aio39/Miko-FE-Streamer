@@ -1,20 +1,21 @@
-import { Center, VStack } from "@chakra-ui/react";
-import { Chart, Information, Message, Quiz, Ranking, Recording, Sell, WindowType } from "@src/const";
-import { selectedWindowState } from "@src/state/recoil/selectedWindowState";
-import { FC } from "react";
-import { useRecoilState } from "recoil";
+import { Center, VStack } from '@chakra-ui/react';
+import { Chart, Information, Message, Quiz, Ranking, Recording, Sell, WindowType } from '@src/const';
+import { selectedWindowState } from '@src/state/recoil/selectedWindowState';
+import { FC } from 'react';
+import { useRecoilState } from 'recoil';
+
 // @ts-ignore
-import ChartLogo from "./chart.svg?component";
+import ChartLogo from './chart.svg?component';
 // @ts-ignore
-import InformationLogo from "./information.svg?component";
+import InformationLogo from './information.svg?component';
 // @ts-ignore
-import MessageLogo from "./message.svg?component";
+import MessageLogo from './message.svg?component';
 // @ts-ignore
-import QuizLogo from "./quiz.svg?component";
+import QuizLogo from './quiz.svg?component';
 // @ts-ignore
-import RankingLogo from "./ranking.svg?component";
+import RankingLogo from './ranking.svg?component';
 // @ts-ignore
-import SellLogo from "./sell.svg?component";
+import SellLogo from './sell.svg?component';
 
 const IconWrapper: FC<{ type: WindowType }> = ({ type, children }) => {
   const [selectedWindow, setSelectedWindow] = useRecoilState(selectedWindowState);
@@ -24,7 +25,7 @@ const IconWrapper: FC<{ type: WindowType }> = ({ type, children }) => {
   };
 
   return (
-    <Center w="full" h="full" onClick={handleChangeWindow} bgColor={type === selectedWindow ? "blue.100" : "#FFFFFF00"} p="2">
+    <Center w="full" h="full" onClick={handleChangeWindow} bgColor={type === selectedWindow ? 'blue.100' : '#FFFFFF00'} p="2">
       {children}
     </Center>
   );

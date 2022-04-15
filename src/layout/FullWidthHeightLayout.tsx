@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/react";
-import ErrorBoundary from "@src/components/common/ErrorBoundary";
-import LoginStatus from "@src/components/display/LoginStatus";
-import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Box } from '@chakra-ui/react';
+import ErrorBoundary from '@src/components/common/ErrorBoundary';
+import LoginStatus from '@src/components/display/LoginStatus';
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 
 const FullWidthHeightLayout = () => {
   return (

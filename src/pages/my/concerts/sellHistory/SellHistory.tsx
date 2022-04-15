@@ -1,14 +1,14 @@
-import { Box, Button, Center, Heading, HStack, Select, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useToast } from "@chakra-ui/react";
-import PaginationBtn from "@src/components/button/PaginationBtn";
-import { chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx, chTicketSoldIdx, chType } from "@src/const";
-import convertDate from "@src/helper/convertDate";
-import { withSuspense } from "@src/layout/withSuspenseHOC";
-import { usePageLaravel, useSingleLaravel } from "@src/state/swr/useLaravel";
-import { useMyCoin } from "@src/state/swr/useUser";
-import { CommonFSW } from "@src/types/share/common";
-import produce from "immer";
-import { ChangeEventHandler, FC, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Box, Button, Center, Heading, HStack, Select, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useToast } from '@chakra-ui/react';
+import PaginationBtn from '@src/components/button/PaginationBtn';
+import { chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx, chTicketSoldIdx, chType } from '@src/const';
+import convertDate from '@src/helper/convertDate';
+import { withSuspense } from '@src/layout/withSuspenseHOC';
+import { usePageLaravel, useSingleLaravel } from '@src/state/swr/useLaravel';
+import { useMyCoin } from '@src/state/swr/useUser';
+import { CommonFSW } from '@src/types/share/common';
+import produce from 'immer';
+import { ChangeEventHandler, FC, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const ALL = -1;
 
@@ -24,7 +24,7 @@ type Props = {
 };
 
 const SellHistoryDataFetch = withSuspense<Props>(({ query, page, perPage, handelPageChange }) => {
-  const { data } = usePageLaravel("/coin_histories", query);
+  const { data } = usePageLaravel('/coin_histories', query);
 
   if (!data) return <Box>Error</Box>;
 
@@ -48,7 +48,7 @@ const SellHistoryDataFetch = withSuspense<Props>(({ query, page, perPage, handel
                 const { type, userId, variation, createdAt } = history;
                 return (
                   <Tr key={type + perPage + page + idx + createdAt}>
-                    <Td>{convertDate(createdAt, "YMDHMS")}</Td>
+                    <Td>{convertDate(createdAt, 'YMDHMS')}</Td>
                     <Td>{userId}</Td>
                     <Td>{variation}</Td>
                     <Td isNumeric>{chType[type]}</Td>
@@ -66,26 +66,26 @@ const SellHistoryDataFetch = withSuspense<Props>(({ query, page, perPage, handel
 const SellHistory: FC = () => {
   const { ticketId, concertId } = useParams<{ ticketId: string; concertId: string }>();
   const toast = useToast();
-  const { data: ticketData, mutate } = useSingleLaravel("/tickets", parseInt(ticketId as string), {});
+  const { data: ticketData, mutate } = useSingleLaravel('/tickets', parseInt(ticketId as string), {});
   const { data: coinData } = useMyCoin();
   const [perPage, setPerPage] = useState(20);
   const [page, setPage] = useState(1);
   const [type, setType] = useState(ALL);
   const [queryData, setQueryData] = useState<CommonFSW>({
     filter: [
-      ["ticket_id", ticketId as string],
-      ["type", type],
+      ['ticket_id', ticketId as string],
+      ['type', type],
     ],
     perPage: perPage,
     page: page,
   });
 
-  const handlePerPageChange: ChangeEventHandler<HTMLSelectElement> = e => {
+  const handlePerPageChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const newPerPage = +e.target.value;
     setPage(1);
     setPerPage(newPerPage);
     setQueryData(
-      produce(draft => {
+      produce((draft) => {
         draft.perPage = newPerPage;
         draft.page = 1;
       }),
@@ -95,7 +95,7 @@ const SellHistory: FC = () => {
   const handelPageChange = (newPage: number) => {
     setPage(newPage);
     setQueryData(
-      produce(draft => {
+      produce((draft) => {
         draft.page = newPage;
       }),
     );
@@ -104,14 +104,14 @@ const SellHistory: FC = () => {
   return (
     <Box px="6" pt="10" w="full" h="full" overflowY="scroll">
       <Heading size="md">販売履歴</Heading>
-      <Heading> coin : {coinData?.data || "NO COIN"}</Heading>
+      <Heading> coin : {coinData?.data || 'NO COIN'}</Heading>
       <HStack aria-label="Filter controller">
-        {[ALL, chTicketSoldIdx, chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx].map(typeNum => {
+        {[ALL, chTicketSoldIdx, chGoodsSoldIdx, chSuperChatSendedIdx, chSuperDoneItemSendedIdx].map((typeNum) => {
           const handlerSetType = () => {
             setType(typeNum);
             setPage(1);
             setQueryData(
-              produce(draft => {
+              produce((draft) => {
                 // @ts-ignore
                 draft.filter[1][1] = typeNum;
                 draft.page = 1;
@@ -120,8 +120,8 @@ const SellHistory: FC = () => {
           };
 
           return (
-            <Button key={typeNum} onClick={handlerSetType} colorScheme={typeNum === type ? "red" : "gray"}>
-              {typeNum === ALL ? "全部" : chType[typeNum]}
+            <Button key={typeNum} onClick={handlerSetType} colorScheme={typeNum === type ? 'red' : 'gray'}>
+              {typeNum === ALL ? '全部' : chType[typeNum]}
             </Button>
           );
         })}

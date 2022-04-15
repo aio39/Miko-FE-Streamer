@@ -1,8 +1,8 @@
-import { Box, Text } from "@chakra-ui/react";
-import { draftMsgState } from "@src/state/recoil/draftMessageState";
-import { MsgTextData } from "@src/types/share/TimeMetadataFormat";
-import { FC } from "react";
-import { useRecoilValue } from "recoil";
+import { Box, Text } from '@chakra-ui/react';
+import { draftMsgState } from '@src/state/recoil/draftMessageState';
+import { MsgTextData } from '@src/types/share/TimeMetadataFormat';
+import { FC } from 'react';
+import { useRecoilValue } from 'recoil';
 
 // const EditableText: FC<{ type: 'mt' | 'st' }> = ({ type }) => {
 //   const draftMessage = useRecoilValue(draftMsgState);
@@ -79,13 +79,13 @@ import { useRecoilValue } from "recoil";
 
 const positionSwith = {
   1: { left: 0, top: 0 },
-  2: { left: "50%", top: 0, transform: "translate(-50%,0)" },
+  2: { left: '50%', top: 0, transform: 'translate(-50%,0)' },
   3: { right: 0, top: 0 },
-  4: { left: 0, top: "50%", transform: "translate(0,-50%)" },
-  5: { left: "50%", top: "50%", transform: "translate(-50%,-50%)" },
-  6: { right: 0, top: "50%", transform: "translate(0,-50%)" },
+  4: { left: 0, top: '50%', transform: 'translate(0,-50%)' },
+  5: { left: '50%', top: '50%', transform: 'translate(-50%,-50%)' },
+  6: { right: 0, top: '50%', transform: 'translate(0,-50%)' },
   7: { left: 0, bottom: 0 },
-  8: { left: "50%", bottom: 0, transform: "translate(-50%,0)" },
+  8: { left: '50%', bottom: 0, transform: 'translate(-50%,0)' },
   9: { right: 0, bottom: 0 },
 };
 
@@ -108,7 +108,7 @@ const DraftMessagePreview = () => {
       {/* <EditableText type="mt" />
       <EditableText type="st" /> */}
       <MessageText data={mainTextData} />
-      <Box height={boxData.spacing + "px"}></Box>
+      <Box height={boxData.spacing + 'px'}></Box>
       <MessageText data={subTextData} />
     </Box>
   );

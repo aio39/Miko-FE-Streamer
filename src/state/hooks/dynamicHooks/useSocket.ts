@@ -1,6 +1,6 @@
-import { SOCKET_URL } from "@src/const";
-import { useRef } from "react";
-import io, { Socket } from "socket.io-client";
+import { SOCKET_URL } from '@src/const';
+import { useRef } from 'react';
+import io, { Socket } from 'socket.io-client';
 
 export const useSocket = () => {
   const socket = useRef<Socket>(
@@ -8,20 +8,20 @@ export const useSocket = () => {
       io(SOCKET_URL, {
         autoConnect: true,
         // forceNew: true,
-        transports: ["websocket", "polling"],
+        transports: ['websocket', 'polling'],
       })
-        .on("connect", () => {
-          console.log("socket connect 👌 ", window.socket.connected);
+        .on('connect', () => {
+          console.log('socket connect 👌 ', window.socket.connected);
         })
-        .on("connect_error", err => {
-          console.error("socket_connect_error", err);
+        .on('connect_error', (err) => {
+          console.error('socket_connect_error', err);
           setTimeout(() => socket.current.connect(), 1000);
         })
-        .on("error", err => {
-          console.error("socket error", err);
+        .on('error', (err) => {
+          console.error('socket error', err);
         })
-        .on("disconnect", reason => {
-          console.error("socket disconnect", reason);
+        .on('disconnect', (reason) => {
+          console.error('socket disconnect', reason);
         }),
   );
 

@@ -1,30 +1,30 @@
-import { MetaData, MetadataType } from "@src/types/share/TimeMetadataFormat";
-import { atom, selector } from "recoil";
+import { MetaData, MetadataType } from '@src/types/share/TimeMetadataFormat';
+import { atom, selector } from 'recoil';
 
 //  "" 일때 필터 작동 안함.
 export const metadataListFilterSearchState = atom({
-  key: "metadataListFilterSearchState",
-  default: "",
+  key: 'metadataListFilterSearchState',
+  default: '',
 });
 
 //  " " 일때 필터 작동 안함.
 export const metadataListFilterTagState = atom({
-  key: "metadataListFilterTagState",
-  default: " ",
+  key: 'metadataListFilterTagState',
+  default: ' ',
 });
 
-export const metadataListFilterUsedState = atom<"all" | "used" | "notUsed">({
-  key: "metadataListFilterUsedState",
-  default: "all",
+export const metadataListFilterUsedState = atom<'all' | 'used' | 'notUsed'>({
+  key: 'metadataListFilterUsedState',
+  default: 'all',
 });
 
-export const metadataListFilterTypeState = atom<"all" | MetadataType>({
-  key: "metadataListFilterTypeState",
-  default: "all",
+export const metadataListFilterTypeState = atom<'all' | MetadataType>({
+  key: 'metadataListFilterTypeState',
+  default: 'all',
 });
 
 export const metadataListFilterState = selector({
-  key: "metadataListFilterState",
+  key: 'metadataListFilterState',
   get: ({ get }) => {
     return {
       type: get(metadataListFilterTypeState),
@@ -36,23 +36,23 @@ export const metadataListFilterState = selector({
 });
 
 export const metadataState = atom<Array<MetaData>>({
-  key: "metadataState",
+  key: 'metadataState',
   default: [],
 });
 
 export const metadataTagListState = selector({
-  key: "metadataTagListState",
+  key: 'metadataTagListState',
   get: ({ get }) => {
     const metadataList = get(metadataState);
     const tagSet = new Set<string>();
 
-    metadataList.forEach(metadata => {
-      metadata.tags.forEach(tag => {
-        console.log("tag", tag);
+    metadataList.forEach((metadata) => {
+      metadata.tags.forEach((tag) => {
+        console.log('tag', tag);
         tagSet.add(tag);
       });
     });
-    console.log("set", tagSet);
+    console.log('set', tagSet);
 
     return Array.from(tagSet);
   },

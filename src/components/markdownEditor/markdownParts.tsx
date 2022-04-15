@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { css, cx } from "@emotion/css";
-import { default as React, FC, forwardRef, PropsWithChildren, Ref } from "react";
-import ReactDOM from "react-dom";
+import { css, cx } from '@emotion/css';
+import { default as React, FC, forwardRef, PropsWithChildren, Ref } from 'react';
+import ReactDOM from 'react-dom';
 interface BaseProps {
   className: string;
   [key: string]: unknown;
@@ -30,7 +30,7 @@ export const Button = forwardRef(
         className,
         css`
           cursor: pointer;
-          color: ${reversed ? (active ? "white" : "#aaa") : active ? "black" : "#ccc"};
+          color: ${reversed ? (active ? 'white' : '#aaa') : active ? 'black' : '#ccc'};
         `,
       )}
     />
@@ -51,9 +51,9 @@ export const EditorValue = forwardRef(
     ref: Ref<OrNull<null>>,
   ) => {
     const textLines = value.document.nodes
-      .map(node => node.text)
+      .map((node) => node.text)
       .toArray()
-      .join("\n");
+      .join('\n');
     return (
       <div
         ref={ref}
@@ -99,7 +99,7 @@ export const Icon = forwardRef(({ className, ...props }: PropsWithChildren<BaseP
     {...props}
     ref={ref}
     className={cx(
-      "material-icons",
+      'material-icons',
       className,
       css`
         font-size: 18px;
@@ -145,7 +145,7 @@ export const Menu = forwardRef(({ className, ...props }: PropsWithChildren<BaseP
 ));
 
 export const Portal: FC = ({ children }) => {
-  return typeof document === "object" ? ReactDOM.createPortal(children, document.body) : null;
+  return typeof document === 'object' ? ReactDOM.createPortal(children, document.body) : null;
 };
 
 export const Toolbar = forwardRef(({ className, ...props }: PropsWithChildren<BaseProps>, ref: Ref<OrNull<HTMLDivElement>>) => (

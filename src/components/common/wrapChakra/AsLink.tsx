@@ -1,6 +1,6 @@
-import { Link } from "@chakra-ui/react";
-import { FC } from "react";
-import { Link as ReachLink } from "react-router-dom";
+import { Link } from '@chakra-ui/react';
+import { FC } from 'react';
+import { Link as ReachLink } from 'react-router-dom';
 
 const AsLink: FC<React.ComponentProps<typeof Link>> = ({ children, ...props }) => {
   return (
