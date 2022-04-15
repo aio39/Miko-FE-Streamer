@@ -12,7 +12,7 @@ export default function SidebarWithHeader() {
       <AnimatePresence>
         <Flex w="100vw" bg={useColorModeValue("gray.100", "gray.900")}>
           <SidebarContent onClose={() => onClose} />
-          <VStack flexGrow="1" maxH="100vh" overflowX="scroll">
+          <VStack flexGrow={1} maxH="100vh" overflowX="scroll">
             <MobileNav onOpen={onOpen} />
             <Box width="full" height="full">
               <Outlet />

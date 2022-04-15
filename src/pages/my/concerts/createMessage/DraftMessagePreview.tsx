@@ -92,7 +92,7 @@ const positionSwith = {
 const MessageText: FC<{ data: MsgTextData }> = ({ data }) => {
   const { text, bold, font, size, hexColor } = data;
   return (
-    <Text fontSize={size} fontFamily={font} bold={bold} color={hexColor}>
+    <Text fontSize={size} fontFamily={font} fontWeight={bold} color={hexColor}>
       {text}
     </Text>
   );

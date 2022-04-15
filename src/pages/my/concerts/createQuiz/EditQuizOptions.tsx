@@ -13,7 +13,7 @@ const EditQuizOptions = () => {
   };
 
   return (
-    <Flex minW="300px" flexGrow="1" flexDir="column" gap="4">
+    <Flex minW="300px" flexGrow={1} flexDir="column" gap="4">
       <Heading size="md">詳細設定</Heading>
 
       <HStack>

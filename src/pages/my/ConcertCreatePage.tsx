@@ -69,7 +69,7 @@ const ConcertCreatePage = () => {
 
   return (
     <Box>
-      <Box borderRadius="md" shadow="md" direction="column" maxW="container.xl" w="full" p="4" bg={useColorStore("surface")}>
+      <Box borderRadius="md" shadow="md" maxW="container.xl" w="full" p="4" bg={useColorStore("surface")}>
         <Button
           onClick={() => {
             console.log(imageUploadRef.current?.getFile());

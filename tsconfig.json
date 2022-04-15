@@ -1,26 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["vite/client","node"],
+    "baseUrl": "./src",
+    "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "react-jsx",
+    "paths": {
+      "@src/*": ["./*"]
+    },
+    "noEmitOnError": true,
   },
-  "include": ["src", "src/pages/my/concerts/timeline/.TimeLine.tsx"],
-  "exclude": ["node_modules"],
-  "extends": "./tsconfig.paths.json",
-  // "extends": "./tsconfig.paths.json",
-  "rules": {
-    // "no-unused-declaration": true
-  }
+  "include": ["src/**/*", "env.d.ts"],
+  "exclude": ["node_modules"]
 }

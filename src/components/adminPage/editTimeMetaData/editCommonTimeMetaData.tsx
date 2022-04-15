@@ -39,7 +39,7 @@ const EditCommonTimeMetaData: FC<Props> = ({ useTag, useTitle, createdAt }) => {
   };
 
   return (
-    <Flex gap="4" flexDir="column" minW="300px" flexGrow="1">
+    <Flex gap="4" flexDir="column" minW="300px" flexGrow={1}>
       <Badge>{createdAt === -1 ? "新しいデータ" : convertDate(createdAt, "YMDHMS")}</Badge>
 
       <Box>
@@ -55,7 +55,7 @@ const EditCommonTimeMetaData: FC<Props> = ({ useTag, useTitle, createdAt }) => {
             <IoMdAdd />
           </Button>
         </Box>
-        <Flex spacing={4} flexWrap="wrap" py="2">
+        <Flex  gap={4} flexWrap="wrap" py="2">
           {tags.map((tag, idx) => (
             <Tag size="md" key={tag + idx} borderRadius="full" variant="solid">
               <TagLabel>{tag}</TagLabel>

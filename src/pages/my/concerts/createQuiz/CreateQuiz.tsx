@@ -37,7 +37,7 @@ const CreateQuiz = () => {
 
   return (
     <Flex h="full">
-      <Box flexGrow="1" px="2" py="2">
+      <Box flexGrow={1} px="2" py="2">
         <Heading size="md">アンケート・クイズ</Heading>
         <Screen169>
           <Center w="full" h="full" flexDir="column">

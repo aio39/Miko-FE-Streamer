@@ -64,7 +64,7 @@ const RankingPage: FC = () => {
     <Box px="6" pt="10" h="full" overflowY="scroll">
       <Heading size="md">ランキング</Heading>
       <HStack gap="6">
-        <Heading flexGrow="1">
+        <Heading flexGrow={1}>
           {start + 1} ~ {start + PER_PAGE}{" "}
         </Heading>
         <HStack gap="2">

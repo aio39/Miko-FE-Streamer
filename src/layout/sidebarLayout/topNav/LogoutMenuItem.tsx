@@ -22,7 +22,7 @@ export const LogoutMenuItem = () => {
   };
 
   return (
-    <MenuItem size="sm" variant="outline" colorScheme="teal" onClick={logoutHandler}>
+    <MenuItem bgSize="sm"   onClick={logoutHandler}>
       ログアウト
     </MenuItem>
   );

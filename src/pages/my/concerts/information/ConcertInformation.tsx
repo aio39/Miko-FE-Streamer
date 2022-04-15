@@ -23,13 +23,13 @@ const KeyView: FC<{ keyName: string; tipText?: string; keyValue: string }> = ({ 
   return (
     <Heading display="flex" w="full" size="md" py="2" onClick={onCopy} cursor="pointer" whiteSpace="nowrap">
       <Tooltip hasArrow bg="#39c5bb" label={tipText} placement="top">
-        <Tag flexShrink="0">{keyName}</Tag>
+        <Tag flexShrink={0}>{keyName}</Tag>
       </Tooltip>
       {` ・ `}
-      <Text isTruncated flexShrink="1">
+      <Text isTruncated flexShrink={1}>
         {keyValue}
       </Text>
-      <Box flexShrink="0" as="span" display="inline">
+      <Box flexShrink={0} as="span" display="inline">
         <BiCopyAlt color={hasCopied ? "red" : "black"} />
       </Box>
     </Heading>

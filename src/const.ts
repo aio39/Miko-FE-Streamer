@@ -28,8 +28,12 @@ export const chSuperDoneItemSendedIdx = 8;
 export const S3_URL = "https://img.mikopj.live/";
 
 //ENV
-export const LARAVEL_URL = process.env.REACT_APP_LARAVEL_URL ?? "http://localhost:8080/api/";
-export const NEST_URL = process.env.REACT_APP_NEST_URL ?? "http://localhost:3001/api";
-export const SOCKET_URL = process.env.REACT_APP_SOCKET_SERVER ?? "http://localhost:3001";
+// @ts-ignore
+export const LARAVEL_URL = import.meta.VITE_LARAVEL_URL ?? "http://localhost:8080/api/";
+// @ts-ignore
+export const NEST_URL = import.meta.VITE_NEST_URL ?? "http://localhost:3001/api";
+// @ts-ignore
+export const SOCKET_URL = import.meta.VITE_SOCKET_SERVER ?? "http://localhost:3001";
 
-export const S3_IVS_URL = process.env.REACT_APP_IVS_S3 as string;
+// @ts-ignore
+export const S3_IVS_URL = import.meta.VITE_IVS_S3 as string;

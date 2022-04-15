@@ -31,7 +31,7 @@ const ConcertCard: FC<{ data: Concert }> = ({ data }) => {
         <Flex alignItems="center" px={6} py={3} bg="gray.900">
           <Icon as={MdSchedule} h={6} w={6} color="white" />
 
-          <VStack flexGrow="1">
+          <VStack flexGrow={1}>
             <chakra.h3 mx={3} color="white" fontWeight="bold" fontSize="md" alignSelf="start">
               {startDate} ~
             </chakra.h3>

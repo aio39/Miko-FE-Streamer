@@ -23,7 +23,7 @@ const CreateMsg = () => {
   console.log(msgMetaData);
   return (
     <Flex h="full">
-      <Box flexGrow="1" px="2" py="2">
+      <Box flexGrow={1} px="2" py="2">
         <Heading size="md">メッセージ</Heading>
         <Box>
           <Screen169>
@@ -37,7 +37,7 @@ const CreateMsg = () => {
           <Divider my="4" />
           <MsgBoxEditor />
           <Divider my="4" />
-          <Flex flexDir="column" flexGrow="1" minW="200px" gap="2" alignItems="start">
+          <Flex flexDir="column" flexGrow={1} minW="200px" gap="2" alignItems="start">
             <MsgTextDataEditor atom={draftMsgMainTextState} type="main" />
             <MsgTextDataEditor atom={draftMsgSubTextState} type="sub" />
           </Flex>

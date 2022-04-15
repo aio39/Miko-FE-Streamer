@@ -36,7 +36,7 @@ const DefaultChart: FC<Props> = ({ title, type, colors }) => {
   };
 
   return (
-    <Flex flexDir="column" h="50vh" w="50%" minW="500px" flexGrow="1">
+    <Flex flexDir="column" h="50vh" w="50%" minW="500px" flexGrow={1}>
       <HStack w="full" justifyContent="space-between" flexWrap="wrap" alignItems="center" py="10px" rowGap="10px">
         <HStack alignItems="end" minW="500px">
           <Heading>{title}</Heading>
@@ -44,7 +44,7 @@ const DefaultChart: FC<Props> = ({ title, type, colors }) => {
             {convertDate(startRef.current, "YMDHM")} ~ {convertDate(endRef.current, "HM")}
           </Text>
         </HStack>
-        <HStack flexGrow="1" alignItems="center" pr="10" justifyContent="end">
+        <HStack flexGrow={1} alignItems="center" pr="10" justifyContent="end">
           <Button colorScheme="cyan" onClick={() => handleSetTime(-30, "m")}>
             -30m
           </Button>
@@ -54,7 +54,7 @@ const DefaultChart: FC<Props> = ({ title, type, colors }) => {
         </HStack>
       </HStack>
       {/* <Button onClick={handleDraw}>draw</Button> */}
-      <Box flexGrow="1"></Box>
+      <Box flexGrow={1}></Box>
       <Suspense fallback={<Loading />}>
         <NivoLineChart start={start} end={end} type={type} colors={colors} />
       </Suspense>

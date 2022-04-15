@@ -44,7 +44,7 @@ const RecordingBox: FC<{ recording: Recording }> = ({ recording }) => {
   };
 
   return (
-    <Box w="container.sm" idx={stream_id}>
+    <Box w="container.sm" id={stream_id}>
       <Text>{prefix}</Text>
       <Text>{convertDate(start, "YMDHMS")}</Text>
       <Text>{end ? convertDate(end, "YMDHMS") : "not ended"}</Text>

@@ -9,7 +9,7 @@ type Props = {
 
 const PageBtn: FC<{ text: number | string } & ComponentProps<typeof Button>> = ({ text, ...props }) => {
   return (
-    <Button {...props} colorScheme="gray" flexGrow="1" maxW="120px">
+    <Button {...props} colorScheme="gray" flexGrow={1} maxW="120px">
       <Heading size="sm">{text}</Heading>
     </Button>
   );
@@ -40,7 +40,7 @@ const PaginationBtn: FC<Props> = ({ data: { current_page, last_page }, setPage }
     <Flex justifyContent="center">
       <Flex justifyContent="center" columnGap="10px" width="container.lg">
         <Center width="30px">{curPage !== startPage && <PageBtn text="<" onClick={onBeforePageHandler} />}</Center>
-        <Center flexGrow="1" gap="5px">
+        <Center flexGrow={1} gap="5px">
           {new Array(leftBtnNum)
             .fill(0)
             .slice(0, Math.max(MAX_SIDE_BTN, MAX_TOTAL_BTN - 1 - rightBtnNum))

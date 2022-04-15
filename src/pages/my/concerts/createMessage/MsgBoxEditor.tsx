@@ -29,7 +29,7 @@ const MsgBoxEditor = () => {
   };
 
   return (
-    <Flex flexDir="column" flexGrow="1" minW="250px" alignItems="start" gap="2">
+    <Flex flexDir="column" flexGrow={1} minW="250px" alignItems="start" gap="2">
       <Heading size="md">メッセージボックス</Heading>
 
       <HStack>
