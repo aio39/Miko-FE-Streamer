@@ -2,9 +2,10 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
-    "source.organizeImports": true,
+    // "source.organizeImports": true,
     "source.sortMembers": true
   },
+  "typescript.preferences.importModuleSpecifier": "relative",
   "path-intellisense.absolutePathToWorkspace": true,
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#fbed80",

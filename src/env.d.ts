@@ -1,15 +1,14 @@
 /// <reference types="vite/client" />
 
+interface ImportMetaEnv {
+  readonly VITE_LARAVEL_URL: string;
+  readonly VITE_NEST_URL: string;
+  readonly VITE_SOCKET_SERVER: string;
+  readonly VITE_IVS_S3: string;
+}
+
 interface ImportMeta {
-  env: {
-    PORT: string;
-    ESLINT_NO_DEV_ERRORS: string;
-    VITE_LARAVEL_URL: string;
-    VITE_NEST_URL: string;
-    VITE_SOCKET_SERVER: string;
-    VITE_IVS_S3: string;
-    DISABLE_ESLINT_PLUGIN: string;
-  };
+  readonly env: ImportMetaEnv;
 }
 declare global {
   interface Window {

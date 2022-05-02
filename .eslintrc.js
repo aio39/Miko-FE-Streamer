@@ -23,6 +23,7 @@ module.exports = {
     browser: true,
     amd: true,
     node: true,
+    es6: true,
   },
   extends: [
     'eslint:recommended',
@@ -30,7 +31,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
-  plugins: ['simple-import-sort', 'prettier'],
+  plugins: ['prettier', 'simple-import-sort', 'import'],
   rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'react/react-in-jsx-scope': 'off',
@@ -39,6 +40,9 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

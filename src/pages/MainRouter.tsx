@@ -1,5 +1,3 @@
-import './App.css';
-
 import FullWidthHeightLayout from '@src/layout/FullWidthHeightLayout';
 import SidebarWithHeader from '@src/layout/sidebarLayout/SidebarLayout';
 import NotLoginGuard from '@src/pages/guard/NotLoginGuard';
@@ -13,22 +11,13 @@ import EditMyPage from '@src/pages/my/EditMyPage';
 import MyPage from '@src/pages/my/MyPage';
 import Page404 from '@src/pages/Page404';
 import SignPage from '@src/pages/SignPage';
-import type * as ivs from 'amazon-ivs-player';
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Socket } from 'socket.io-client';
 
-import ConcertDetailPage from './pages/my/concertDetail/ConcertDetailPage';
-import GoodsPage from './pages/my/concertDetail/GoodsPage';
-import TicketListPage from './pages/my/concertDetail/TicketListPage';
-declare global {
-  interface Window {
-    socket: Socket;
-    IVSPlayer: typeof ivs;
-  }
-}
+import ConcertDetailPage from './my/concertDetail/ConcertDetailPage';
+import GoodsPage from './my/concertDetail/GoodsPage';
+import TicketListPage from './my/concertDetail/TicketListPage';
 
-function App() {
+const MainRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -62,6 +51,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
-export default App;
+export default MainRouter;

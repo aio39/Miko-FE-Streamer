@@ -1,0 +1,6 @@
+[0429/094333.990:ERROR:registration_protocol_win.cc(106)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0429/094334.017:ERROR:registration_protocol_win.cc(106)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0429/094548.618:ERROR:registration_protocol_win.cc(106)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0429/094817.439:ERROR:registration_protocol_win.cc(106)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0429/130548.999:ERROR:registration_protocol_win.cc(106)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0429/130550.701:ERROR:registration_protocol_win.cc(106)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)

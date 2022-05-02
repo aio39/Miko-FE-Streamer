@@ -30,6 +30,8 @@ const LoadingImage = memo<{ prefix: string; idx: number }>(({ prefix, idx }) => 
   );
 });
 
+LoadingImage.displayName = 'LoadingImage';
+
 const RecordingBox: FC<{ recording: Recording }> = ({ recording }) => {
   const { id, prefix, start, end, stream_id, avl_archive } = recording;
   const [sliderValue, setSliderValue] = useState(0);

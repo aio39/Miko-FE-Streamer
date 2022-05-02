@@ -29,11 +29,11 @@ export const S3_URL = 'https://img.mikopj.live/';
 
 //ENV
 // @ts-ignore
-export const LARAVEL_URL = import.meta.VITE_LARAVEL_URL ?? 'http://localhost:8080/api/';
+export const LARAVEL_URL = import.meta.env.VITE_LARAVEL_URL ?? 'http://localhost:8080/api/';
 // @ts-ignore
-export const NEST_URL = import.meta.VITE_NEST_URL ?? 'http://localhost:3001/api';
+export const NEST_URL = import.meta.env.VITE_NEST_URL ?? 'http://localhost:3001/api';
 // @ts-ignore
-export const SOCKET_URL = import.meta.VITE_SOCKET_SERVER ?? 'http://localhost:3001';
+export const SOCKET_URL = import.meta.env.VITE_SOCKET_SERVER ?? 'http://localhost:3001';
 
 // @ts-ignore
-export const S3_IVS_URL = import.meta.VITE_IVS_S3 as string;
+export const S3_IVS_URL = import.meta.env.VITE_IVS_S3 as string;
