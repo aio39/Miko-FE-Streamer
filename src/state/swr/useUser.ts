@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import useSWR, { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
+import { setCookie } from './../../helper/setCookie';
 import { axiosI, fetcher } from './fetcher';
 import laggy from './middleware/laggy';
 
@@ -23,7 +24,13 @@ export const useUser = () => {
       // NOTE  useSWR는 undefined일 경우 suspense가 안 끝남.
       return Promise.resolve(null);
     }
-    return fetcher(url);
+    return axiosI
+      .get(url)
+      .then((res) => res.data)
+      .catch((err) => {
+        setCookie('isLogin', '', 0.0001);
+        return null;
+      });
   };
 
   const userResult = useSWRImmutable<User>(URL_USER, aFetcher, {
@@ -53,6 +60,7 @@ export const useLogin = async (loginData: LoginData) => {
     mutate(URL_USER, data, false);
     return true;
   } catch (error) {
+    mutate(URL_USER, null, false);
     return false;
   }
 };
