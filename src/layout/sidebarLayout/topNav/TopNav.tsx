@@ -4,6 +4,7 @@ import { useUser } from '@src/state/swr/useUser';
 import React from 'react';
 
 import { LogoutMenuItem } from './LogoutMenuItem';
+
 const LoginUserInfo = () => {
   const { data } = useUser();
 

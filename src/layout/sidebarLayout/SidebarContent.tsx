@@ -13,6 +13,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import SidebarNavItem from './SidebarNavItem';
+
 interface LinkItemProps {
   name?: string;
   icon: IconType;

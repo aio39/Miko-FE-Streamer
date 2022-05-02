@@ -2,6 +2,7 @@ import { Flex, FlexProps, Icon, Link } from '@chakra-ui/react';
 import { IconType } from '@react-icons/all-files/lib';
 import { ReactText } from 'react';
 import { Link as ReachLink } from 'react-router-dom';
+
 interface NavItemProps extends FlexProps {
   icon: IconType;
   url: string;

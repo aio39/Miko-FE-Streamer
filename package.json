@@ -1,14 +1,23 @@
 {
   "name": "miko-streamer",
   "version": "0.1.0",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
-    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "yarn lint:format && yarn lint:fix ",
     "type-check": "tsc"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "prettier  --loglevel warn --write",
+      "eslint --quiet  --cache --fix --ignore-path ./.gitignore"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     "@chakra-ui/button": "^1.5.10",
@@ -38,7 +47,9 @@
     "filepond-plugin-image-exif-orientation": "^1.0.11",
     "filepond-plugin-image-preview": "^4.6.11",
     "framer-motion": "^6.3.0",
+    "husky": "^7.0.4",
     "immer": "^9.0.12",
+    "lint-staged": "^12.4.1",
     "react": "^18.0.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.0.0",
@@ -92,7 +103,5 @@
     "typescript": "^4.6.3",
     "vite": "^2.9.5",
     "vite-tsconfig-paths": "^3.4.1"
-  },
-  "pre-commit": "lint",
-  "license": "MIT"
+  }
 }

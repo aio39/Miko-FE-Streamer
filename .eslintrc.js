@@ -43,6 +43,7 @@ module.exports = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
+    'no-unused-vars': 'warn',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 import SidebarContent from './SidebarContent';
 import TopNav from './topNav/TopNav';
+
 export default function SidebarWithHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (

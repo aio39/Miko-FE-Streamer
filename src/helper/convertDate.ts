@@ -2,6 +2,7 @@ import { THUMBNAIL_INTERVAL_S } from '@src/const';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 

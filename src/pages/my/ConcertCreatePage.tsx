@@ -1,3 +1,5 @@
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
+
 import { Button } from '@chakra-ui/button';
 import { Box, Heading, useDisclosure, VStack } from '@chakra-ui/react';
 import DateInputWrapper from '@src/components/common/inputs/DateInput';
@@ -12,8 +14,8 @@ import { Concert, CreateConcertData } from '@src/types/share/Concert';
 import React, { useRef, useState } from 'react';
 import { FilePond } from 'react-filepond';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { Descendant } from 'slate';
+
 import RichTextExample from '../../components/markdownEditor/MarkDownEditor';
 
 interface FormInputs {
