@@ -4,18 +4,18 @@ import NotLoginGuard from '@src/pages/guard/NotLoginGuard';
 import RequiredLoginGuard from '@src/pages/guard/RequiredLoginGuard';
 import HomePage from '@src/pages/HomePage';
 import LoginPage from '@src/pages/LoginPage';
-import ConcertCreatePage from '@src/pages/my/ConcertCreatePage';
-import ConcertListPage from '@src/pages/my/ConcertListPage';
-import ConcertAdminPage from '@src/pages/my/concertsPage/ConcertAdminPage';
-import EditMyPage from '@src/pages/my/EditMyPage';
-import MyPage from '@src/pages/my/MyPage';
+import ConcertCreatePage from '@src/pages/myPages/concertCreatePage/ConcertCreatePage';
+import ConcertListPage from '@src/pages/myPages/concertListPage/ConcertListPage';
+import ConcertAdminPage from '@src/pages/myPages/concertsPages/ConcertAdminPage';
+import EditMyPage from '@src/pages/myPages/editMyInfoPage/EditMyPage';
+import MyPage from '@src/pages/myPages/myPageHome/MyPage';
 import Page404 from '@src/pages/Page404';
 import SignPage from '@src/pages/SignPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import ConcertDetailPage from './my/concertDetailPage/ConcertDetailPage';
-import GoodsPage from './my/concertDetailPage/GoodsPage';
-import TicketListPage from './my/concertDetailPage/TicketListPage';
+import ConcertDetailPage from './myPages/concertDetailPage/ConcertDetailPage';
+import GoodsPage from './myPages/concertDetailPage/GoodsPage';
+import TicketListPage from './myPages/concertDetailPage/TicketListPage';
 
 const MainRouter = () => {
   return (

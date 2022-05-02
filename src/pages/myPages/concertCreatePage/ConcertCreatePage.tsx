@@ -16,7 +16,7 @@ import { FilePond } from 'react-filepond';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Descendant } from 'slate';
 
-import RichTextExample from '../../components/markdownEditor/MarkDownEditor';
+import RichTextExample from '../../../components/markdownEditor/MarkDownEditor';
 
 interface FormInputs {
   name: string;

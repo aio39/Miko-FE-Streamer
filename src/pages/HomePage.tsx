@@ -1,14 +1,14 @@
-import { Box, Button, Container, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Container, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 export default function HomePage() {
   let params = useParams();
   return (
-    <Box width="full" height="full" position="relative">
+    <Center width="100vw" height="100vh" position="relative">
       <Container>
         <Text fontSize="8xl" color="white" fontWeight="bold">
-          MICO
+          MIKO
         </Text>
         <Link to="/login">
           <Button>로그인</Button>
@@ -28,6 +28,6 @@ export default function HomePage() {
         top="0"
         right="0"
       ></Box>
-    </Box>
+    </Center>
   );
 }
