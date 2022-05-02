@@ -1,7 +1,7 @@
 import { Box, Button, GridItem, Input, Text } from '@chakra-ui/react';
 import { draftQuizChoicesState } from '@src/state/recoil/draftQuizState';
 import produce from 'immer';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 const ChoiceEdit: FC<{ text: string; idx: number }> = ({ text, idx }) => {

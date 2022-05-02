@@ -101,7 +101,9 @@ const MetadataPreviewContainer: FC<{ data: MetaData; pushMetaData: (channelArn: 
         {children}
         <HStack>
           {data.tags.map((tag) => (
-            <Tag colorScheme="teal">{tag}</Tag>
+            <Tag key={tag} colorScheme="teal">
+              {tag}
+            </Tag>
           ))}
         </HStack>
       </Box>

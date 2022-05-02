@@ -1,6 +1,6 @@
 import { Box, Input } from '@chakra-ui/react';
 import { draftQuizMainTitleState } from '@src/state/recoil/draftQuizState';
-import { FC, useMemo, useRef } from 'react';
+import React, { FC, useMemo, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 
 const QuizTitle: FC = () => {

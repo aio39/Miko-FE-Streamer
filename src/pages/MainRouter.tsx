@@ -6,7 +6,7 @@ import HomePage from '@src/pages/HomePage';
 import LoginPage from '@src/pages/LoginPage';
 import ConcertCreatePage from '@src/pages/my/ConcertCreatePage';
 import ConcertListPage from '@src/pages/my/ConcertListPage';
-import ConcertAdminPage from '@src/pages/my/concerts/ConcertAdminPage';
+import ConcertAdminPage from '@src/pages/my/concertsPage/ConcertAdminPage';
 import EditMyPage from '@src/pages/my/EditMyPage';
 import MyPage from '@src/pages/my/MyPage';
 import Page404 from '@src/pages/Page404';

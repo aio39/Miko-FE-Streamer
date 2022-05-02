@@ -5,7 +5,7 @@ import { isIvsScriptLoadedState } from '@src/state/recoil';
 import { metadataState } from '@src/state/recoil/metadataState';
 import { selectedWindowState } from '@src/state/recoil/selectedWindowState';
 import { useSingleLaravel } from '@src/state/swr/useLaravel';
-import { Suspense, useCallback, useEffect } from 'react';
+import React, { Suspense, useCallback, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
@@ -24,13 +24,16 @@ import SellHistory from './sellHistory/SellHistory';
 import SideBar from './sideBar/SideBar';
 
 const SuspenseHOC = (WrappedComponent: () => JSX.Element) => {
-  return function () {
+  const SuspenseComp = () => {
     return (
       <Suspense fallback={<Center> 로딩</Center>}>
         <WrappedComponent />
       </Suspense>
     );
   };
+  SuspenseComp.displayName = 'SuspenseHOC';
+
+  return SuspenseComp;
 };
 
 const ConcertAdminPageNoData = () => {
