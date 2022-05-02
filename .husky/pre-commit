@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# npx lint-staged
-echo "abcd"
+echo "husky: pre-commit"
+npx lint-staged
