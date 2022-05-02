@@ -13,9 +13,9 @@ import Page404 from '@src/pages/Page404';
 import SignPage from '@src/pages/SignPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import ConcertDetailPage from './myPages/concertDetailPage/ConcertDetailPage';
-import GoodsPage from './myPages/concertDetailPage/GoodsPage';
-import TicketListPage from './myPages/concertDetailPage/TicketListPage';
+import ConcertDetailPage from './myPages/concertDetailPages/concertDetailPage/ConcertDetailPage';
+import GoodsPage from './myPages/concertDetailPages/concertGoodsListPage/GoodsPage';
+import TicketListPage from './myPages/concertDetailPages/concertTicketListPage/TicketListPage';
 
 const MainRouter = () => {
   return (
