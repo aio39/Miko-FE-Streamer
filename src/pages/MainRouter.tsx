@@ -13,9 +13,9 @@ import Page404 from '@src/pages/Page404';
 import SignPage from '@src/pages/SignPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import ConcertDetailPage from './my/concertDetail/ConcertDetailPage';
-import GoodsPage from './my/concertDetail/GoodsPage';
-import TicketListPage from './my/concertDetail/TicketListPage';
+import ConcertDetailPage from './my/concertDetailPage/ConcertDetailPage';
+import GoodsPage from './my/concertDetailPage/GoodsPage';
+import TicketListPage from './my/concertDetailPage/TicketListPage';
 
 const MainRouter = () => {
   return (
@@ -45,7 +45,6 @@ const MainRouter = () => {
             <Route path="concerts/:concertId/admin/:ticketId" element={<ConcertAdminPage />} />
             {/* <Route path="concerts/:concertId" element={<ConcertAdminPage />} /> */}
           </Route>
-
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>
